@@ -12,4 +12,4 @@ class email(interface):
 
     def push(self):
         sleep(1)
-        trigger('foo', None)
+        trigger('print', self.conf['str'])
