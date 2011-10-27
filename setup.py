@@ -9,7 +9,6 @@ setup(
     author='hackmeeting',
     url='http://sindominio.net/hackmeeting',
     packages=['asambleitor',
-        'asambleitor.core',
         'asambleitor.module',
         'asambleitor.module.dummy',
         'asambleitor.interface',
