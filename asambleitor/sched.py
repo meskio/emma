@@ -1,15 +1,19 @@
 import thread
+import random
 from time import sleep, time
 
 from asambleitor.events import trigger
 
-def periodic(event, data, seconds):
-    thread.start_new_thread(_periodic, (event, data, seconds))
 
-def _periodic(event, data, seconds):
+def periodic(handler, seconds):
+    #event = 'periodic_' + str(random.randrange(0, 100000))
+    #subscribe(event, handler)
+    thread.start_new_thread(_periodic, (handler, seconds))
+
+def _periodic(handler, seconds):
     while 1:
-        sleep(seconds)
-        trigger(event, data)
+        sleep(float(seconds))
+        handler()
 
 def at(event, data, date):
     thread.start_new_thread(_delay, (event, data, date - time()))
@@ -18,5 +22,5 @@ def delay(event, data, seconds):
     thread.start_new_thread(_delay, (event, data, seconds))
 
 def _delay(event, data, seconds):
-    sleep(seconds)
+    sleep(float(seconds))
     trigger(event, data)
