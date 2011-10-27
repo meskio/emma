@@ -1,4 +1,4 @@
 from asambleitor.core import init
 
 def main():
-    init('data/conf')
+    init('/usr/local/etc/asambleitor.cfg')
