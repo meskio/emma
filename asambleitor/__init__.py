@@ -1,5 +1,6 @@
-from time import sleep
+import thread
 import ConfigParser
+from time import sleep
 
 confPath = '/usr/local/etc/asambleitor.cfg'
 
@@ -12,10 +13,12 @@ def main():
 
         name = section[2:-2]
         if section[0] == 'M':
-            m = __import__("asambleitor.module." + name)
-            exec "m.module." + name + "." + name + "(options)"
+            imp = __import__("asambleitor.module." + name)
+            exec "m = imp.module." + name + "." + name + "(options)"
+            thread.start_new_thread(m.run, ())
         if section[0] == 'I':
-            m = __import__("asambleitor.interface." + name)
-            exec "m.interface." + name + "." + name + "(options)"
+            imp = __import__("asambleitor.interface." + name)
+            exec "i = imp.interface." + name + "." + name + "(options)"
+            thread.start_new_thread(i.run, ())
 
     while 1: sleep(1000)
