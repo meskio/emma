@@ -13,9 +13,9 @@ def main():
         name = section[2:-2]
         if section[0] == 'M':
             m = __import__("asambleitor.module." + name)
-            exec "m.module." + name + ".init(options)"
+            exec "m.module." + name + "." + name + "(options)"
         if section[0] == 'I':
             m = __import__("asambleitor.interface." + name)
-            exec "m.interface." + name + ".init(options)"
+            exec "m.interface." + name + "." + name + "(options)"
 
     sleep(2)

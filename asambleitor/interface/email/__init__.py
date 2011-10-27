@@ -1,11 +1,15 @@
 from time import sleep
 import thread
+
 from asambleitor.events import trigger
+from asambleitor.interface import interface
 
-def push():
-    sleep(1)
-    trigger('foo',None)
 
-def init(conf):
-    thread.start_new(push, ())
-    
+class email(interface):
+    def __init__(self, conf):
+        interface.__init__(self, conf)
+        thread.start_new(self.push, ())
+
+    def push(self):
+        sleep(1)
+        trigger('foo', None)

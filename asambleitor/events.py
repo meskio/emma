@@ -1,16 +1,16 @@
-events = {}
+_events = {}
 
 def trigger(event, data):
-    if event not in events:
+    if event not in _events:
         return
-    for handler in events[event]:
+    for handler in _events[event]:
         handler(event, data)
 
 def subscribe(event, handler):
-    if event in events:
-        events[event].append(handler)
+    if event in _events:
+        _events[event].append(handler)
     else:
-        events[event] = [handler]
+        _events[event] = [handler]
 
 def unsubscribe(event, handler):
-    events[event].remove(handler)
+    _events[event].remove(handler)

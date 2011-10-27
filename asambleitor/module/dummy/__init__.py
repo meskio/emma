@@ -1,8 +1,11 @@
 from asambleitor.events import subscribe,unsubscribe
+from asambleitor.module import module
 
-def h(event, data):
-    print "hola mundo"
-    unsubscribe(event, h)
+class dummy(module):
+    def __init__(self, conf):
+        module.__init__(self, conf)
+        subscribe('foo', self.handler)
 
-def init(conf):
-    subscribe('foo', h)
+    def handler(self, event, data):
+        print "hola mundo"
+        unsubscribe(event, self.handler)
