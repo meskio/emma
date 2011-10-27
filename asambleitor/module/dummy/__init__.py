@@ -1,7 +1,8 @@
-from asambleitor.events import subscribe
+from asambleitor.events import subscribe,unsubscribe
 
-def h(data):
+def h(event, data):
     print "hola mundo"
+    unsubscribe(event, h)
 
 def init(conf):
     subscribe('foo', h)
