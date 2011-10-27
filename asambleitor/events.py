@@ -18,6 +18,5 @@ def subscribe(event, handler):
     _events_lock.release()
 
 def unsubscribe(event, handler):
-    _events_lock.acquire()
-    _events[event].remove(handler)
-    _events_lock.release()
+    with _events_lock:
+        _events[event].remove(handler)

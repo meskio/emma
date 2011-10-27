@@ -18,4 +18,4 @@ def main():
             m = __import__("asambleitor.interface." + name)
             exec "m.interface." + name + "." + name + "(options)"
 
-    sleep(2)
+    while 1: sleep(1000)
