@@ -7,10 +7,11 @@ from asambleitor.log import log
 confPath = '/usr/local/etc/asambleitor.cfg'
 
 def main():
-    log("[core] preparing interfaces and modules")
     conf = ConfigParser.RawConfigParser()
     conf.read(confPath)
+    log.activate = conf.getboolean("core", "log")
 
+    log("[core] preparing interfaces and modules")
     for section in conf.sections():
         options = dict(conf.items(section))
 

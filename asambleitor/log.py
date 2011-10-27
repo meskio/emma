@@ -1,2 +1,6 @@
+
 def log(string):
-    print string
+    global activate
+
+    if log.activate:
+        print string
