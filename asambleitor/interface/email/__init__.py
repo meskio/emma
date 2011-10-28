@@ -5,7 +5,7 @@ from asambleitor.sched import periodic
 from asambleitor.events import trigger
 from asambleitor.log import log
 
-from parse import parse
+from parser import Parser
 
 
 class email(interface):
@@ -30,9 +30,12 @@ class email(interface):
 
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
-            message = parse(pop.retr(i+1)[1])
+            p = Parser(pop.retr(i+1)[1])
+            message = p.message()
             trigger('receive', 'email', message)
-            #pop.dele(i+1)
+            for command in p.commands():
+                trigger('command', 'email', command)
+            pop.dele(i+1)
 
         pop.quit()
         log("[email]     " + str(numMessages) + " found")
