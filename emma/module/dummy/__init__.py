@@ -1,5 +1,5 @@
-from asambleitor.events import subscribe
-from asambleitor.module import module
+from emma.events import subscribe
+from emma.module import module
 
 class dummy(module):
     def run(self):

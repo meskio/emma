@@ -4,7 +4,7 @@ from time import sleep
 
 from log import log
 
-confPath = '/usr/local/etc/asambleitor.cfg'
+confPath = '/usr/local/etc/emma.cfg'
 
 def main():
     conf = ConfigParser.RawConfigParser()
@@ -18,12 +18,12 @@ def main():
         name = section[2:-2]
         if section[0] == 'M':
             log("[core]     load module " + name)
-            imp = __import__("asambleitor.module." + name)
+            imp = __import__("emma.module." + name)
             exec "m = imp.module." + name + "." + name + "(options)"
             thread.start_new_thread(m.run, ())
         if section[0] == 'I':
             log("[core]     load interface " + name)
-            imp = __import__("asambleitor.interface." + name)
+            imp = __import__("emma.interface." + name)
             exec "i = imp.interface." + name + "." + name + "(options)"
             thread.start_new_thread(i.run, ())
 

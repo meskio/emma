@@ -1,9 +1,9 @@
 import poplib
 
-from asambleitor.interface import interface
-from asambleitor.sched import periodic
-from asambleitor.events import trigger
-from asambleitor.log import log
+from emma.interface import interface
+from emma.sched import periodic
+from emma.events import trigger
+from emma.log import log
 
 from parser import Parser
 
