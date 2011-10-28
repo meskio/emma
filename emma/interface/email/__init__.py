@@ -1,8 +1,9 @@
 import poplib
+import smtplib
 
 from emma.interface import interface
 from emma.sched import periodic
-from emma.events import trigger
+from emma.events import trigger, subscribe
 from emma.log import log
 
 from parser import Parser
@@ -12,6 +13,7 @@ class email(interface):
     def run(self):
         period = self.conf['pop_period']
         periodic(self.fetch, period)
+        subscribe(self.send_handle, 'send_'+self.conf['id'])
 
     def fetch(self):
         log("[email] fetching email " + self.conf['pop_user']
@@ -39,3 +41,25 @@ class email(interface):
 
         pop.quit()
         log("[email]     " + str(numMessages) + " found")
+
+    def send_handle(self, event, provider, msg):
+        msg['From'] = self.conf['smtp_address']
+        self.send(msg['To'], msg.as_string())
+
+    def send(self, to, msg):
+        try:
+            if self.conf['smtp_ssl'] == "yes":
+                server = smtplib.SMTP_SSL(self.conf['smtp_host'])
+            else:
+                server = smtplib.SMTP(self.conf['smtp_host'])
+            #server.set_debuglevel(1)
+            if self.conf['smtp_tls'] == "yes":
+                server.starttls()
+            server.login(self.conf['smtp_user'], self.conf['smtp_pass'])
+        except:
+            log("[email]     error sending email")
+            return
+
+        fromaddr = self.conf['smtp_address']
+        server.sendmail(fromaddr, to, msg)
+        server.quit()

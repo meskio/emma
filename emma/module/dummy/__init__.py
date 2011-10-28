@@ -1,4 +1,6 @@
-from emma.events import subscribe
+from email.mime.text import MIMEText
+
+from emma.events import subscribe, trigger
 from emma.module import module
 
 class dummy(module):
@@ -13,3 +15,8 @@ class dummy(module):
     def handler_cmd(self, event, producer, command):
         if command[0] == "print":
             print command[1]
+        if command[0] == "send":
+            msg = MIMEText(command[1])
+            msg['Subject'] = "from emma bot"
+            msg['To'] = self.conf['send_to']
+            trigger('send_'+self.conf['send_id'], 'dummy', msg)
