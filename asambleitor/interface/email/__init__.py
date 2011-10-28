@@ -2,6 +2,7 @@ import poplib
 
 from asambleitor.interface import interface
 from asambleitor.sched import periodic
+from asambleitor.events import trigger
 from asambleitor.log import log
 
 from parse import parse
@@ -30,7 +31,7 @@ class email(interface):
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
             message = parse(pop.retr(i+1)[1])
-            print str(message)
+            trigger('recv_email', message)
             #pop.dele(i+1)
 
         pop.quit()
