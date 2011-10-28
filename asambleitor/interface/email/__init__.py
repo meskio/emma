@@ -31,7 +31,7 @@ class email(interface):
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
             message = parse(pop.retr(i+1)[1])
-            trigger('recv_email', message)
+            trigger('receive', 'email', message)
             #pop.dele(i+1)
 
         pop.quit()

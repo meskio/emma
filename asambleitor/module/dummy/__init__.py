@@ -3,8 +3,8 @@ from asambleitor.module import module
 
 class dummy(module):
     def run(self):
-        subscribe('recv_email', self.handler)
+        subscribe(self.handler, 'receive', 'email')
 
-    def handler(self, event, data):
+    def handler(self, event, producer, data):
         print data['subject']
         print data.get_payload()

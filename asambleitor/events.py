@@ -3,20 +3,27 @@ import thread
 _events = {}
 _events_lock = thread.allocate_lock()
 
-def trigger(event, data):
+def trigger(event, producer, data):
     if event not in _events:
         return
-    for handler in _events[event]:
-        thread.start_new_thread(handler, (event, data))
+    if producer in _events[event]:
+        for handler in _events[event][producer]:
+            thread.start_new_thread(handler, (event, producer, data))
+    if None in _events[event]:
+        for handler in _events[event][None]:
+            thread.start_new_thread(handler, (event, producer, data))
 
-def subscribe(event, handler):
+def subscribe(handler, event, producer=None):
     _events_lock.acquire()
-    if event in _events:
-        _events[event].append(handler)
+    if event not in _events:
+        _events[event] = {producer: [handler]}
+    elif producer not in _events[event]:
+        _events[event][producer] = [handler]
     else:
-        _events[event] = [handler]
+        _events[event][producer].append(handler)
     _events_lock.release()
 
-def unsubscribe(event, handler):
+def unsubscribe(handler, event, producer=None):
     with _events_lock:
-        _events[event].remove(handler)
+        if event in _events and producer in _events[event]:
+            _events[event][producer].remove(handler)
