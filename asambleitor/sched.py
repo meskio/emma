@@ -2,12 +2,10 @@ import thread
 import random
 from time import sleep, time
 
-from asambleitor.events import trigger
+from events import trigger
 
 
 def periodic(handler, seconds):
-    #event = 'periodic_' + str(random.randrange(0, 100000))
-    #subscribe(event, handler)
     thread.start_new_thread(_periodic, (handler, seconds))
 
 def _periodic(handler, seconds):

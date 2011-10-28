@@ -7,7 +7,7 @@ def trigger(event, data):
     if event not in _events:
         return
     for handler in _events[event]:
-        handler(event, data)
+        thread.start_new_thread(handler, (event, data))
 
 def subscribe(event, handler):
     _events_lock.acquire()

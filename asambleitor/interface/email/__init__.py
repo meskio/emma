@@ -4,6 +4,8 @@ from asambleitor.interface import interface
 from asambleitor.sched import periodic
 from asambleitor.log import log
 
+from parse import parse
+
 
 class email(interface):
     def run(self):
@@ -27,8 +29,8 @@ class email(interface):
 
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
-            for j in pop.retr(i+1)[1]:
-                print j
+            message = parse(pop.retr(i+1)[1])
+            print str(message)
             #pop.dele(i+1)
 
         pop.quit()

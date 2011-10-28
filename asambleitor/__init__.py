@@ -2,7 +2,7 @@ import thread
 import ConfigParser
 from time import sleep
 
-from asambleitor.log import log
+from log import log
 
 confPath = '/usr/local/etc/asambleitor.cfg'
 
