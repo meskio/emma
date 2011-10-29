@@ -42,7 +42,6 @@ class email(Interface):
             message = p.message()
             trigger(recv_event, message)
             for command in p.commands():
-                print command[0] + command[1]
                 trigger(cmd_event, command)
             pop.dele(i+1)
 
