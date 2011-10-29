@@ -1,7 +1,4 @@
+from emma.complement import Complement
 
-class interface:
-    def __init__(self, conf):
-        self.conf = conf
-
-    def run(self):
-        pass
+class Interface(Complement):
+    pass

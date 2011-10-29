@@ -1,19 +1,21 @@
 import poplib
 import smtplib
 
-from emma.interface import interface
+from emma.interface import Interface
 from emma.sched import periodic
-from emma.events import trigger, subscribe
+from emma.events import Event, trigger, subscribe
 from emma.log import log
 
 from parser import Parser
 
 
-class email(interface):
+class email(Interface):
     def run(self):
         period = self.conf['pop_period']
         periodic(self.fetch, period)
-        subscribe(self.send_handle, 'send_'+self.conf['id'])
+        event = Event(event='send', interface='email', \
+                      identifier=self.identifier)
+        subscribe(event, self.send_handle)
 
     def fetch(self):
         log("[email] fetching email " + self.conf['pop_user']
@@ -30,19 +32,24 @@ class email(interface):
             log("[email]     error connecting by POP3")
             return
 
+        recv_event = Event(event='receive', interface='email', \
+                           identifier=self.identifier)
+        cmd_event = Event(event='command', interface='email', \
+                          identifier=self.identifier)
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
             p = Parser(pop.retr(i+1)[1])
             message = p.message()
-            trigger('receive', 'email', message)
+            trigger(recv_event, message)
             for command in p.commands():
-                trigger('command', 'email', command)
+                print command[0] + command[1]
+                trigger(cmd_event, command)
             pop.dele(i+1)
 
         pop.quit()
         log("[email]     " + str(numMessages) + " found")
 
-    def send_handle(self, event, provider, msg):
+    def send_handle(self, event, msg):
         msg['From'] = self.conf['smtp_address']
         self.send(msg['To'], msg.as_string())
 
