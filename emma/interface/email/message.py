@@ -20,8 +20,12 @@ class Message:
             return self.commands()
         elif item == 'tags':
             return self.tags()
-        else:
+        elif item == 'type':
+            return "email"
+        elif item in self.message:
             return self.message[item]
+        else:
+            return ""
 
     def commands(self):
         text = self['body']

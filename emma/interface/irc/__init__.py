@@ -1,27 +1,29 @@
-from emma.interface import interface
+import irclib
+
+from emma.interface import Interface
 from emma.log import log
 from emma.events import Event, subscribe, trigger
 
 from ircclient import IrcClient
 
-class irc(interface):
+class irc(Interface):
     def run(self):
+        event = Event(event='send', interface='irc', identifier=self.identifier)
+        subscribe(event, self.handler)
+
         server = self.conf['server']
-        port = self.conf['port']
+        port = int(self.conf['port'])
         nick = self.conf['nick']
         channel =  self.conf['channel']
+        log("[irc] Connect to " + server + ":" + str(port) + " nick:" + nick \
+                + " channel:" + channel)
 
         try:
-            self.irc = IrcClient(channel, nick, server, port)
+            self.irc = IrcClient(self.identifier, channel, nick, server, port)
+            self.irc.start()
         except irclib.ServerConnectionError, x:
             log("[irc] error conecting to server: " + x)
-        self.irc.start()
-
-        event = Event(interface='irc', identifier=self.identifier)
-        subscribe(Event, self.handler)
 
     def handler(self, event, data):
-        event_type, data = do_command() #TODO
-        e = Event(event=event_type, interface='irc', identifier=self.identifier)
-        trigger(e, data)
+        self.irc.send(data[0], data[1])
 

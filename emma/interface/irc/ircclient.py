@@ -1,15 +1,23 @@
 """
 This is a modification of the testbot.py example of the irclib
+
+Simple irc implementation, is missing a lot of features
 """
+import re
 from ircbot import SingleServerIRCBot
-from irclib import nm_to_n, nm_to_h, irc_lower, ip_numstr_to_quad, ip_quad_to_numstr
 
 from emma.log import log
+from emma.events import Event, subscribe, trigger
+
+from message import Message
 
 class IrcClient(SingleServerIRCBot):
-    def __init__(self, channel, nickname, server, port=6667):
+    def __init__(self, identifier, channel, nickname, server, port=6667):
         SingleServerIRCBot.__init__(self, [(server, port)], nickname, nickname)
+        self.nick = nickname
         self.channel = channel
+        self.identifier = identifier
+        self.cmdexp = re.compile(r"^" + self.nick + r"[:, ] *(.*)$")
 
     def on_nicknameinuse(self, c, e):
         c.nick(c.get_nickname() + "_")
@@ -18,50 +26,35 @@ class IrcClient(SingleServerIRCBot):
         c.join(self.channel)
 
     def on_privmsg(self, c, e):
-        self.do_command(e, e.arguments()[0])
+        args = e.arguments()[0]
+        msg = Message(e)
+        self._trigger_cmd(args, e)
 
     def on_pubmsg(self, c, e):
-        a = e.arguments()[0].split(":", 1)
-        if len(a) > 1 and irc_lower(a[0]) == irc_lower(self.connection.get_nickname()):
-            self.do_command(e, a[1].strip())
-        return
+        msg = Message(e)
+        recv_event = Event(event='receive', interface='irc', \
+                           identifier=self.identifier)
+        trigger(recv_event, msg)
 
-    def on_dccmsg(self, c, e):
-        #TODO
-        c.privmsg("You said: " + e.arguments()[0])
+        # Search for commands
+        m = self.cmdexp.match(msg["body"])
+        if m:
+            args = m.groups()[0]
+            self._trigger_cmd(args, msg)
 
-    def on_dccchat(self, c, e):
-        if len(e.arguments()) != 2:
-            return
-        args = e.arguments()[1].split()
-        if len(args) == 4:
-            try:
-                address = ip_numstr_to_quad(args[2])
-                port = int(args[3])
-            except ValueError:
-                return
-            self.dcc_connect(address, port)
-
-    def do_command(self, e, cmd):
-        nick = nm_to_n(e.source())
+    def send(self, to, msg):
         c = self.connection
+        c.privmsg(to, msg)
 
-        if cmd == "disconnect":
-            self.disconnect()
-        elif cmd == "die":
-            self.die()
-        elif cmd == "stats":
-            stats = {}
-            for chname, chobj in self.channels.items():
-                stats[chname] = {'users': chobj.users().sort(),
-                                 'opers': chobj.opers().sort(),
-                                 'voiced': chobj.voiced().sort()}
-            return ("stats", stats)
-        elif cmd == "send":
-        elif cmd == "dcc":
-            dcc = self.dcc_listen()
-            c.ctcp("DCC", nick, "CHAT chat %s %d" % (
-                ip_quad_to_numstr(dcc.localaddress),
-                dcc.localport))
+    def _trigger_cmd(self, args, msg):
+        s = args.split(" ", 1)
+        if len(s) == 2:
+            cmd, args = s
         else:
-            c.notice(nick, "Not understood: " + cmd)
+            cmd = s[0]
+            args = ""
+
+        log("[irc] command receved: " + cmd + ": " + args)
+        cmd_event = Event(event='command', interface='irc', \
+                          identifier=self.identifier)
+        trigger(cmd_event, ((cmd, args), msg))
