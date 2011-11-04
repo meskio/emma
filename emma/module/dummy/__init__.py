@@ -12,9 +12,11 @@ class dummy(Module):
 
     def handler_rcv(self, event, message):
         print message['subject']
-        print message.get_payload()
+        print message['tags']
+        print message['body']
 
-    def handler_cmd(self, event, command):
+    def handler_cmd(self, event, data):
+        command, message = data
         if command[0] == "print":
             print command[1]
         if command[0] == "send":

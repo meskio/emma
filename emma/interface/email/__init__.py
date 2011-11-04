@@ -6,7 +6,7 @@ from emma.sched import periodic
 from emma.events import Event, trigger, subscribe
 from emma.log import log
 
-from parser import Parser
+from message import Message
 
 
 class email(Interface):
@@ -38,11 +38,10 @@ class email(Interface):
                           identifier=self.identifier)
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
-            p = Parser(pop.retr(i+1)[1])
-            message = p.message()
+            message = Message(pop.retr(i+1)[1])
             trigger(recv_event, message)
-            for command in p.commands():
-                trigger(cmd_event, command)
+            for command in message.commands():
+                trigger(cmd_event, (command, message))
             pop.dele(i+1)
 
         pop.quit()
