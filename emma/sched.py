@@ -10,8 +10,8 @@ def periodic(handler, seconds):
 
 def _periodic(handler, seconds):
     while 1:
-        sleep(float(seconds))
         handler()
+        sleep(float(seconds))
 
 def at(event, data, date):
     thread.start_new_thread(_delay, (event, data, date - time()))
