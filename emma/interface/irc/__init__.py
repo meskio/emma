@@ -1,7 +1,6 @@
 import irclib
 
 from emma.interface import Interface
-from emma.log import log
 from emma.events import Event, subscribe, trigger
 
 from ircclient import IrcClient
@@ -15,14 +14,14 @@ class irc(Interface):
         port = int(self.conf['port'])
         nick = self.conf['nick']
         channel =  self.conf['channel']
-        log("[irc] Connect to " + server + ":" + str(port) + " nick:" + nick \
+        self.log("Connect to " + server + ":" + str(port) + " nick:" + nick \
                 + " channel:" + channel)
 
         try:
             self.irc = IrcClient(self.identifier, channel, nick, server, port)
             self.irc.start()
         except irclib.ServerConnectionError, x:
-            log("[irc] error conecting to server: " + x)
+            self.log("error conecting to server: " + x)
 
     def handler(self, event, data):
         self.irc.send(data[0], data[1])

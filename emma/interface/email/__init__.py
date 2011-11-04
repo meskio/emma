@@ -4,7 +4,6 @@ import smtplib
 from emma.interface import Interface
 from emma.sched import periodic
 from emma.events import Event, trigger, subscribe
-from emma.log import log
 
 from message import Message
 
@@ -18,7 +17,7 @@ class email(Interface):
         subscribe(event, self.send_handle)
 
     def fetch(self):
-        log("[email] fetching email " + self.conf['pop_user']
+        self.log("fetching email " + self.conf['pop_user']
                 + "@" + self.conf['pop_host'])
 
         try:
@@ -29,7 +28,7 @@ class email(Interface):
             pop.user(self.conf['pop_user'])
             pop.pass_(self.conf['pop_pass'])
         except:
-            log("[email]     error connecting by POP3")
+            self.log("    error connecting by POP3")
             return
 
         recv_event = Event(event='receive', interface='email', \
@@ -45,7 +44,7 @@ class email(Interface):
             pop.dele(i+1)
 
         pop.quit()
-        log("[email]     " + str(numMessages) + " found")
+        self.log("    " + str(numMessages) + " found")
 
     def send_handle(self, event, msg):
         msg['From'] = self.conf['smtp_address']
@@ -62,7 +61,7 @@ class email(Interface):
                 server.starttls()
             server.login(self.conf['smtp_user'], self.conf['smtp_pass'])
         except:
-            log("[email]     error sending email")
+            self.log("    error sending email")
             return
 
         fromaddr = self.conf['smtp_address']

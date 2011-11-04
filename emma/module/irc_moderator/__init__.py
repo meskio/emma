@@ -2,7 +2,6 @@ import thread
 
 from emma.events import Event, subscribe, trigger
 from emma.module import Module
-from emma.log import log
 
 class irc_moderator(Module):
     def run(self):
@@ -20,16 +19,16 @@ class irc_moderator(Module):
         self.lock.acquire()
         cmd, args = data[0]
         if cmd == "moderate" and not self.on_moderate:
-            log("[irc_moderator] Start moderating")
+            self.log("Start moderating")
             self.on_moderate = True
             self.words = []
             self.talking = None
         elif cmd == "stop":
-            log("[irc_moderator] Stop moderating")
+            self.log("Stop moderating")
             self.on_moderate = False
         elif cmd == "word":
             nick = data[1]['from']
-            log("[irc_moderator] Request word from: " + nick)
+            self.log("Request word from: " + nick)
             if self.talking:
                 self.words.append(nick)
             else:
@@ -50,7 +49,7 @@ class irc_moderator(Module):
         self.lock.release()
 
     def give_turn(self, nick):
-        log("[irc_moderator] Give word to: " + nick)
+        self.log("Give word to: " + nick)
         msg = nick + " has the word"
         event = Event(event="send", interface="irc", \
                       identifier=self.conf['irc_id'])

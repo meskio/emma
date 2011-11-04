@@ -54,7 +54,7 @@ class IrcClient(SingleServerIRCBot):
             cmd = s[0]
             args = ""
 
-        log("[irc] command receved: " + cmd + ": " + args)
+        log("[irc " + self.identifier + "] command receved: " + cmd + ": " + args)
         cmd_event = Event(event='command', interface='irc', \
                           identifier=self.identifier)
         trigger(cmd_event, ((cmd, args), msg))
