@@ -2,3 +2,7 @@ There is three layers:
 - Core, where the main stuff happends (database, mainloop, ...)
 - Interfaces, the ones that comunicates with the world (email, irc, wiki, lorea, ...)
 - Modules, the actions and so for the assembly. That should be easy to hack and welcome for every developer.
+
+You can get the documentation by:
+$ epydoc emma
+The folder 'html' will be created with the doc in it.

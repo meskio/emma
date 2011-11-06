@@ -1,12 +1,22 @@
 """
-This is a modification of the testbot.py example of the irclib
+irc client
 
 Simple irc implementation, is missing a lot of features
+
+This is a modification of the testbot.py example of the irclib
+
+@copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
+@license:
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the Do What The Fuck You Want To
+  Public License, Version 2, as published by Sam Hocevar. See
+  http://sam.zoy.org/projects/COPYING.WTFPL for more details.
 """
+
 import re
 from ircbot import SingleServerIRCBot
 
-from emma.log import log
+from emma.logger import log
 from emma.events import Event, subscribe, trigger
 
 from message import Message

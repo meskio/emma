@@ -1,3 +1,14 @@
+"""
+dummy module for testing
+
+@copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
+@license:
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the Do What The Fuck You Want To
+  Public License, Version 2, as published by Sam Hocevar. See
+  http://sam.zoy.org/projects/COPYING.WTFPL for more details.
+"""
+
 from email.mime.text import MIMEText
 
 from emma.events import Event, subscribe, trigger
