@@ -38,13 +38,12 @@ class IrcClient(SingleServerIRCBot):
     def on_privmsg(self, c, e):
         args = e.arguments()[0]
         msg = Message(e)
-        self._trigger_cmd(args, e)
+        self._trigger_rcv(msg)
+        self._trigger_cmd(args, msg)
 
     def on_pubmsg(self, c, e):
         msg = Message(e)
-        recv_event = Event(event='receive', interface='irc', \
-                           identifier=self.identifier)
-        trigger(recv_event, msg)
+        self._trigger_rcv(msg)
 
         # Search for commands
         m = self.cmdexp.match(msg["body"])
@@ -55,6 +54,11 @@ class IrcClient(SingleServerIRCBot):
     def send(self, to, msg):
         c = self.connection
         c.privmsg(to, msg)
+
+    def _trigger_rcv(self, msg):
+        recv_event = Event(event='receive', interface='irc', \
+                           identifier=self.identifier)
+        trigger(recv_event, msg)
 
     def _trigger_cmd(self, args, msg):
         s = args.split(" ", 1)

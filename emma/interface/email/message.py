@@ -13,34 +13,58 @@ from email.feedparser import FeedParser
 import email.message
 import re
 
-class Message:
+from emma.interface import message
+
+class Message(message.Message):
+    """
+    email message
+
+    All the headers apears on the dictionary as msg[hdr_name]
+    """
     def __init__(self, list_lines):
         p = FeedParser()
         for line in list_lines:
             p.feed(line + "\n")
         self.message = p.close()
 
+        frm = self.message['from']
+        to = self.message['to']
+        body = self.message.get_payload()
+        message.Message.__init__(self, frm, to, body, 'email')
+
         self.lines = list_lines
         self.comexp = re.compile(r"\[\[([^\|]*)\|([^\]]*)\]\]")
         self.tagexp = re.compile(r"\[([^\]]*)\]")
 
     def __getitem__(self, item):
-        if item == 'body':
-            return self.message.get_payload()
+        if item in self._:
+            return self._[item]
         elif item == 'commands':
             return self.commands()
         elif item == 'tags':
             return self.tags()
-        elif item == 'type':
-            return "email"
         elif item in self.message:
             return self.message[item]
         else:
             return ""
 
     def commands(self):
+        """
+        get a list of the commands inside the email
+
+        Everithing with the form [[cmd|params]] will be reconice as command
+
+        @returns: [(cmd, params)]
+        """
         text = self['body']
         return self.comexp.findall(text)
 
     def tags(self):
+        """
+        get a list of the tags from the subject
+
+        The text between [ and ] is consider as a tag
+
+        @returns: [tag]
+        """
         return self.tagexp.findall(self['subject'])

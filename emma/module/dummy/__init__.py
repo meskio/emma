@@ -23,7 +23,7 @@ class dummy(Module):
 
     def handler_rcv(self, event, message):
         print message['from'] + " -> " + message['to'] + ": " + message['subject']
-        print message['tags'] + " " + message['type']
+        print str(message['tags']) + " " + message['type']
         print message['body']
 
     def handler_cmd(self, event, data):
