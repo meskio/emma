@@ -19,7 +19,8 @@ class Message(message.Message):
     """
     email message
 
-    All the headers apears on the dictionary as msg[hdr_name]
+    All the headers apears on the dictionary as msg[hdr_name]. The attachments
+    are a list on the msg['attachments'].
     """
     def __init__(self, list_lines):
         p = FeedParser()
@@ -29,8 +30,14 @@ class Message(message.Message):
 
         frm = self.message['from']
         to = self.message['to']
-        body = self.message.get_payload()
+        payload = self.message.get_payload()
+        if type(payload) == list:
+            body = payload[0].get_payload()
+        else:
+            body = payload
+        attachments = payload
         message.Message.__init__(self, frm, to, body, 'email')
+        self._['attachments'] = attachments
 
         self.lines = list_lines
         self.comexp = re.compile(r"\[\[([^\|]*)\|([^\]]*)\]\]")
@@ -67,4 +74,5 @@ class Message(message.Message):
 
         @returns: [tag]
         """
-        return self.tagexp.findall(self['subject'])
+        subject = self['subject']
+        return self.tagexp.findall(subject)
