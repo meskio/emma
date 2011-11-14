@@ -21,6 +21,9 @@ from message import Message
 
 class email(Interface):
     def run(self):
+        """
+        Initialize email interface
+        """
         period = self.conf['pop_period']
         periodic(self.fetch, period)
         event = Event(event='send', interface='email', \
@@ -28,6 +31,11 @@ class email(Interface):
         subscribe(event, self.send_handle)
 
     def fetch(self):
+        """
+        Fetch email
+
+        Will be run periodically fetching the email from a POP3 server.
+        """
         self.log("fetching email " + self.conf['pop_user']
                 + "@" + self.conf['pop_host'])
 
@@ -52,6 +60,8 @@ class email(Interface):
             trigger(recv_event, message)
             for command in message.commands():
                 trigger(cmd_event, (command, message))
+            if self.conf['store'] == "yes":
+                self.store(message)
             pop.dele(i+1)
 
         pop.quit()
@@ -78,3 +88,16 @@ class email(Interface):
         fromaddr = self.conf['smtp_address']
         server.sendmail(fromaddr, to, msg)
         server.quit()
+
+    def store(self, message):
+        """
+        Store message on the database
+
+        @type message: Message
+        @param message: message to be stored
+        """
+        dmsg = dict(message)
+        print "=============================="
+        print dmsg
+        print "=============================="
+        self.db.insert(dmsg)

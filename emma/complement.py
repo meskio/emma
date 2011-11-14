@@ -15,7 +15,7 @@ from logger import log
 
 def use_lock(fn):
     """
-    Decorator for add a lock to a method
+    Decorator that adds a lock to a method
 
     It decorates methods of child classes of L{Complement}, usually L{interface}
     or L{module}. Adds the use of a locker (mutex) to the method, so the access
@@ -43,18 +43,26 @@ class Complement:
     Empty class mented to be inhered by L{interface} and L{module}
 
     It handles the configuration, identifier and locker.
+
+    There will be some useful variables:
+        self.conf(dict): with all the configuration of the complement
+        self.identifier(str): the identifier of the instantiation of the complement
+        self.db(mongoDB collection): the database collection
     """
-    def __init__(self, identifier, conf):
+    def __init__(self, identifier, conf, db):
         """
         @type identifier: string
         @param identifier: complement unique identifier, on L{interface} it is
             use for the L{Event} invocation
         @type conf: dictionary
         @param conf: the configuration of the module as {item: value}
+        @type db: database collection (mongoDB)
+        @param db: the database collection of the complement
         """
         self.conf = conf
         self.identifier = identifier
         self.lock = thread.allocate_lock()
+        self.db = db
 
     def run(self):
         """

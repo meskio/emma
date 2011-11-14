@@ -17,6 +17,7 @@ The code is organice on three layers:
 
 import thread
 import ConfigParser
+import pymongo
 import re
 from time import sleep
 
@@ -35,6 +36,10 @@ def main():
     conf.read(confPath)
     log.activate = conf.getboolean("core", "log")
 
+    log("[core] connect to database")
+    conn = pymongo.Connection()
+    db = conn[conf.get("core", "db_name")]
+
     log("[core] preparing interfaces and modules")
     sectexp = re.compile(r"^[IM] ([^ ]*) (.*)$")
     for section in conf.sections():
@@ -46,15 +51,17 @@ def main():
         name, identifier = m.groups()
         if section[0] == 'M':
             log("[core]     load module " + name)
+            db_coll = db["module_" + name + "_" + identifier]
             imp = __import__("emma.module." + name)
             exec "m = imp.module." + name + "." + name \
-                    + "('" + identifier + "', options)"
+                    + "('" + identifier + "', options, db_coll)"
             thread.start_new_thread(m.run, ())
         if section[0] == 'I':
             log("[core]     load interface " + name)
+            db_coll = db["interface_" + name + "_" + identifier]
             imp = __import__("emma.interface." + name)
             exec "i = imp.interface." + name + "." + name \
-                    + "('" + identifier + "', options)"
+                    + "('" + identifier + "', options, db_coll)"
             thread.start_new_thread(i.run, ())
 
     while 1: sleep(1000) # I didn't find any better wait method

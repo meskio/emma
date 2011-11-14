@@ -1,1 +1,18 @@
 Bot for digital assembly
+
+- Install -
+===========
+
+You need to have installed some dependencies:
+- mongondb
+- pymongo
+- irclib (for irc interface)
+- poplib (for email interface)
+- smtplib (for email interface)
+
+For install it:
+# python setup.py install
+
+Configure the /usr/local/etc/emma.cfg 
+and run it with:
+$ emm

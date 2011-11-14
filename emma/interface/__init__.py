@@ -19,6 +19,36 @@ class variables L{locks<emma.complement.use_lock>} should be use.
 """
 
 from emma.complement import Complement
+from emma.events import Event, subscribe
+
 
 class Interface(Complement):
-    pass
+    def __init__(self, *args):
+        Complement.__init__(self, *args)
+        name = self.__module__.split(".")[-1]
+        event = Event(event="db", interface=name, identifier=self.identifier)
+        subscribe(event, self.db_handler)
+
+    def db_handler(self, event, data):
+        """
+        Default DB handler
+
+        Get a database search for the collection of the interface and return
+        it's results.
+
+        @type event: l{event}
+        @param event: event to be triggered, it must have all the elements
+        @type data: dict or (dict, dict, ...)
+        @param data: a db search, like ({"type": "foo"}, {"body": True})
+        @returns: results of the db search
+        """
+        try:
+            if type(data) == tuple:
+                res = db.find(*data)
+            else:
+                res = db.find(data)
+        except Exception as detail:
+            log("db request error: " + detail)
+            res = []
+        return res
+

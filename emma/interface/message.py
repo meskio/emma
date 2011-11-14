@@ -26,6 +26,9 @@ class Message:
         """
         self._ = {'from': frm, 'to': to, 'body': body, 'type': tpe}
 
+    def items(self):
+        return self._.items()
+
     def __getitem__(self, item):
         if item in self._:
             return self._[item]
@@ -34,3 +37,17 @@ class Message:
 
     def __setitem__(self, item, value):
         self._[item] = value
+
+    def __iter__(self):
+        class __meta__:
+            def __init__(self, elements):
+                self.elements = elements
+
+            def next(self):
+                if len(self.elements):
+                    element = self.elements[0]
+                    self.elements = self.elements[1:]
+                    return element
+                else:
+                    raise StopIteration
+        return __meta__(self.items())

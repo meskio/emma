@@ -26,34 +26,33 @@ class Message(message.Message):
         p = FeedParser()
         for line in list_lines:
             p.feed(line + "\n")
-        self.message = p.close()
+        msg = p.close()
+        
+        if 'Content-Type' in msg:
+            exp = re.compile(r"charset=([^;]*)")
+            charset = exp.findall(msg['Content-Type'])[0]
 
-        frm = self.message['from']
-        to = self.message['to']
-        payload = self.message.get_payload()
+        payload = msg.get_payload()
         if type(payload) == list:
             body = payload[0].get_payload()
+            attachments = payload
         else:
             body = payload
-        attachments = payload
-        message.Message.__init__(self, frm, to, body, 'email')
+            attachments = [payload]
+        if charset:
+            body = body.decode(charset).encode("UTF-8")
+            attachments = [ at.decode(charset).encode("UTF-8") for at in attachments ]
+        message.Message.__init__(self, body=body, tpe='email')
         self._['attachments'] = attachments
 
-        self.lines = list_lines
-        self.comexp = re.compile(r"\[\[([^\|]*)\|([^\]]*)\]\]")
-        self.tagexp = re.compile(r"\[([^\]]*)\]")
+        for key, value in msg.items():
+            key = key.lower()
+            if charset:
+                value = value.decode(charset).encode("UTF-8")
+            self._[key] = value
 
-    def __getitem__(self, item):
-        if item in self._:
-            return self._[item]
-        elif item == 'commands':
-            return self.commands()
-        elif item == 'tags':
-            return self.tags()
-        elif item in self.message:
-            return self.message[item]
-        else:
-            return ""
+        self._['commands'] = self.commands()
+        self._['tags'] = self.tags()
 
     def commands(self):
         """
@@ -63,8 +62,9 @@ class Message(message.Message):
 
         @returns: [(cmd, params)]
         """
+        comexp = re.compile(r"\[\[([^\|]*)\|([^\]]*)\]\]")
         text = self['body']
-        return self.comexp.findall(text)
+        return comexp.findall(text)
 
     def tags(self):
         """
@@ -74,5 +74,6 @@ class Message(message.Message):
 
         @returns: [tag]
         """
+        tagexp = re.compile(r"\[([^\]]*)\]")
         subject = self['subject']
-        return self.tagexp.findall(subject)
+        return tagexp.findall(subject)
