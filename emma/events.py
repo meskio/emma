@@ -80,9 +80,16 @@ class Event:
 _events = {}
 _events_lock = thread.allocate_lock()
 
+def _get_handlers(event):
+    handlers = []
+    for e in event.all_events():
+        if e in _events:
+            handlers += _events[e]
+    return set(handlers)
+
 def trigger(event, data):
     """
-    Trigger an event
+    Trigger an event on background
 
     Execute in a new thread each handler L{subscribe}d to the event.
 
@@ -93,14 +100,33 @@ def trigger(event, data):
     it's data structure
     @warning: event can not have any None value
     """
-    h = []
-    for e in event.all_events():
-        if e in _events:
-            h += _events[e]
-    handlers = set(h)
+    handlers = _get_handlers(event)
 
     for handler in handlers:
         thread.start_new_thread(handler, (event, data))
+
+def run_event(event, data):
+    """
+    Run an event waiting for it's result
+
+    Execute each handler L{subscribe}d to the event secuentially getting back
+    the return value of each handler.
+
+    @type event: L{Event}
+    @param event: event to be triggered, it must have all the elements
+    @type data: undefined
+    @param data: the information passed by the event, each event will define 
+    it's data structure
+    @returns: [return value of each event handler]
+    @warning: event can not have any None value
+    @warning: it is not properly tested might have bugs
+    """
+    handlers = _get_handlers(event)
+
+    res = []
+    for handler in handlers:
+        res.insert(handler(event, data))
+    return res
 
 def subscribe(event, handler):
     """
