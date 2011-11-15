@@ -35,16 +35,16 @@ def main():
     conf = ConfigParser.RawConfigParser()
     conf.read(confPath)
     log.activate = conf.getboolean("core", "log")
+    db = _get_db(conf.get("core", "db_name"))
+    _load_complements(conf, db)
 
-    log("[core] connect to database")
-    conn = pymongo.Connection()
-    db = conn[conf.get("core", "db_name")]
+    while 1: sleep(1000) # I didn't find any better wait method
 
+def _load_complements(conf, db):
     log("[core] preparing interfaces and modules")
     sectexp = re.compile(r"^[IM] ([^ ]*) (.*)$")
     for section in conf.sections():
         options = dict(conf.items(section))
-
         m = sectexp.match(section)
         if not m:
             continue
@@ -64,4 +64,7 @@ def main():
                     + "('" + identifier + "', options, db_coll)"
             thread.start_new_thread(i.run, ())
 
-    while 1: sleep(1000) # I didn't find any better wait method
+def _get_db(name):
+    log("[core] connect to database")
+    conn = pymongo.Connection()
+    return conn[name]
