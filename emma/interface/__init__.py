@@ -11,6 +11,9 @@ L{log<emma.complement.Complement.log>}, L{use locks<emma.complement.use_lock>},
 class variables L{locks<emma.complement.use_lock>} should be use.
 
 @copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
+@author: Ruben Pollan
+@organization: hackmeeting U{http://sindominio.net/hackmeeting}
+@contact: meskio@sindominio.net
 @license:
   This program is free software; you can redistribute it and/or
   modify it under the terms of the Do What The Fuck You Want To

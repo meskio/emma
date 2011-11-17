@@ -2,5 +2,7 @@
 *.pyo
 *~
 .*.swp
+MANIFEST
 build
 html
+dist

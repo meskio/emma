@@ -8,6 +8,9 @@ The code is organice on three layers:
     simple API of events to intercomunicate with the interfaces.
 
 @copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
+@author: Ruben Pollan
+@organization: hackmeeting U{http://sindominio.net/hackmeeting}
+@contact: meskio@sindominio.net
 @license:
   This program is free software; you can redistribute it and/or
   modify it under the terms of the Do What The Fuck You Want To
