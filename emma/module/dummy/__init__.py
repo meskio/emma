@@ -25,9 +25,9 @@ class dummy(Module):
         subscribe(cmd_event, self.handler_cmd)
 
     def handler_rcv(self, event, message):
-        print message['from'] + " -> " + message['to'] + ": " + message['subject']
-        print str(message['tags']) + " " + message['type']
-        print message['body']
+        print message['From'] + " -> " + message['To'] + ": " + message['Subject']
+        print str(message['Tags']) + " " + message['Type']
+        print message['Body']
 
     def handler_cmd(self, event, data):
         command, message = data

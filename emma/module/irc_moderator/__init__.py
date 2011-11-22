@@ -39,7 +39,7 @@ class irc_moderator(Module):
             self.log("Stop moderating")
             self.on_moderate = False
         elif cmd == "word":
-            nick = data[1]['from']
+            nick = data[1]['From']
             self.log("Request word from: " + nick)
             if self.talking:
                 self.words.append(nick)
@@ -50,7 +50,7 @@ class irc_moderator(Module):
     @use_lock
     def rcv_handler(self, event, data):
         if self.on_moderate:
-            if data['body'] == "." and data['from'] == self.talking:
+            if data['Body'] == "." and data['From'] == self.talking:
                 if self.words:
                     self.talking = self.words[0]
                     self.words = self.words[1:]

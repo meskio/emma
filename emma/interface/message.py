@@ -27,7 +27,7 @@ class Message:
         @type tpe: string
         @param tpe: message type
         """
-        self._ = {'from': frm, 'to': to, 'body': body, 'type': tpe}
+        self._ = {'From': frm, 'To': to, 'Body': body, 'Type': tpe}
 
     def items(self):
         return self._.items()
