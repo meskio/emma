@@ -13,8 +13,6 @@ email message support
 """
 
 import pyzmail
-#from email.feedparser import FeedParser
-#import email.message
 import re
 
 from emma.interface import message
@@ -76,9 +74,11 @@ def _msg_to_dict(msg):
         a = dict(mailpart.part)
         body = mailpart.get_payload()
         if mailpart.charset:
-            body.decode(mailpart.charset).encode('UTF-8')
+            body = body.decode(mailpart.charset).encode('UTF-8')
         a['Body'] = body
         attach.append(a)
+        break
     d['Attachments'] = attach
+    print str(d)
 
     return d
