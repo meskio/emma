@@ -80,7 +80,6 @@ class email(Interface):
                 server = smtplib.SMTP_SSL(self.conf['smtp_host'])
             else:
                 server = smtplib.SMTP(self.conf['smtp_host'])
-            #server.set_debuglevel(1)
             if self.conf['smtp_tls'] == "yes":
                 server.starttls()
             server.login(self.conf['smtp_user'], self.conf['smtp_pass'])
@@ -100,7 +99,4 @@ class email(Interface):
         @param message: message to be stored
         """
         dmsg = dict(message)
-        print "=============================="
-        print dmsg
-        print "=============================="
         self.db.insert(dmsg)
