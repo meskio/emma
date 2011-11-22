@@ -48,9 +48,9 @@ class Complement:
     It handles the configuration, identifier and locker.
 
     There will be some useful variables:
-        self.conf(dict): with all the configuration of the complement
-        self.identifier(str): the identifier of the instantiation of the complement
-        self.db(mongoDB collection): the database collection
+        - self.conf(dict): with all the configuration of the complement
+        - self.identifier(str): the identifier of the instantiation of the complement
+        - self.db(mongoDB collection): the database collection
     """
     def __init__(self, identifier, conf, db):
         """
