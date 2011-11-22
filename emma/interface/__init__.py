@@ -21,6 +21,8 @@ class variables L{locks<emma.complement.use_lock>} should be use.
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+import re
+
 from emma.complement import Complement
 from emma.events import Event, subscribe
 
@@ -41,17 +43,21 @@ class Interface(Complement):
 
         @type event: l{event}
         @param event: event to be triggered, it must have all the elements
-        @type data: dict or (dict, dict, ...)
-        @param data: a db search, like ({"type": "foo"}, {"body": True})
+        @type data: dict
+        @param data: a db search, like {"type": "foo", "body": True}
         @returns: results of the db search
         """
-        try:
-            if type(data) == tuple:
-                res = db.find(*data)
+        search = {}
+        for k, v in data.items():
+            if '/' == v[0] == v[-1]:
+                search[k] = re.compile(v[1:-2])
             else:
-                res = db.find(data)
-        except Exception as detail:
-            log("db request error: " + detail)
+                search[k] = v
+
+        try:
+            res = self.db.find(search)
+        except Exception:
+            self.log("db request error.")
             res = []
         return res
 
