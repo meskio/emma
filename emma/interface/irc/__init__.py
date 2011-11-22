@@ -39,4 +39,3 @@ class irc(Interface):
 
     def handler(self, event, data):
         self.irc.send(data[0], data[1])
-

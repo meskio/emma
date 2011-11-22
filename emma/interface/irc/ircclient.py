@@ -56,6 +56,8 @@ class IrcClient(SingleServerIRCBot):
 
     def send(self, to, msg):
         c = self.connection
+        #FIXME: find a proper way to do the encoding
+        msg = msg.encode('iso-8859-1')
         c.privmsg(to, msg)
 
     def _trigger_rcv(self, msg):
