@@ -122,13 +122,12 @@ def run_event(event, data):
     it's data structure
     @returns: [return value of each event handler]
     @warning: event can not have any None value
-    @warning: it is not properly tested might have bugs
     """
     handlers = _get_handlers(event)
 
     res = []
     for handler in handlers:
-        res.insert(handler(event, data))
+        res.append(handler(event, data))
     return res
 
 def subscribe(event, handler):
