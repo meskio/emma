@@ -29,45 +29,13 @@ class help(Module):
 
         event.event = 'send'
         to = data[1]['From']
-        if event.interface == 'irc':
-            body = self.help_irc(args)
-            if data[1]['To'][0] == '#':
-                to = data[1]['To']
-        elif event.interface == 'email':
-            body = self.help_email(args)
+        if event.interface in self.conf:
+            body = self.conf[event.interface]
         else:
-            body = self.help_none(args)
+            body = "No help"
+        if event.interface == 'irc' and data[1]['To'][0] == '#':
+            to = data[1]['To']
         msg = Message(body, to)
+        msg['Subject'] = "help"
 
         trigger(event, msg)
-
-    def help_irc(self, args):
-        string = """\
-emma is a bot for virtual assembly
-==================================
-Commands:
-- remind 23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;text
-    Schelude a reminder at certan date
-- find From:/hackmeeting/,Tags:asamblea
-    Use for search on emails stored by emma
-- display 0
-    Display an email from a search list generated from 'find'
-- moderate
-    Start moderating an assembly
-- word
-    While moderating request word
-"""
-        return string
-
-    def help_email(self, args):
-        string = """\
-emma is a bot for virtual assembly
-
-Commands:
-- [[remind|23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;text]]
-Schelude a reminder at certan date
-"""
-        return string
-
-    def help_none(self, args):
-        return "No help"
