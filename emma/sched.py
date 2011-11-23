@@ -15,8 +15,10 @@ Schedule actions or events
 import thread
 import random
 from time import sleep, time
+from cPickle import dumps
 
 from events import trigger
+from database import DB
 
 
 def periodic(handler, seconds):
@@ -38,24 +40,50 @@ def _periodic(handler, seconds):
         handler()
         sleep(float(seconds))
 
-def at(event, data, date):
+def at(event, data, date, doc_id=None):
     """
     Program an event to be trigger on a date
 
-    @warning: the syntax might change
-    @warning: it is not properly tested might have bugs
+    @type event: Event
+    @param event: event to be scheduled
+    @param data: data for the event
+    @type date: int
+    @param date: epoch date for the event
+    @type doc_id: ObjectId
+    @param doc_id: optional database document id where is stored the scheduled
+    event. Meant to be use on recovering sched from the database, like after
+    a shutdown
     """
-    thread.start_new_thread(_delay, (event, data, date - time()))
+    thread.start_new_thread(_delay, (event, data, date - time(), date, doc_id))
 
-def delay(event, data, seconds):
+def delay(event, data, seconds, doc_id=None):
     """
     Program an event to be trigger after some seconds
 
-    @warning: the syntax might change
+    @type event: Event
+    @param event: event to be scheduled
+    @param data: data for the event
+    @type seconds: int
+    @param seconds: seconds of delay for the event
+    @type doc_id: ObjectId
+    @param doc_id: optional database document id where is stored the scheduled
+    event. Meant to be use on recovering sched from the database, like after
+    a shutdown
     @warning: it is not properly tested might have bugs
     """
-    thread.start_new_thread(_delay, (event, data, seconds))
+    thread.start_new_thread(_delay, (event, data, seconds, seconds + time()))
 
-def _delay(event, data, seconds):
-    sleep(float(seconds))
+def _delay(event, data, seconds, date, doc_id=None):
+    db = DB()
+    if not doc_id:
+        doc = {'element': 'sched',
+            'type': 'at',
+            'event': dumps(event.elements()),
+            'data': dumps(data),
+            'date': date}
+        doc_id = db.core().insert(doc)
+
+    if seconds > 0:
+        sleep(float(seconds))
     trigger(event, data)
+    db.core().remove(doc_id)

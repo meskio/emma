@@ -14,6 +14,7 @@ email interface for mailing lists or private mail
 
 import poplib
 import smtplib
+from email.mime.text import MIMEText
 
 from emma.interface import Interface
 from emma.sched import periodic
@@ -71,8 +72,12 @@ class email(Interface):
         self.log("    " + str(numMessages) + " found")
 
     def send_handle(self, event, msg):
+        #TODO: use pyzmail
         msg['From'] = self.conf['smtp_address']
-        self.send(msg['To'], msg.as_string())
+        mime = MIMEText(msg['Body'])
+        mime['Subject'] = msg['Subject']
+        mime['To'] = msg['To']
+        self.send(msg['To'], mime.as_string())
 
     def send(self, to, msg):
         try:

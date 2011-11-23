@@ -22,9 +22,12 @@ import thread
 import ConfigParser
 import re
 from time import sleep
+from cPickle import loads
 
 from logger import log
 from database import DB
+from sched import at
+from events import Event
 
 confPath = '/usr/local/etc/emma.cfg'
 """ Hardcoded the config location, that needs to be fixed """
@@ -41,6 +44,7 @@ def main():
     db = DB()
     db.connect(conf.get("core", "db_name"))
     _load_complements(conf, db)
+    _restore_sched(db.core())
 
     while 1: sleep(1000) # I didn't find any better wait method
 
@@ -67,3 +71,14 @@ def _load_complements(conf, db):
             exec "i = imp.interface." + name + "." + name \
                     + "('" + identifier + "', options, db_coll)"
             thread.start_new_thread(i.run, ())
+
+def _restore_sched(db):
+    sched = db.find({'element': 'sched', 'type': 'at'})
+    log("[core] restore " + str(sched.count()) + " scheduled events")
+    for s in sched:
+        elements = loads(str(s['event']))
+        event = Event(*elements)
+        data = loads(str(s['data']))
+        date = s['date']
+        doc_id = s['_id']
+        at(event, data, date, doc_id)
