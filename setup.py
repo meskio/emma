@@ -25,7 +25,6 @@ setup(
         "Topic :: Communications :: Email"],
     packages = ['emma',
         'emma.module',
-        'emma.module.dummy',
         'emma.module.irc_moderator',
         'emma.module.find_email',
         'emma.interface',
