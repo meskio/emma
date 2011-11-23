@@ -30,7 +30,6 @@ class IrcClient(SingleServerIRCBot):
         self.nick = nickname
         self.channel = channel
         self.identifier = identifier
-        self.cmdexp = re.compile(r"^" + self.nick + r"[:, ] *(.*)$")
 
     def on_nicknameinuse(self, c, e):
         c.nick(c.get_nickname() + "_")
@@ -49,7 +48,8 @@ class IrcClient(SingleServerIRCBot):
         self._trigger_rcv(msg)
 
         # Search for commands
-        m = self.cmdexp.match(msg["body"])
+        cmdexp = re.compile(r"^" + c.get_nickname() + r"[:, ] *(.*)$")
+        m = cmdexp.match(msg["Body"])
         if m:
             args = m.groups()[0]
             self._trigger_cmd(args, msg)

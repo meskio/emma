@@ -22,7 +22,7 @@ from emma.complement import use_lock
 class find_email(Module):
     def run(self):
         self.search = {}
-        """ {from:[email]} """
+        """ {channel:[email]} """
 
         cmd_event = Event(event="command", interface="irc", \
                           identifier=self.conf['irc_id'])
@@ -30,7 +30,10 @@ class find_email(Module):
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        frm = data[1]['From']
+        if data[1]['To'][0] == '#':
+            channel = data[1]['To']
+        else:
+            channel = data[1]['From']
 
         if cmd == "find":
             event = Event("db", "email", self.conf['email_id'])
@@ -38,26 +41,26 @@ class find_email(Module):
             self.log("Find: " + str(search))
             res = run_event(event, search)
             if not res or not res[0]:
-                self.say("Not found any email", frm)
+                self.say("Not found any email", channel)
             else:
-                self.add_search(res[0], frm)
-                self.show_list(frm)
-        elif cmd == "display" and frm in self.search:
-            emails = self.search[frm]
+                self.add_search(res[0], channel)
+                self.show_list(channel)
+        elif cmd == "display" and channel in self.search:
+            emails = self.search[channel]
             try:
                 email_index = int(args)
             except ValueError:
-                self.say("Not valid index: " + args, frm)
+                self.say("Not valid index: " + args, channel)
                 return
             if len(emails) > email_index:
-                self.show_email(emails[email_index], frm)
+                self.show_email(emails[email_index], channel)
             else:
                 err_str = "Index not in range(0-%d): %s" % (len(emails)-1, args)
-                self.say(err_str, frm)
+                self.say(err_str, channel)
 
     @use_lock
-    def add_search(self, emails, frm):
-        self.search[frm] = emails
+    def add_search(self, emails, channel):
+        self.search[channel] = emails
 
     def show_list(self, channel):
         emails = self.search[channel]
