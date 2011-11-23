@@ -16,14 +16,14 @@ class Message:
     """
     Message is basically a dictionary
     """
-    def __init__(self, frm=None, to=None, body=None, tpe=None):
+    def __init__(self, body=None, to=None, frm=None, tpe=None):
         """
-        @type frm: string
-        @param frm: source
-        @type to: string
-        @param to: target
         @type body: string
         @param body: content
+        @type to: string
+        @param to: target
+        @type frm: string
+        @param frm: source
         @type tpe: string
         @param tpe: message type
         """

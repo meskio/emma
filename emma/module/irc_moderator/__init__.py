@@ -15,6 +15,8 @@ irc moderator module
 from emma.events import Event, subscribe, trigger
 from emma.module import Module
 from emma.complement import use_lock
+from emma.interface.message import Message
+
 
 class irc_moderator(Module):
     def run(self):
@@ -60,7 +62,7 @@ class irc_moderator(Module):
 
     def give_turn(self, nick):
         self.log("Give word to: " + nick)
-        msg = nick + " has the word"
+        msg = Message(nick + " has the word", self.conf['irc_chn'])
         event = Event(event="send", interface="irc", \
                       identifier=self.conf['irc_id'])
-        trigger(event, (self.conf['irc_chn'], msg))
+        trigger(event, msg)

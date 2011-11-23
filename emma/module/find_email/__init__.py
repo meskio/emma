@@ -17,6 +17,7 @@ from time import sleep
 from emma.events import Event, subscribe, run_event
 from emma.module import Module
 from emma.complement import use_lock
+from emma.interface.message import Message
 
 
 class find_email(Module):
@@ -82,7 +83,8 @@ class find_email(Module):
     def say(self, msg, channel):
         event = Event(event="send", interface="irc", \
                       identifier=self.conf['irc_id'])
-        run_event(event, (channel, msg))
+        message = Message(msg, channel)
+        run_event(event, message)
         sleep(0.3) #FIXME: any better way to prevent Flood?
 
     def parse_args(self, args):

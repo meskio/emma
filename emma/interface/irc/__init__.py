@@ -38,4 +38,4 @@ class irc(Interface):
             self.log("error conecting to server: " + x)
 
     def handler(self, event, data):
-        self.irc.send(data[0], data[1])
+        self.irc.send(data['To'], data['Body'])
