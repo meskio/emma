@@ -51,7 +51,7 @@ class DB:
         """
         return self.__['db'][coll]
 
-    def core():
+    def core(self):
         """
         Get the core collection
 
