@@ -20,11 +20,11 @@ The code is organice on three layers:
 
 import thread
 import ConfigParser
-import pymongo
 import re
 from time import sleep
 
 from logger import log
+from database import DB
 
 confPath = '/usr/local/etc/emma.cfg'
 """ Hardcoded the config location, that needs to be fixed """
@@ -38,7 +38,8 @@ def main():
     conf = ConfigParser.RawConfigParser()
     conf.read(confPath)
     log.activate = conf.getboolean("core", "log")
-    db = _get_db(conf.get("core", "db_name"))
+    db = DB()
+    db.connect(conf.get("core", "db_name"))
     _load_complements(conf, db)
 
     while 1: sleep(1000) # I didn't find any better wait method
@@ -54,20 +55,15 @@ def _load_complements(conf, db):
         name, identifier = m.groups()
         if section[0] == 'M':
             log("[core]     load module " + name)
-            db_coll = db["module_" + name + "_" + identifier]
+            db_coll = db.collection("module_" + name + "_" + identifier)
             imp = __import__("emma.module." + name)
             exec "m = imp.module." + name + "." + name \
                     + "('" + identifier + "', options, db_coll)"
             thread.start_new_thread(m.run, ())
         if section[0] == 'I':
             log("[core]     load interface " + name)
-            db_coll = db["interface_" + name + "_" + identifier]
+            db_coll = db.collection("interface_" + name + "_" + identifier)
             imp = __import__("emma.interface." + name)
             exec "i = imp.interface." + name + "." + name \
                     + "('" + identifier + "', options, db_coll)"
             thread.start_new_thread(i.run, ())
-
-def _get_db(name):
-    log("[core] connect to database")
-    conn = pymongo.Connection()
-    return conn[name]
