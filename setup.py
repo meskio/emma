@@ -27,6 +27,7 @@ setup(
         'emma.module',
         'emma.module.dummy',
         'emma.module.irc_moderator',
+        'emma.module.find_email',
         'emma.interface',
         'emma.interface.email',
         'emma.interface.irc'],

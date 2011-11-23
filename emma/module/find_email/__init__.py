@@ -16,34 +16,63 @@ from time import sleep
 
 from emma.events import Event, subscribe, run_event
 from emma.module import Module
+from emma.complement import use_lock
 
 
 class find_email(Module):
     def run(self):
+        self.search = {}
+        """ {from:[email]} """
+
         cmd_event = Event(event="command", interface="irc", \
                           identifier=self.conf['irc_id'])
         subscribe(cmd_event, self.cmd_handler)
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        if cmd != "find":
-            return
+        frm = data[1]['From']
 
-        event = Event("db", "email", self.conf['email_id'])
-        search = self.parse_args(args)
-        self.log("Find: " + str(search))
-        res = run_event(event, search)
-        if not res or not res[0].count():
-            self.say("Not found any email", data[1]['From'])
-        else:
-            for email in res[0]:
-                self.show_email(email, data[1]['From'])
+        if cmd == "find":
+            event = Event("db", "email", self.conf['email_id'])
+            search = self.parse_args(args)
+            self.log("Find: " + str(search))
+            res = run_event(event, search)
+            if not res or not res[0]:
+                self.say("Not found any email", frm)
+            else:
+                self.add_search(res[0], frm)
+                self.show_list(frm)
+        elif cmd == "display" and frm in self.search:
+            emails = self.search[frm]
+            try:
+                email_index = int(args)
+            except ValueError:
+                self.say("Not valid index: " + args, frm)
+                return
+            if len(emails) > email_index:
+                self.show_email(emails[email_index], frm)
+            else:
+                err_str = "Index not in range(0-%d): %s" % (len(emails)-1, args)
+                self.say(err_str, frm)
+
+    @use_lock
+    def add_search(self, emails, frm):
+        self.search[frm] = emails
+
+    def show_list(self, channel):
+        emails = self.search[channel]
+        for i, email in zip(range(len(emails)), emails):
+            date = email.get('Date', '')
+            frm = email.get('From', '')
+            sbj = email.get('Subject', '')
+            line = "%d - %s   %s   %s" % (i, date, frm, sbj)
+            self.say(line, channel)
 
     def show_email(self, email, channel):
         for key in ['From', 'To', 'Cc', 'Date', 'Subject']:
             if key in email:
                 self.say(key + ": " + email[key], channel)
-        body = [ "|  " + line for line in email['Body'].split('\n') ]
+        body = [ "   " + line for line in email['Body'].split('\n') ]
         for line in body:
             self.say(line, channel)
 
@@ -51,7 +80,7 @@ class find_email(Module):
         event = Event(event="send", interface="irc", \
                       identifier=self.conf['irc_id'])
         run_event(event, (channel, msg))
-        sleep(0.4) #FIXME: any better way to prevent Flood?
+        sleep(0.3) #FIXME: any better way to prevent Flood?
 
     def parse_args(self, args):
         #FIXME: improve to take care of spaces
