@@ -12,8 +12,6 @@ find an email from irc
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
-from time import sleep
-
 from emma.events import Event, subscribe, run_event
 from emma.module import Module
 from emma.complement import use_lock
@@ -65,27 +63,28 @@ class find_email(Module):
 
     def show_list(self, channel):
         emails = self.search[channel]
+        string = ""
         for i, email in zip(range(len(emails)), emails):
             date = email.get('Date', '')
             frm = email.get('From', '')
             sbj = email.get('Subject', '')
-            line = "%d - %s   %s   %s" % (i, date, frm, sbj)
-            self.say(line, channel)
+            string += "%d - %s   %s   %s\n" % (i, date, frm, sbj)
+        self.say(string, channel)
 
     def show_email(self, email, channel):
+        string = ""
         for key in ['From', 'To', 'Cc', 'Date', 'Subject']:
             if key in email:
-                self.say(key + ": " + email[key], channel)
+                string += key + ": " + email[key] + '\n'
         body = [ "   " + line for line in email['Body'].split('\n') ]
-        for line in body:
-            self.say(line, channel)
+        string += '\n'.join(body)
+        self.say(string, channel)
 
     def say(self, msg, channel):
         event = Event(event="send", interface="irc", \
                       identifier=self.conf['irc_id'])
         message = Message(msg, channel)
         run_event(event, message)
-        sleep(0.3) #FIXME: any better way to prevent Flood?
 
     def parse_args(self, args):
         #FIXME: improve to take care of spaces

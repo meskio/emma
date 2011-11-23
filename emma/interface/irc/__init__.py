@@ -13,6 +13,7 @@ irc interface
 """
 
 import irclib
+from time import sleep
 
 from emma.interface import Interface
 from emma.events import Event, subscribe, trigger
@@ -38,4 +39,6 @@ class irc(Interface):
             self.log("error conecting to server: " + x)
 
     def handler(self, event, data):
-        self.irc.send(data['To'], data['Body'])
+        for line in data['Body'].split('\n'):
+            self.irc.send(data['To'], line)
+            sleep(0.3) #FIXME: any better way to prevent Flood?
