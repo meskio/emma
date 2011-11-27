@@ -76,7 +76,7 @@ class Event:
         event_tuples = itertools.product((self.event, None), \
                                          (self.interface, None), \
                                          (self.identifier, None))
-        events = [ Event(e[0], e[1], e[2]) for e in event_tuples]
+        events = [ Event(x,y,z) for x,y,z in event_tuples]
         return events
 
 
