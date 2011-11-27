@@ -23,7 +23,7 @@ def use_lock(fn):
     It decorates methods of child classes of L{Complement}, usually L{interface}
     or L{module}. Adds the use of a locker (mutex) to the method, so the access
     to the class data is thread safe.
-    
+
     >>> from emma.complement import use_lock
     >>> class myModule(Module):
     ...     @use_lock
@@ -72,7 +72,7 @@ class Complement:
         The starting method of the complement
 
         Each L{interface} or L{module} should define here the initialization,
-        L{subscribe<emma.events.subscribe>} to events, the 
+        L{subscribe<emma.events.subscribe>} to events, the
         L{periodic<emma.sched.periodic>} actions, ...
         """
         pass

@@ -2,7 +2,7 @@
 Event support for emma
 
 The events are addressed by L{Event} class, with the event name, interface and
-identifier of the L{interface} related to it. Any complement can be scubcribed 
+identifier of the L{interface} related to it. Any complement can be scubcribed
 and trigger any event.
 
 @copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
@@ -33,7 +33,7 @@ class Event:
     >>> myEvent.identifier
     'bar'
     """
-    def __init__(self, event=None, interface=None, identifier=None): 
+    def __init__(self, event=None, interface=None, identifier=None):
         """
         Define the event
 
@@ -99,7 +99,7 @@ def trigger(event, data):
     @type event: L{Event}
     @param event: event to be triggered, it must have all the elements
     @type data: undefined
-    @param data: the information passed by the event, each event will define 
+    @param data: the information passed by the event, each event will define
     it's data structure
     @warning: event can not have any None value
     """
@@ -118,7 +118,7 @@ def run_event(event, data):
     @type event: L{Event}
     @param event: event to be triggered, it must have all the elements
     @type data: undefined
-    @param data: the information passed by the event, each event will define 
+    @param data: the information passed by the event, each event will define
     it's data structure
     @returns: [return value of each event handler]
     @warning: event can not have any None value
@@ -135,7 +135,7 @@ def subscribe(event, handler):
     Subscribe to an event
 
     Set a function to be call if an event is produced. The event can have some
-    (or all) elements undefined, so it was call by any event with the defined 
+    (or all) elements undefined, so it was call by any event with the defined
     elements equals to the subscribed event.
 
     @type event: L{Event}

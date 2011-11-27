@@ -16,13 +16,13 @@ def log(msg):
     """
     Output a log string
 
-    If activated it prompts the string to the standard output. It can be 
-    activated or deactivated by the config file, with the variable 'log' on the 
-    'core' section. L{interface} and L{module} should use the 
-    L{Complement.log()<emma.complement.Complement.log>} method, wich is inhered 
+    If activated it prompts the string to the standard output. It can be
+    activated or deactivated by the config file, with the variable 'log' on the
+    'core' section. L{interface} and L{module} should use the
+    L{Complement.log()<emma.complement.Complement.log>} method, wich is inhered
     to the class.
 
-    The log can be activate or deactibate by setting log.activate variable to 
+    The log can be activate or deactibate by setting log.activate variable to
     True or False
 
     @type msg: string
@@ -32,4 +32,4 @@ def log(msg):
     global activate
 
     if log.activate:
-        print msg 
+        print msg
