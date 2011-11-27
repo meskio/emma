@@ -43,14 +43,15 @@ def main():
     log.activate = conf.getboolean("core", "log")
     db = DB()
     db.connect(conf.get("core", "db_name"))
-    _load_complements(conf, db)
+    _load_complements(conf)
     _restore_sched(db.core())
 
     while 1: sleep(1000) # I didn't find any better wait method
 
-def _load_complements(conf, db):
+def _load_complements(conf):
     log("[core] preparing interfaces and modules")
     sectexp = re.compile(r"^[IM] ([^ ]*) (.*)$")
+
     for section in conf.sections():
         options = dict(conf.items(section))
         m = sectexp.match(section)
@@ -58,19 +59,21 @@ def _load_complements(conf, db):
             continue
         name, identifier = m.groups()
         if section[0] == 'M':
-            log("[core]     load module " + name)
-            db_coll = db.collection("module_%s_%s" % (name, identifier))
-            imp = __import__("emma.module." + name)
-            exec "m = imp.module.%s.%s(%s, options, db_coll)" % \
-                    (name, name, identifier)
+            m = _init_complement('module', name, identifier, options)
             thread.start_new_thread(m.run, ())
         if section[0] == 'I':
-            log("[core]     load interface " + name)
-            db_coll = db.collection("interface_%s_%s" % (name, identifier))
-            imp = __import__("emma.interface." + name)
-            exec "i = imp.interface.%s.%s(%s, options, db_coll)" % \
-                    (name, name, identifier)
+            i = _init_complement('interface', name, identifier, options)
             thread.start_new_thread(i.run, ())
+
+def _init_complement(tpe, name, identifier, options):
+    db = DB()
+    log("[core]     load %s %s" % (tpe, name))
+    db_coll = db.collection("%s_%s_%s" % (tpe, name, identifier))
+    imp = __import__("emma.%s.%s" % (tpe, name))
+    complements = getattr(imp, tpe)
+    complement  = getattr(complements, name)
+    clss = getattr(complement, name)
+    return clss(identifier, options, db_coll)
 
 def _restore_sched(db):
     sched = db.find({'element': 'sched', 'type': 'at'})
