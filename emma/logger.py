@@ -12,6 +12,10 @@ Loggin system for emma
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+import thread
+
+_log_lock = thread.allocate_lock()
+
 def log(msg):
     """
     Output a log string
@@ -32,4 +36,4 @@ def log(msg):
     global activate
 
     if log.activate:
-        print msg
+        with _log_lock: print msg
