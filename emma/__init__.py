@@ -59,17 +59,17 @@ def _load_complements(conf, db):
         name, identifier = m.groups()
         if section[0] == 'M':
             log("[core]     load module " + name)
-            db_coll = db.collection("module_" + name + "_" + identifier)
+            db_coll = db.collection("module_%s_%s" % (name, identifier))
             imp = __import__("emma.module." + name)
-            exec "m = imp.module." + name + "." + name \
-                    + "('" + identifier + "', options, db_coll)"
+            exec "m = imp.module.%s.%s(%s, options, db_coll)" % \
+                    (name, name, identifier)
             thread.start_new_thread(m.run, ())
         if section[0] == 'I':
             log("[core]     load interface " + name)
-            db_coll = db.collection("interface_" + name + "_" + identifier)
+            db_coll = db.collection("interface_%s_%s" % (name, identifier))
             imp = __import__("emma.interface." + name)
-            exec "i = imp.interface." + name + "." + name \
-                    + "('" + identifier + "', options, db_coll)"
+            exec "i = imp.interface.%s.%s(%s, options, db_coll)" % \
+                    (name, name, identifier)
             thread.start_new_thread(i.run, ())
 
 def _restore_sched(db):

@@ -88,4 +88,4 @@ class Complement:
         @param msg: the text to output
         """
         name = self.__module__.split(".")[-1]
-        log("[" + name + " " + self.identifier + "] " + msg)
+        log("[%s %s] %s" % (name, self.identifier, msg))
