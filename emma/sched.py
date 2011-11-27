@@ -16,10 +16,28 @@ import thread
 import random
 from time import sleep, time
 from cPickle import dumps
+from time import strptime, mktime
 
 from events import trigger
 from database import DB
 
+
+def str2date(date):
+    """
+    Convert an string of date to a epoch date
+
+    @type date: string
+    @param date: string date of the date
+    @returns: epoch date
+    """
+    date_fmt = ["%d/%m/%Y %H:%M", "%d/%m/%Y"]
+
+    for fmt in date_fmt:
+        try:
+            return mktime(strptime(date, fmt))
+        except ValueError:
+            pass
+    return -1
 
 def periodic(handler, seconds):
     """
@@ -47,14 +65,23 @@ def at(event, data, date, doc_id=None):
     @type event: Event
     @param event: event to be scheduled
     @param data: data for the event
-    @type date: int
-    @param date: epoch date for the event
+    @type date: int or string
+    @param date: epoch date or string date for the event
     @type doc_id: ObjectId
     @param doc_id: optional database document id where is stored the scheduled
     event. Meant to be use on recovering sched from the database, like after
     a shutdown
     """
-    thread.start_new_thread(_delay, (event, data, date - time(), date, doc_id))
+    epoch = -1
+    if isinstance(date, int):
+        epoch = date
+    elif isinstance(date, str):
+        epoch = str2date(date)
+
+    if epoch != -1:
+        args = (event, data, epoch - time(), epoch, doc_id)
+        thread.start_new_thread(_delay, args)
+    return epoch
 
 def delay(event, data, seconds, doc_id=None):
     """

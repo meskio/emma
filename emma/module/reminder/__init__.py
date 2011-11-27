@@ -12,8 +12,6 @@ program emails to be sent as reminder
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
-from time import strptime, mktime
-
 from emma.events import Event, subscribe
 from emma.sched import at
 from emma.module import Module
@@ -43,12 +41,4 @@ class reminder(Module):
         msg = Message(body, to)
         msg['Subject'] = subject
         send_event = Event('send', self.conf['interface'], self.conf['identifier'])
-        try:
-            epoch = mktime(strptime(date, "%d/%m/%Y %H:%M"))
-        except ValueError:
-            try:
-                epoch = strptime(date, "%d/%m/%Y")
-            except ValueError:
-                self.log("invalid date format")
-                return
-        at(send_event, msg, epoch)
+        at(send_event, msg, date)
