@@ -1,0 +1,24 @@
+Core
+----
+* Parse comand line params
+* database versioning and modular update system. Store the version on the
+  database and give a way for the components to update the database.
+* Don't hardcode the config path (use setup.py?)
+* Internationalization. Maybe gettext? But I need reverse sentence resolution.
+
+
+Interfaces
+----------
+* MediaWiki
+* xmpp (jabber)
+* lorea.cc (elgg)
+* microblogin (twitter, identica)
+
+
+Others
+------
+* Proper easy to use documentation
+* list archive reader. A standalone program to read mbox list archives and 
+  store them on the database
+* init.d script
+* debian package
