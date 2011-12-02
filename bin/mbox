@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+
+import re
+from sys import argv, exit
+from chardet import detect
+from mailbox import mbox
+from pyzmail import PyzMessage
+
+from emma.database import DB
+from emma.logger import log
+
+def usage():
+    """
+    Show program usage
+    """
+    print "Usage: "
+    print "  %s dbname identifier mboxfile" % argv[0]
+
+def commands(body):
+    """
+    get a list of the commands inside the email
+
+    Everithing with the form [[cmd|params]] will be reconice as command
+
+    @type body: string
+    @param body: payload of the mail
+    @returns: [(cmd, params)]
+    """
+    comexp = re.compile(r"\[\[([^\|]*)\|([^\]]*)\]\]")
+    return comexp.findall(body)
+
+def tags(subject):
+    """
+    get a list of the tags from the subject
+
+    The text between [ and ] is consider as a tag
+
+    @type subject: string
+    @param subject: subject of the email
+    @returns: [tag]
+    """
+    tagexp = re.compile(r"\[([^\]]*)\]")
+    return tagexp.findall(subject)
+
+def parse(mbox_path, db):
+    """
+    Parse mails and upload them to a mongodb
+
+    @type mbox_path: string
+    @param mbox_path: path to the mbox file
+    @param db: mongodb collection
+    """
+    m = mbox(mbox_path)
+    for message in m:
+        zmail = PyzMessage(message)
+        d = {}
+        for header in zmail.keys():
+            d[header] = zmail.get_decoded_header(header)
+        body = zmail.text_part.get_payload()
+        charset = detect(body)['encoding']
+        body = body.decode(charset).encode('UTF-8')
+        d['Body'] = body
+        d['Commands'] = commands(body)
+        d['Tags'] = tags(zmail.get_subject())
+        db.save(d)
+
+def get_coll(dbname, identifier):
+    log.activate = False
+    db = DB()
+    db.connect(dbname)
+    collname = "interface_email_%s" % identifier
+    return db.collection(collname)
+
+if __name__ == "__main__":
+    if len(argv) != 4:
+        usage()
+        exit(1)
+    dbname, identifier, path = argv[1:]
+    coll = get_coll(dbname, identifier)
+    parse(path, coll)
