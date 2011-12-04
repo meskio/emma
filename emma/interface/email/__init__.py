@@ -33,6 +33,7 @@ class email(Interface):
         event = Event(event='send', interface='email', \
                       identifier=self.identifier)
         subscribe(event, self.send_handle)
+        self.update_db()
 
     def fetch(self):
         """

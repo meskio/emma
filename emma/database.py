@@ -47,7 +47,7 @@ class DB:
 
         @type coll: string
         @param coll: coll name
-        @returns: mongodb collection
+        @returns: mongoDb collection
         """
         return self.__['db'][coll]
 
@@ -56,6 +56,6 @@ class DB:
         Get the core collection
 
         The collection use by the core of emma
-        @returns: mongodb collection
+        @returns: mongoDb collection
         """
-        return self.__['db']['core']
+        return self.collection('core')

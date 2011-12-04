@@ -102,15 +102,16 @@ def delay(event, data, seconds, doc_id=None):
 
 def _delay(event, data, seconds, date, doc_id=None):
     db = DB()
+    core = db.core()
     if not doc_id:
         doc = {'element': 'sched',
             'type': 'at',
             'event': dumps(event.elements()),
             'data': dumps(data),
             'date': date}
-        doc_id = db.core().insert(doc)
+        doc_id = core.insert(doc)
 
     if seconds > 0:
         sleep(float(seconds))
     trigger(event, data)
-    db.core().remove(doc_id)
+    core.remove(doc_id)

@@ -14,6 +14,7 @@ The necessary class and decorators for L{interface} and L{module}
 
 import thread
 
+import emma
 from logger import log
 
 def use_lock(fn):
@@ -89,3 +90,32 @@ class Complement:
         """
         name = self.__module__.split(".")[-1]
         log("[%s %s] %s" % (name, self.identifier, msg))
+
+    def update_db(self):
+        """
+        Update database
+
+        Stores the emma version on the collection of the complement. And
+        returns the old version from the database and the actual version
+        of emma.
+
+        @note: That is meant to be use for updating the database structure of the
+        complement.
+        @returns: (old version, new version)
+        """
+        dbmeta = self.db.find({'type' : 'meta'})
+        old_version = None
+        metaUpdated = False
+        if dbmeta.count():
+            for meta in dbmeta:
+                v = float(meta['version'])
+                if old_version and v < old_version:
+                    old_version = v
+                if v != emma.version:
+                    self.db.remove(meta['_id'])
+                else:
+                    metaUpdated = True
+
+        if not metaUpdated:
+            self.db.insert({'type': 'meta', 'version': emma.version})
+        return (old_version, emma.version)

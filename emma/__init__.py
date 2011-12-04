@@ -29,8 +29,12 @@ from database import DB
 from sched import at
 from events import Event
 
+version = 0.1
+""" Version of emma """
+
 confPath = '/usr/local/etc/emma.cfg'
-""" Hardcoded the config location, that needs to be fixed """
+""" Hardcoded the config location
+@note: that needs to be fixed """
 
 def main():
     """
@@ -43,8 +47,9 @@ def main():
     log.activate = conf.getboolean("core", "log")
     db = DB()
     db.connect(conf.get("core", "db_name"))
+    core = db.core()
     _load_complements(conf)
-    _restore_sched(db.core())
+    _restore_sched(core)
 
     while 1: sleep(1000) # I didn't find any better wait method
 
