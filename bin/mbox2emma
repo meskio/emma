@@ -65,6 +65,9 @@ def parse(mbox_path, db):
         db.save(d)
 
 def get_coll(dbname, identifier):
+    """
+    Get database collumn (mongoDB)
+    """
     log.activate = False
     db = DB()
     db.connect(dbname)

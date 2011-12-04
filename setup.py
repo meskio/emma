@@ -32,7 +32,7 @@ setup(
         'emma.interface.email',
         'emma.interface.irc'],
     data_files = [('etc', ['data/emma.cfg'])],
-    scripts = ['emm'],
+    scripts = ['emm', 'bin/mbox2emma'],
     license = 'WTFPL',
     long_description = open('README').read(),
 )
