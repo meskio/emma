@@ -14,5 +14,10 @@ emma: bot for digital assembly
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+from sys import argv
 from emma import main
-main()
+
+if len(argv) > 1:
+    main(argv[1])
+else:
+    main()

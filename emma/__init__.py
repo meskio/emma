@@ -36,14 +36,14 @@ confPath = '/usr/local/etc/emma.cfg'
 """ Hardcoded the config location
 @note: that needs to be fixed """
 
-def main():
+def main(conf_path=confPath):
     """
     Main function of the program
 
     It loads all the interfaces and modules described on the config file.
     """
     conf = ConfigParser.RawConfigParser()
-    conf.read(confPath)
+    conf.read(conf_path)
     log.activate = conf.getboolean("core", "log")
     db = DB()
     db.connect(conf.get("core", "db_name"))
