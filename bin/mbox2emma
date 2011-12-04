@@ -2,12 +2,12 @@
 
 import re
 from sys import argv, exit
-from chardet import detect
 from mailbox import mbox
 from pyzmail import PyzMessage
 
 from emma.database import DB
 from emma.logger import log
+from emma.interface.email.message import msg_to_dict
 
 def usage():
     """
@@ -53,16 +53,14 @@ def parse(mbox_path, db):
     m = mbox(mbox_path)
     for message in m:
         zmail = PyzMessage(message)
-        d = {}
-        for header in zmail.keys():
-            d[header] = zmail.get_decoded_header(header)
-        body = zmail.text_part.get_payload()
-        charset = detect(body)['encoding']
-        body = body.decode(charset).encode('UTF-8')
-        d['Body'] = body
-        d['Commands'] = commands(body)
-        d['Tags'] = tags(zmail.get_subject())
-        db.save(d)
+        d = msg_to_dict(zmail)
+        d['Commands'] = commands(d['Body'])
+        d['Tags'] = tags(d['Subject'])
+        try:
+            db.save(d)
+        except:
+            for key, value in d.items():
+                print key + ": " + str(value)
 
 def get_coll(dbname, identifier):
     """
