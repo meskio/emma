@@ -14,6 +14,7 @@ email message support
 
 import pyzmail
 import re
+import chardet
 
 from emma.interface import message
 
@@ -60,25 +61,31 @@ class Message(message.Message):
         return tagexp.findall(subject)
 
 
-def _msg_to_dict(msg):
+def msg_to_dict(msg):
+    """
+    Convert a PyZmail message to a dictionary
+
+    @type msg: PyzMessage
+    @param msg: email to convert
+    @returns: {'Header': 'content'}
+    """
     # FIXME: any repeated header will be ignored
     # Usually it is only 'Received' header
     d = {}
     for header in msg.keys():
         d[header] = msg.get_decoded_header(header)
     body = msg.text_part.get_payload()
-    d['Body'] = body.decode(msg.text_part.charset).encode('UTF-8')
+    if msg.text_part.charset:
+        charset = msg.text_part.charset
+    else:
+        charset = chardet.detect(body)['encoding']
+    d['Body'] = body.decode(charset).encode('UTF-8')
 
-    attach = []
-    for mailpart in msg.mailparts:
-        a = dict(mailpart.part)
-        body = mailpart.get_payload()
-        if mailpart.charset:
-            body = body.decode(mailpart.charset).encode('UTF-8')
-        a['Body'] = body
-        attach.append(a)
-        break
-    d['Attachments'] = attach
-    print str(d)
+    if len(msg.mailparts) > 1:
+        attach = []
+        for mailpart in msg.mailparts:
+            a = msg_to_dict(mailpart.part)
+            attach.append(a)
+        d['Attachments'] = attach
 
     return d
