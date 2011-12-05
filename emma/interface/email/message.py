@@ -31,7 +31,7 @@ class Message(message.Message):
         msgStr = '\n'.join(list_lines)
         msg = pyzmail.PyzMessage.factory(msgStr)
 
-        d = _msg_to_dict(msg)
+        d = msg_to_dict(msg)
         self._.update(d)
         self._['Commands'] = self.commands()
         self._['Tags'] = self.tags()
@@ -74,17 +74,24 @@ def msg_to_dict(msg):
     d = {}
     for header in msg.keys():
         d[header] = msg.get_decoded_header(header)
-    body = msg.text_part.get_payload()
-    if msg.text_part.charset:
+
+    if msg.text_part:
+        body = msg.text_part.get_payload()
         charset = msg.text_part.charset
     else:
+        body = msg.get_payload()
+        charset = msg.get_charset()
+    if not charset:
         charset = chardet.detect(body)['encoding']
-    d['Body'] = body.decode(charset).encode('UTF-8')
+    if charset:
+        body = body.decode(charset).encode('UTF-8')
+    d['Body'] = body
 
     if len(msg.mailparts) > 1:
         attach = []
         for mailpart in msg.mailparts:
-            a = msg_to_dict(mailpart.part)
+            zmail = pyzmail.PyzMessage(mailpart.part)
+            a = msg_to_dict(zmail)
             attach.append(a)
         d['Attachments'] = attach
 
