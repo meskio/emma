@@ -73,7 +73,6 @@ class email(Interface):
         self.log("    " + str(numMessages) + " found")
 
     def send_handle(self, event, msg):
-        #TODO: use pyzmail
         msg['From'] = self.conf['smtp_address']
         mime = MIMEText(msg['Body'])
         mime['Subject'] = msg['Subject']

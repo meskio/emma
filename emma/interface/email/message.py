@@ -14,7 +14,6 @@ email message support
 
 import pyzmail
 import re
-import chardet
 
 from emma.interface import message
 
@@ -72,8 +71,6 @@ def msg_to_dict(msg):
     # FIXME: any repeated header will be ignored
     # Usually it is only 'Received' header
     d = {}
-    for header in msg.keys():
-        d[header] = msg.get_decoded_header(header)
 
     if msg.text_part:
         body = msg.text_part.get_payload()
@@ -81,18 +78,46 @@ def msg_to_dict(msg):
     else:
         body = msg.get_payload()
         charset = msg.get_charset()
-    if not charset:
-        charset = chardet.detect(body)['encoding']
     if charset:
-        body = body.decode(charset).encode('UTF-8')
+        charset = charset.lower()
+        i = charset.find('iso')
+        u = charset.find('utf')
+        if i > 0:
+            charset = charset[i:]
+        elif u > 0:
+            charset = charset[u:]
+        # Some old emails say it's ascii or unkown but in reality is not
+        # not use any charset not iso or utf
+        elif i != 0 and u != 0:
+            charset = None
+
+    for header in msg.keys():
+        value = msg.get_decoded_header(header)
+        value, _ = pyzmail.decode_text(value, charset, None)
+        value = value.encode('UTF-8')
+        header = header.replace('.',',') # mongoDB don't likes '.' on keys
+        d[header] = value
+
+    attach = []
+    if type(body) == str:
+        body, _ = pyzmail.decode_text(body, charset, None)
+        body = body.encode('UTF-8')
+    # On attachments of emails sometimes it end up with a list of email.message
+    elif type(body) == list:
+        for part in body:
+            zmail = pyzmail.PyzMessage(part)
+            a = msg_to_dict(zmail)
+            attach.append(a)
+        body = attach[0]['Body']
     d['Body'] = body
 
     if len(msg.mailparts) > 1:
-        attach = []
         for mailpart in msg.mailparts:
             zmail = pyzmail.PyzMessage(mailpart.part)
             a = msg_to_dict(zmail)
             attach.append(a)
+
+    if attach:
         d['Attachments'] = attach
 
     return d

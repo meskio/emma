@@ -53,14 +53,17 @@ def parse(mbox_path, db):
     m = mbox(mbox_path)
     for message in m:
         zmail = PyzMessage(message)
+        print "%s: %s" % (zmail.get_decoded_header('From'),
+                          zmail.get_decoded_header('Subject'))
         d = msg_to_dict(zmail)
         d['Commands'] = commands(d['Body'])
-        d['Tags'] = tags(d['Subject'])
+        if 'Subject' in d:
+            d['Tags'] = tags(d['Subject'])
         try:
-            db.save(d)
+            db.insert(d)
         except:
-            for key, value in d.items():
-                print key + ": " + str(value)
+            print "::::::::   Something wrong happend   ::::::::::"
+            print d
 
 def get_coll(dbname, identifier):
     """
