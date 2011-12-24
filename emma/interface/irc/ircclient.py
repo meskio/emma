@@ -17,9 +17,9 @@ This is a modification of the testbot.py example of the irclib
 """
 
 import re
+import logging
 from ircbot import SingleServerIRCBot
 
-from emma.logger import log
 from emma.events import Event, subscribe, trigger
 
 from message import Message
@@ -73,7 +73,8 @@ class IrcClient(SingleServerIRCBot):
             cmd = s[0]
             args = ""
 
-        log("[irc " + self.identifier + "] command receved: " + cmd + ": " + args)
+        logging.info("[irc %s] command receved: %s: %s" % 
+                        (self.identifier, cmd, args))
         cmd_event = Event(event='command', interface='irc', \
                           identifier=self.identifier)
         trigger(cmd_event, ((cmd, args), msg))

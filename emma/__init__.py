@@ -21,10 +21,10 @@ The code is organice on three layers:
 import thread
 import ConfigParser
 import re
+import logging
 from time import sleep
 from cPickle import loads
 
-from logger import log
 from database import DB
 from sched import at
 from events import Event
@@ -44,7 +44,7 @@ def main(conf_path=confPath):
     """
     conf = ConfigParser.RawConfigParser()
     conf.read(conf_path)
-    log.activate = conf.getboolean("core", "log")
+    _init_log(conf)
     db = DB()
     db.connect(conf.get("core", "db_name"))
     core = db.core()
@@ -53,8 +53,36 @@ def main(conf_path=confPath):
 
     while 1: sleep(1000) # I didn't find any better wait method
 
+def _init_log(conf):
+    fmt = "%(asctime)s (%(levelname).1s) %(message)s"
+    datefmt = "%b %d %H:%M:%S"
+
+    levels = {"debug":    logging.DEBUG,
+              "info":     logging.INFO,
+              "warning":  logging.WARNING,
+              "error":    logging.ERROR,
+              "critical": logging.CRITICAL}
+    try:
+        strlevel = conf.get("core", "log_level")
+    except ConfigParser.NoOptionError:
+        strlevel = "warning"
+    if strlevel in levels:
+        level = levels[strlevel]
+    else:
+        level = logging.WARNING
+
+    try:
+        log_file = conf.get("core", "log_file")
+        logging.basicConfig(format=fmt, datefmt=datefmt, level=level, \
+                            filename=log_file)
+    except ConfigParser.NoOptionError:
+        logging.basicConfig(format=fmt, datefmt=datefmt, level=level)
+
+    if strlevel not in levels:
+        logging.warning("[core] Not valid config value on log_level")
+
 def _load_complements(conf):
-    log("[core] preparing interfaces and modules")
+    logging.info("[core] preparing interfaces and modules")
     sectexp = re.compile(r"^[IM] ([^ ]*) (.*)$")
 
     for section in conf.sections():
@@ -72,7 +100,7 @@ def _load_complements(conf):
 
 def _init_complement(tpe, name, identifier, options):
     db = DB()
-    log("[core]     load %s %s" % (tpe, name))
+    logging.debug("[core]     load %s %s" % (tpe, name))
     db_coll = db.collection("%s_%s_%s" % (tpe, name, identifier))
     imp = __import__("emma.%s.%s" % (tpe, name))
     complements = getattr(imp, tpe)
@@ -82,7 +110,7 @@ def _init_complement(tpe, name, identifier, options):
 
 def _restore_sched(db):
     sched = db.find({'element': 'sched', 'type': 'at'})
-    log("[core] restore " + str(sched.count()) + " scheduled events")
+    logging.info("[core] restore " + str(sched.count()) + " scheduled events")
     for s in sched:
         elements = loads(str(s['event']))
         event = Event(*elements)

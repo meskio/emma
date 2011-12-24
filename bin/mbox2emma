@@ -6,7 +6,6 @@ from mailbox import mbox
 from pyzmail import PyzMessage
 
 from emma.database import DB
-from emma.logger import log
 from emma.interface.email.message import msg_to_dict
 
 def usage():
@@ -69,7 +68,6 @@ def get_coll(dbname, identifier):
     """
     Get database collumn (mongoDB)
     """
-    log.activate = False
     db = DB()
     db.connect(dbname)
     collname = "interface_email_%s" % identifier

@@ -15,8 +15,7 @@ Using mongoDB
 """
 
 import pymongo
-
-from logger import log
+import logging
 
 class DB:
     """
@@ -37,7 +36,7 @@ class DB:
         @type name: string
         @param name: database name
         """
-        log("[core] connect to database")
+        logging.info("[core] connect to database")
         self.__['conn'] = pymongo.Connection()
         self.__['db'] = self.__['conn'][name]
 

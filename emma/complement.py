@@ -13,9 +13,9 @@ The necessary class and decorators for L{interface} and L{module}
 """
 
 import thread
+import logging
 
 import emma
-from logger import log
 
 def use_lock(fn):
     """
@@ -78,7 +78,7 @@ class Complement:
         """
         pass
 
-    def log(self, msg):
+    def log(self, msg, level=logging.INFO):
         """
         Output a log string
 
@@ -87,9 +87,11 @@ class Complement:
 
         @type msg: string
         @param msg: the text to output
+        @type level: logging level
+        @param level: default logging.INFO
         """
         name = self.__module__.split(".")[-1]
-        log("[%s %s] %s" % (name, self.identifier, msg))
+        logging.log(level, "[%s %s] %s" % (name, self.identifier, msg))
 
     def update_db(self):
         """

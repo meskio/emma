@@ -18,6 +18,7 @@ and trigger any event.
 
 import thread
 import itertools
+import logging
 
 class Event:
     """
@@ -164,4 +165,4 @@ def unsubscribe(event, handler):
         if event in _events:
             _events[event].remove(handler)
         else:
-            log("[core] can't unsubscribe identifier, it was not subscribed")
+            logging.warning("[core] can't unsubscribe identifier, it was not subscribed")
