@@ -17,6 +17,7 @@ import re
 
 from emma.interface import message
 
+
 class Message(message.Message):
     """
     email message
@@ -95,7 +96,7 @@ def msg_to_dict(msg):
         value = msg.get_decoded_header(header)
         value, _ = pyzmail.decode_text(value, charset, None)
         value = value.encode('UTF-8')
-        header = header.replace('.',',') # mongoDB don't likes '.' on keys
+        header = header.replace('.', ',')    # mongoDB don't likes '.' on keys
         d[header] = value
 
     attach = []

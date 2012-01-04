@@ -39,6 +39,7 @@ def str2date(date):
             pass
     return -1
 
+
 def periodic(handler, seconds):
     """
     Program a periodic action
@@ -53,10 +54,12 @@ def periodic(handler, seconds):
     """
     thread.start_new_thread(_periodic, (handler, seconds))
 
+
 def _periodic(handler, seconds):
     while 1:
         handler()
         sleep(float(seconds))
+
 
 def at(event, data, date, doc_id=None):
     """
@@ -83,6 +86,7 @@ def at(event, data, date, doc_id=None):
         thread.start_new_thread(_delay, args)
     return epoch
 
+
 def delay(event, data, seconds, doc_id=None):
     """
     Program an event to be trigger after some seconds
@@ -99,6 +103,7 @@ def delay(event, data, seconds, doc_id=None):
     @warning: it is not properly tested might have bugs
     """
     thread.start_new_thread(_delay, (event, data, seconds, seconds + time()))
+
 
 def _delay(event, data, seconds, date, doc_id=None):
     db = DB()

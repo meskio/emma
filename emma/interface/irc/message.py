@@ -16,11 +16,12 @@ from irclib import nm_to_n
 
 from emma.interface import message
 
+
 class Message(message.Message):
     """
     irc message
 
-    the types can be 'pubmsg', 'privmsg' 
+    the types can be 'pubmsg', 'privmsg'
     """
     def __init__(self, ircEvent):
         body = ircEvent.arguments()[0]

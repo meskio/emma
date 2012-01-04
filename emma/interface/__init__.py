@@ -59,5 +59,4 @@ class Interface(Complement):
         except Exception:
             self.log("db request error.")
             res = []
-        return [ i for i in res ]
-
+        return [i for i in res]

@@ -21,8 +21,8 @@ import logging
 from ircbot import SingleServerIRCBot
 
 from emma.events import Event, subscribe, trigger
-
 from message import Message
+
 
 class IrcClient(SingleServerIRCBot):
     def __init__(self, identifier, channel, nickname, server, port=6667):

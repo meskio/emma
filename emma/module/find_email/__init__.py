@@ -54,7 +54,8 @@ class find_email(Module):
             if len(emails) > email_index:
                 self.show_email(emails[email_index], channel)
             else:
-                err_str = "Index not in range(0-%d): %s" % (len(emails)-1, args)
+                err_str = ("Index not in range(0-%d): %s" %
+                           (len(emails) - 1, args))
                 self.say(err_str, channel)
 
     @use_lock
@@ -75,8 +76,8 @@ class find_email(Module):
         string = ""
         for key in ['From', 'To', 'Cc', 'Date', 'Subject']:
             if key in email:
-                string += key + ": " + email[key] + '\n'
-        body = [ "   " + line for line in email['Body'].split('\n') ]
+                string += "%s: %s\n" % (key, email[key])
+        body = ["   " + line for line in email['Body'].split('\n')]
         string += '\n'.join(body)
         self.say(string, channel)
 
@@ -88,5 +89,5 @@ class find_email(Module):
 
     def parse_args(self, args):
         #FIXME: improve to take care of spaces
-        splited = [ item.split(":") for item in args.split(",") ]
+        splited = [item.split(":") for item in args.split(",")]
         return dict(splited)

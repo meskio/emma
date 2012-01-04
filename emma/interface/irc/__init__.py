@@ -20,15 +20,17 @@ from emma.events import Event, subscribe, trigger
 
 from ircclient import IrcClient
 
+
 class irc(Interface):
     def run(self):
-        event = Event(event='send', interface='irc', identifier=self.identifier)
+        event = Event(event='send', interface='irc',
+                      identifier=self.identifier)
         subscribe(event, self.handler)
 
         server = self.conf['server']
         port = int(self.conf['port'])
         nick = self.conf['nick']
-        channel =  self.conf['channel']
+        channel = self.conf['channel']
         self.log("Connect to " + server + ":" + str(port) + " nick:" + nick \
                 + " channel:" + channel)
 
@@ -41,4 +43,4 @@ class irc(Interface):
     def handler(self, event, data):
         for line in data['Body'].split('\n'):
             self.irc.send(data['To'], line)
-            sleep(0.3) #FIXME: any better way to prevent Flood?
+            sleep(0.3)    # FIXME: any better way to prevent Flood?

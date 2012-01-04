@@ -40,5 +40,6 @@ class reminder(Module):
 
         msg = Message(body, to)
         msg['Subject'] = subject
-        send_event = Event('send', self.conf['interface'], self.conf['identifier'])
+        send_event = Event('send', self.conf['interface'],
+                           self.conf['identifier'])
         at(send_event, msg, date)

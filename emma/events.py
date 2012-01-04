@@ -20,6 +20,7 @@ import thread
 import itertools
 import logging
 
+
 class Event:
     """
     Event addressing class
@@ -77,12 +78,13 @@ class Event:
         event_tuples = itertools.product((self.event, None), \
                                          (self.interface, None), \
                                          (self.identifier, None))
-        events = [ Event(x,y,z) for x,y,z in event_tuples]
+        events = [Event(x, y, z) for x, y, z in event_tuples]
         return events
 
 
 _events = {}
 _events_lock = thread.allocate_lock()
+
 
 def _get_handlers(event):
     handlers = []
@@ -90,6 +92,7 @@ def _get_handlers(event):
         if e in _events:
             handlers += _events[e]
     return set(handlers)
+
 
 def trigger(event, data):
     """
@@ -108,6 +111,7 @@ def trigger(event, data):
 
     for handler in handlers:
         thread.start_new_thread(handler, (event, data))
+
 
 def run_event(event, data):
     """
@@ -131,6 +135,7 @@ def run_event(event, data):
         res.append(handler(event, data))
     return res
 
+
 def subscribe(event, handler):
     """
     Subscribe to an event
@@ -151,6 +156,7 @@ def subscribe(event, handler):
         _events[event].append(handler)
     _events_lock.release()
 
+
 def unsubscribe(event, handler):
     """
     Unsubscribe from an event
@@ -165,4 +171,6 @@ def unsubscribe(event, handler):
         if event in _events:
             _events[event].remove(handler)
         else:
-            logging.warning("[core] can't unsubscribe identifier, it was not subscribed")
+            log_str = "[core] can't unsubscribe identifier,"
+            log_str += " it was not subscribed"
+            logging.warning(log_str)

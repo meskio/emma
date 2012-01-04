@@ -3,7 +3,8 @@ B{emma}: bot for digital assembly
 
 The code is organice on three layers:
     1. core controls event passing, config file, threads, mutex, storage, ...
-    2. L{interface} connect emma to the world (email, irc, wiki, microblog, ...)
+    2. L{interface} connect emma to the world (email, irc, wiki, microblog,
+    ...)
     3. L{module} where the actual functionality happens. Easy to program, with
     simple API of events to intercomunicate with the interfaces.
 
@@ -29,12 +30,16 @@ from database import DB
 from sched import at
 from events import Event
 
-version = 0.1
+
+__version__ = 0.1
 """ Version of emma """
 
 confPath = '/usr/local/etc/emma.cfg'
 """ Hardcoded the config location
-@note: that needs to be fixed """
+
+@note: that needs to be fixed
+"""
+
 
 def main(conf_path=confPath):
     """
@@ -51,7 +56,9 @@ def main(conf_path=confPath):
     _load_complements(conf)
     _restore_sched(core)
 
-    while 1: sleep(1000) # I didn't find any better wait method
+    while 1:
+        sleep(1000)    # I didn't find any better wait method
+
 
 def _init_log(conf):
     fmt = "%(asctime)s (%(levelname).1s) %(message)s"
@@ -81,6 +88,7 @@ def _init_log(conf):
     if strlevel not in levels:
         logging.warning("[core] Not valid config value on log_level")
 
+
 def _load_complements(conf):
     logging.info("[core] preparing interfaces and modules")
     sectexp = re.compile(r"^[IM] ([^ ]*) (.*)$")
@@ -98,15 +106,17 @@ def _load_complements(conf):
             i = _init_complement('interface', name, identifier, options)
             thread.start_new_thread(i.run, ())
 
+
 def _init_complement(tpe, name, identifier, options):
     db = DB()
     logging.debug("[core]     load %s %s" % (tpe, name))
     db_coll = db.collection("%s_%s_%s" % (tpe, name, identifier))
     imp = __import__("emma.%s.%s" % (tpe, name))
     complements = getattr(imp, tpe)
-    complement  = getattr(complements, name)
+    complement = getattr(complements, name)
     clss = getattr(complement, name)
     return clss(identifier, options, db_coll)
+
 
 def _restore_sched(db):
     sched = db.find({'element': 'sched', 'type': 'at'})

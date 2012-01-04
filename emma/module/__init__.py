@@ -23,5 +23,6 @@ variables L{locks<emma.complement.use_lock>} should be use.
 
 from emma.complement import Complement
 
+
 class Module(Complement):
     pass

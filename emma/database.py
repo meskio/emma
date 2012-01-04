@@ -17,6 +17,7 @@ Using mongoDB
 import pymongo
 import logging
 
+
 class DB:
     """
     Database class
@@ -24,7 +25,9 @@ class DB:
     It is a singleton class, so any instantion of it will get the global
     database.
     """
+
     __ = {}
+
     def __init__(self):
         pass
 

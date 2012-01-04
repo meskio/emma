@@ -12,6 +12,7 @@ generic message for interfaces
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+
 class Message:
     """
     Message is basically a dictionary

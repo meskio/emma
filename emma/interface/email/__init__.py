@@ -61,13 +61,13 @@ class email(Interface):
                           identifier=self.identifier)
         numMessages = len(pop.list()[1])
         for i in range(numMessages):
-            message = Message(pop.retr(i+1)[1])
+            message = Message(pop.retr(i + 1)[1])
             trigger(recv_event, message)
             for command in message.commands():
                 trigger(cmd_event, (command, message))
             if self.conf['store'] == "yes":
                 self.store(message)
-            pop.dele(i+1)
+            pop.dele(i + 1)
 
         pop.quit()
         self.log("    " + str(numMessages) + " found")

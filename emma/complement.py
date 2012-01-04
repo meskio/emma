@@ -17,13 +17,14 @@ import logging
 
 import emma
 
+
 def use_lock(fn):
     """
     Decorator that adds a lock to a method
 
-    It decorates methods of child classes of L{Complement}, usually L{interface}
-    or L{module}. Adds the use of a locker (mutex) to the method, so the access
-    to the class data is thread safe.
+    It decorates methods of child classes of L{Complement}, usually
+    L{interface} or L{module}. Adds the use of a locker (mutex) to the method,
+    so the access to the class data is thread safe.
 
     >>> from emma.complement import use_lock
     >>> class myModule(Module):
@@ -42,6 +43,7 @@ def use_lock(fn):
         return res
     return wrapper
 
+
 class Complement:
     """
     Empty class mented to be inhered by L{interface} and L{module}
@@ -50,7 +52,8 @@ class Complement:
 
     There will be some useful variables:
         - self.conf(dict): with all the configuration of the complement
-        - self.identifier(str): the identifier of the instantiation of the complement
+        - self.identifier(str): the identifier of the instantiation of the
+          complement
         - self.db(mongoDB collection): the database collection
     """
     def __init__(self, identifier, conf, db):
@@ -101,11 +104,11 @@ class Complement:
         returns the old version from the database and the actual version
         of emma.
 
-        @note: That is meant to be use for updating the database structure of the
-        complement.
+        @note: That is meant to be use for updating the database structure of
+        the complement.
         @returns: (old version, new version)
         """
-        dbmeta = self.db.find({'type' : 'meta'})
+        dbmeta = self.db.find({'type': 'meta'})
         old_version = None
         metaUpdated = False
         if dbmeta.count():
@@ -113,11 +116,11 @@ class Complement:
                 v = float(meta['version'])
                 if old_version and v < old_version:
                     old_version = v
-                if v != emma.version:
+                if v != emma.__version__:
                     self.db.remove(meta['_id'])
                 else:
                     metaUpdated = True
 
         if not metaUpdated:
-            self.db.insert({'type': 'meta', 'version': emma.version})
-        return (old_version, emma.version)
+            self.db.insert({'type': 'meta', 'version': emma.__version__})
+        return (old_version, emma.__version__)
