@@ -19,6 +19,7 @@ The code is organice on three layers:
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+import os
 import thread
 import ConfigParser
 import re
@@ -34,21 +35,25 @@ from events import Event
 __version__ = 0.1
 """ Version of emma """
 
-confPath = '/usr/local/etc/emma.cfg'
-""" Hardcoded the config location
-
-@note: that needs to be fixed
+confPaths = (
+    '/usr/local/etc/emma.cfg',
+    '/etc/emma.cfg',
+    os.path.expanduser('~/.emma.cfg'),
+    'emma.cfg',
+)
+""" Configuration file is searched in those locations. The latter files
+have precedence when a configuration option is set in multiple files.
 """
 
 
-def main(conf_path=confPath):
+def main(conf_paths=confPaths):
     """
     Main function of the program
 
-    It loads all the interfaces and modules described on the config file.
+    It loads all the interfaces and modules described on the config files.
     """
     conf = ConfigParser.RawConfigParser()
-    conf.read(conf_path)
+    conf.read(conf_paths)
     _init_log(conf)
     db = DB()
     db.connect(conf.get("core", "db_host"),
