@@ -51,7 +51,9 @@ def main(conf_path=confPath):
     conf.read(conf_path)
     _init_log(conf)
     db = DB()
-    db.connect(conf.get("core", "db_name"))
+    db.connect(conf.get("core", "db_host"),
+               int(conf.get("core", "db_port")),
+               conf.get("core", "db_name"))
     core = db.core()
     _load_complements(conf)
     _restore_sched(core)

@@ -31,7 +31,7 @@ class DB:
     def __init__(self):
         pass
 
-    def connect(self, name):
+    def connect(self, host, port, name):
         """
         Connect to a mongoDB database
 
@@ -40,7 +40,7 @@ class DB:
         @param name: database name
         """
         logging.info("[core] connect to database")
-        self.__['conn'] = pymongo.Connection()
+        self.__['conn'] = pymongo.Connection(host, port)
         self.__['db'] = self.__['conn'][name]
 
     def collection(self, coll):
