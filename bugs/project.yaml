@@ -1,0 +1,34 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: emma
+version: "0.5"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: emma
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.1"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2012-02-27 16:57:25.344590 Z
+    - Ales Zabala Alava <shagi@gisa-elkartea.org>
+    - created
+    - First published version, it works, but mainly incomplete
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.2"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2012-02-27 16:58:06.374385 Z
+    - Ales Zabala Alava <shagi@gisa-elkartea.org>
+    - created
+    - Some extra features, still in heavy development
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "1.0"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2012-02-27 16:58:17.342677 Z
+    - Ales Zabala Alava <shagi@gisa-elkartea.org>
+    - created
+    - It's fairly complete for now, ready for production use

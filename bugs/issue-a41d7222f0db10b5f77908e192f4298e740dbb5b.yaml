@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Proper easy to use documentation
+desc: ""
+type: :task
+component: emma
+release: 
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:05:22.324649 Z
+references: []
+
+id: a41d7222f0db10b5f77908e192f4298e740dbb5b
+log_events: 
+- - 2012-02-27 17:05:23.576609 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 

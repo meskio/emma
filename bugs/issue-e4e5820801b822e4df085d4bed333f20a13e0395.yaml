@@ -1,0 +1,46 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Internationalization
+desc: Maybe gettext? But I need reverse sentence resolution.
+type: :feature
+component: emma
+release: "1.0"
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:03:24.951427 Z
+references: []
+
+id: e4e5820801b822e4df085d4bed333f20a13e0395
+log_events: 
+- - 2012-02-27 17:03:26.801778 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+- - 2012-02-27 17:12:37.287589 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - commented
+  - "As pasted from previous discussion:\n\
+    > > El tema es que para poder traducir los comandos necesitas traducci\xC3\xB3n\n\
+    > > inversa. Me explico, hay dos tipos de cosas a traducir:\n\
+    > > - Mensajes que salen de los m\xC3\xB3dulos, lo que los modulos escriben por \n\
+    > >   irc o por donde sea cuando pides comandos. Esto con gettext es\n\
+    > >   directo y facil. \n\
+    > > - Entradas de los usuarios, comandos y parametros que le envias a los\n\
+    > >   modulos.  Esta segunda parte necesita algo as\xC3\xAD como resoluci\xC3\xB3n\n\
+    > >   inversa de gettext, usea de la palabra escrita por el usuario en\n\
+    > >   espa\xC3\xB1ol necesito convertirla a la palabra en ingles que entiende el\n\
+    > >   modulo. \n\
+    > > Se entiende ahora?\n\
+    >\n\
+    > OK. Igual para esto es m\xC3\xA1s sencillo si hacemos que emma funcione por\n\
+    > defecto en un solo idioma, y tuviera un comando para cambiarlo. As\xC3\xAD s\xC3\xB3lo\n\
+    > comprobar\xC3\xADamos a ver si la palabra escrita por el usuario existe en la\n\
+    > traducci\xC3\xB3n actual. Claro que para eso tendr\xC3\xADamos que tener alg\xC3\xBAn sistema \n\
+    > de sesiones o de configuraci\xC3\xB3n por usuario.\n\
+    >\n\
+    > Otra aproximaci\xC3\xB3n es que de momento emma s\xC3\xB3lo hable un idioma, aunque\n\
+    > puedas definirlo en la configuraci\xC3\xB3n. Al menos ser\xC3\xADa un principio r\xC3\xA1pido.\n\n\
+    Yo creo que es valido exigir que cada instalaci\xC3\xB3n de emma esta en un idioma\n\
+    solo, que se le podr\xC3\xADa dar en el fichero de configuraci\xC3\xB3n."
+git_branch: 
+claimer: 

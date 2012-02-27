@@ -1,0 +1,90 @@
+====================
+Bug tracking in emma
+====================
+
+Emma uses `ditz <http://ditz.rubyforge.org>`_ to keep track of bugs,
+features and TODOs.
+
+Currently there is not much documentation, but `ditz's README
+<http://ditz.rubyforge.org/README.txt>`_ is a good starting point.
+
+Inline help can be used also:
+
+    ditz help
+
+
+---------
+Why ditz?
+---------
+
+First of all: gitorious hasn't a integrated bug tracker, so we simply
+plugged one :-)
+
+We could have use `bugs everywhere <http://bugseverywhere.org/>`_, but it
+seems a bit unnatural to have to create a bug and then remembering to add
+some comment.
+
+If you know another distributed bug tracker propose it as a new feature. We
+are more like listening if also a migration patch is provided :-)
+
+
+------
+How-to
+------
+
+A quick way to start working with ditz.
+
+First, execute the ditz command; it will ask you some basic questions. Fill
+your name and mail, and when it asks about directory to store issues state
+leave the default "bugs".
+
+
+See all pending bugs::
+
+    $ ditz
+
+See all pending bugs assigned to you::
+
+    $ ditz mine
+
+Navigate the bug tracker::
+
+    $ ditz html target
+
+    And navigate to file://target/index.html
+
+Add a bug::
+
+    $ ditz add
+    ... fill the questions...
+
+    The command ends telling the created issue (something like emma-xxx).
+    This is used in a lot of ditz commands, for example to commit the bug.
+
+    $ ditz commit emma-xxx
+
+    As pointed in the ditz add command output, you can also add the bug
+    directly with git.
+
+Search bugs::
+
+    $ ditz grep regexp
+
+Add a comment to a bug::
+
+    $ ditz comment emma-xxx
+
+Assign a bug to yourself::
+
+    $ditz claim emma-xxx
+
+Mark a bug as fixed::
+
+    $ ditz close emma-xxx
+
+Status of the project::
+
+    $ ditz status
+
+
+For more commands, see ``ditz help``

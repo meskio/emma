@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: init.d script
+desc: ""
+type: :feature
+component: emma
+release: "0.2"
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:05:55.145585 Z
+references: []
+
+id: 88eb15addf612634e4d8bd4b4cc468c670273a95
+log_events: 
+- - 2012-02-27 17:05:56.865128 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Interface: lorea.cc"
+desc: Better if generic elgg could be used, but focus in lorea network
+type: :feature
+component: emma
+release: "1.0"
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:04:19.981953 Z
+references: []
+
+id: b77f7a401d8a6f16ca46933097028c8996f3737c
+log_events: 
+- - 2012-02-27 17:04:20.917164 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 

@@ -1,3 +1,5 @@
 include AUTHORS
 include HACKME
 include LICENSE
+include BUGTRACKING
+include TODO

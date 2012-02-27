@@ -1,19 +1,5 @@
-Core
-----
-* Don't hardcode the config path (use setup.py?)
-* Internationalization. Maybe gettext? But I need reverse sentence resolution.
+To see watch in our TODO list, check the bug tracker.
 
+For the inpatients, install ditz and execute it inside this project.
 
-Interfaces
-----------
-* MediaWiki
-* xmpp (jabber)
-* lorea.cc (elgg)
-* microblogin (twitter, identica)
-
-
-Others
-------
-* Proper easy to use documentation
-* init.d script
-* debian package
+For more information, read the BUGTRACKING file.

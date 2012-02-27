@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: debian package
+desc: ""
+type: :feature
+component: emma
+release: 
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:06:17.488634 Z
+references: []
+
+id: 7e81d4c717bf9733a43501681ce4fa15071fabd7
+log_events: 
+- - 2012-02-27 17:06:18.905668 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 

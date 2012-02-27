@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Interface: XMPP"
+desc: Jabber, mostly for same uses as IRC
+type: :feature
+component: emma
+release: "1.0"
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:01:10.035404 Z
+references: []
+
+id: e67d159ba9f66b3e07892c9ff5983051d547a910
+log_events: 
+- - 2012-02-27 17:01:12.074262 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 

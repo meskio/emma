@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Interface: microblogin"
+desc: Twitter, Identi.ca
+type: :feature
+component: emma
+release: "1.0"
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-02-27 17:04:58.595180 Z
+references: []
+
+id: 30b741f6a87123462e738a95285821104f3679fe
+log_events: 
+- - 2012-02-27 17:04:59.886595 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
