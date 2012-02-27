@@ -5,8 +5,8 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-02-27 17:02:46.191077 Z
 references: []
 
@@ -20,5 +20,11 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - issue claimed
   - ""
+- - 2012-02-27 20:17:33.120746 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - closed with disposition fixed
+  - |-
+    Now the configuration file is searched in /usr/local/etc/emma.cfg, /etc/emma.cfg, ~/.emma.cfg or ./emma.cfg.
+    All founded files are readed, the latter files have preference in case of collision.
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>

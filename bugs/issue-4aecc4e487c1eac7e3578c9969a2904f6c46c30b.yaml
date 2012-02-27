@@ -5,8 +5,8 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-02-27 20:04:04.900421 Z
 references: []
 
@@ -20,5 +20,9 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - issue claimed
   - ""
+- - 2012-02-27 20:18:37.552319 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - closed with disposition fixed
+  - "Two new configuration options for core section: db_host and db_port."
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
