@@ -42,5 +42,13 @@ log_events:
     > puedas definirlo en la configuraci\xC3\xB3n. Al menos ser\xC3\xADa un principio r\xC3\xA1pido.\n\n\
     Yo creo que es valido exigir que cada instalaci\xC3\xB3n de emma esta en un idioma\n\
     solo, que se le podr\xC3\xADa dar en el fichero de configuraci\xC3\xB3n."
-git_branch: 
-claimer: 
+- - 2012-02-28 13:10:55.064805 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - issue claimed
+  - I'm going to try with gettext and configuration option for the language emma understands
+- - 2012-02-28 13:16:53.049289 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - commented
+  - I'll use a new branch, i18n, for this change, as it can be big
+git_branch: i18n
+claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
