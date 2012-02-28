@@ -33,9 +33,9 @@ class reminder(Module):
             date, to, subject, body = s
         elif len(s) == 3:
             date, to, body = s
-            subject = "reminder"
+            subject = _("reminder")
         else:
-            self.log("args not well formed")
+            self.log(_("args not well formed"))
             return
 
         msg = Message(body, to)

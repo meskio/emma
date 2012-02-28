@@ -171,6 +171,6 @@ def unsubscribe(event, handler):
         if event in _events:
             _events[event].remove(handler)
         else:
-            log_str = "[core] can't unsubscribe identifier,"
-            log_str += " it was not subscribed"
+            log_str = _("[core] can't unsubscribe identifier," \
+                        " it was not subscribed")
             logging.warning(log_str)

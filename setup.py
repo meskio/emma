@@ -32,6 +32,7 @@ setup(
         'emma.interface',
         'emma.interface.email',
         'emma.interface.irc'],
+    package_data={'emma': ['locale/*/*/*']},
     data_files = [('etc', ['data/emma.cfg'])],
     scripts = ['emm', 'bin/mbox2emma'],
     license = 'WTFPL',

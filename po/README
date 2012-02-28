@@ -1,0 +1,15 @@
+=================
+Emma translations
+=================
+
+To translate emma to your prefered language::
+
+    $ msginit -l YOURLOCALE -i emma.pot -o YOURLOCALE.po
+
+To update emma.pot::
+
+    $ bash update_pot.sh
+
+To compile translations of a language::
+
+    $ bash compile_mo YOURLOCALE

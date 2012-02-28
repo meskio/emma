@@ -32,10 +32,10 @@ class help(Module):
         if event.interface in self.conf:
             body = self.conf[event.interface]
         else:
-            body = "No help"
+            body = _("No help")
         if event.interface == 'irc' and data[1]['To'][0] == '#':
             to = data[1]['To']
         msg = Message(body, to)
-        msg['Subject'] = "help"
+        msg['Subject'] = _("help")
 
         trigger(event, msg)

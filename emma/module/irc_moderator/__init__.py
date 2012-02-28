@@ -32,17 +32,18 @@ class irc_moderator(Module):
     @use_lock
     def cmd_handler(self, event, data):
         cmd, args = data[0]
+        self.log("hau da komandoa: "+cmd)
         if cmd == "moderate" and not self.on_moderate:
-            self.log("Start moderating")
+            self.log(_("Start moderating"))
             self.on_moderate = True
             self.words = []
             self.talking = None
         elif cmd == "stop":
-            self.log("Stop moderating")
+            self.log(_("Stop moderating"))
             self.on_moderate = False
         elif cmd == "word":
             nick = data[1]['From']
-            self.log("Request word from: " + nick)
+            self.log(_("Request word from: %s") % nick)
             if self.talking:
                 self.words.append(nick)
             else:
@@ -61,8 +62,8 @@ class irc_moderator(Module):
                     self.talking = None
 
     def give_turn(self, nick):
-        self.log("Give word to: " + nick)
-        msg = Message(nick + " has the word", self.conf['irc_chn'])
+        self.log(_("Give word to: %s") % nick)
+        msg = Message(_("%s has the word") % nick, self.conf['irc_chn'])
         event = Event(event="send", interface="irc", \
                       identifier=self.conf['irc_id'])
         trigger(event, msg)

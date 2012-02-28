@@ -40,7 +40,7 @@ class find_email(Module):
             self.log("Find: " + str(search))
             res = run_event(event, search)
             if not res or not res[0]:
-                self.say("Not found any email", channel)
+                self.say(_("Not found any email"), channel)
             else:
                 self.add_search(res[0], channel)
                 self.show_list(channel)
@@ -49,13 +49,13 @@ class find_email(Module):
             try:
                 email_index = int(args)
             except ValueError:
-                self.say("Not valid index: " + args, channel)
+                self.say(_("Not valid index: %s") % args, channel)
                 return
             if len(emails) > email_index:
                 self.show_email(emails[email_index], channel)
             else:
-                err_str = ("Index not in range(0-%d): %s" %
-                           (len(emails) - 1, args))
+                err_str = (_("Index not in range(0-%(number)d): %(args)s") %
+                           {'number':len(emails) - 1, 'args':args})
                 self.say(err_str, channel)
 
     @use_lock
@@ -74,9 +74,17 @@ class find_email(Module):
 
     def show_email(self, email, channel):
         string = ""
-        for key in ['From', 'To', 'Cc', 'Date', 'Subject']:
+        # We don't need keys translated when searching for them in the
+        # email, but they must be translated when presented to the user, so
+        # we define a temporal _ function to overwrite builting one.
+        # See gettext documentation on deferred translations:
+        # http://docs.python.org/library/gettext.html?highlight=gettext#deferred-translations
+        def _(msg): return msg
+        keys = [_('From'), _('To'), _('Cc'), _('Date'), _('Subject')]
+        del _
+        for key in keys:
             if key in email:
-                string += "%s: %s\n" % (key, email[key])
+                string += "%s: %s\n" % (_(key), email[key])
         body = ["   " + line for line in email['Body'].split('\n')]
         string += '\n'.join(body)
         self.say(string, channel)

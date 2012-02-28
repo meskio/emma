@@ -39,7 +39,7 @@ class DB:
         @type name: string
         @param name: database name
         """
-        logging.info("[core] connect to database")
+        logging.info(_("[core] connect to database"))
         self.__['conn'] = pymongo.Connection(host, port)
         self.__['db'] = self.__['conn'][name]
 

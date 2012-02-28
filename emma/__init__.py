@@ -20,6 +20,7 @@ The code is organice on three layers:
 """
 
 import os
+import gettext
 import thread
 import ConfigParser
 import re
@@ -52,6 +53,8 @@ def main(conf_paths=confPaths):
 
     It loads all the interfaces and modules described on the config files.
     """
+    localedir = os.path.join(os.path.dirname(__file__), 'locale')
+    gettext.install('emma', localedir)
     conf = ConfigParser.RawConfigParser()
     conf.read(conf_paths)
     _init_log(conf)
@@ -93,11 +96,11 @@ def _init_log(conf):
         logging.basicConfig(format=fmt, datefmt=datefmt, level=level)
 
     if strlevel not in levels:
-        logging.warning("[core] Not valid config value on log_level")
+        logging.warning(_("[core] Not valid config value on log_level"))
 
 
 def _load_complements(conf):
-    logging.info("[core] preparing interfaces and modules")
+    logging.info(_("[core] preparing interfaces and modules"))
     sectexp = re.compile(r"^[IM] ([^ ]*) (.*)$")
 
     for section in conf.sections():
@@ -116,7 +119,8 @@ def _load_complements(conf):
 
 def _init_complement(tpe, name, identifier, options):
     db = DB()
-    logging.debug("[core]     load %s %s" % (tpe, name))
+    logging.debug(_("[core]     load %(type)s %(name)s") % {'type':tpe,
+                                                            'name':name})
     db_coll = db.collection("%s_%s_%s" % (tpe, name, identifier))
     imp = __import__("emma.%s.%s" % (tpe, name))
     complements = getattr(imp, tpe)
@@ -127,7 +131,7 @@ def _init_complement(tpe, name, identifier, options):
 
 def _restore_sched(db):
     sched = db.find({'element': 'sched', 'type': 'at'})
-    logging.info("[core] restore " + str(sched.count()) + " scheduled events")
+    logging.info(_("[core] restore %s scheduled events") % sched.count())
     for s in sched:
         elements = loads(str(s['event']))
         event = Event(*elements)

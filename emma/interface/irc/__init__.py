@@ -31,14 +31,14 @@ class irc(Interface):
         port = int(self.conf['port'])
         nick = self.conf['nick']
         channel = self.conf['channel']
-        self.log("Connect to " + server + ":" + str(port) + " nick:" + nick \
-                + " channel:" + channel)
+        self.log(_("Connect to %(server)s:%(port)s nick:%(nick)s " \
+                   "channel:%(channel)s") % self.conf)
 
         try:
             self.irc = IrcClient(self.identifier, channel, nick, server, port)
             self.irc.start()
         except irclib.ServerConnectionError, x:
-            self.log("error conecting to server: " + x)
+            self.log(_("error conecting to server: %s") % x)
 
     def handler(self, event, data):
         for line in data['Body'].split('\n'):

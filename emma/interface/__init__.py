@@ -57,6 +57,6 @@ class Interface(Complement):
         try:
             res = self.db.find(search)
         except Exception:
-            self.log("db request error.")
+            self.log(_("db request error."))
             res = []
         return [i for i in res]

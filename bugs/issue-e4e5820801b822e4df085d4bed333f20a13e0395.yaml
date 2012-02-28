@@ -5,7 +5,7 @@ type: :feature
 component: emma
 release: "1.0"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2012-02-27 17:03:24.951427 Z
 references: []
@@ -50,5 +50,9 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - commented
   - I'll use a new branch, i18n, for this change, as it can be big
+- - 2012-02-28 16:00:40.245811 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - changed status from unstarted to in_progress
+  - ""
 git_branch: i18n
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
