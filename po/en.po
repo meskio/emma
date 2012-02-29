@@ -1,0 +1,154 @@
+# English translations for emma package.
+# Copyright (C) 2012 hackmeeting
+# This file is distributed under the same license as the emma package.
+# Ales Zabala Alava <shagi@gisa-elkartea.org>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emma 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-28 17:35+0100\n"
+"PO-Revision-Date: 2012-02-29 18:00+0100\n"
+"Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../emma/interface/email/__init__.py:44
+#, python-format
+msgid "fetching email %(pop_user)s@%(pop_host)s"
+msgstr "fetching email %(pop_user)s@%(pop_host)s"
+
+#: ../emma/interface/email/__init__.py:54
+msgid "    error connecting by POP3"
+msgstr "    error connecting by POP3"
+
+#: ../emma/interface/email/__init__.py:72
+#, python-format
+msgid "    %s found"
+msgstr "    %s found"
+
+#: ../emma/interface/email/__init__.py:91
+msgid "    error sending email"
+msgstr "    error sending email"
+
+#: ../emma/interface/__init__.py:60
+msgid "db request error."
+msgstr "db request error."
+
+#: ../emma/interface/irc/__init__.py:34
+#, python-format
+msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
+msgstr "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
+
+#: ../emma/interface/irc/__init__.py:41
+#, python-format
+msgid "error conecting to server: %s"
+msgstr "error conecting to server: %s"
+
+#: ../emma/interface/irc/ircclient.py:76
+#, python-format
+msgid "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
+msgstr "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
+
+#: ../emma/database.py:42
+msgid "[core] connect to database"
+msgstr "[core] connect to database"
+
+#: ../emma/__init__.py:98
+msgid "[core] Not valid config value on log_level"
+msgstr "[core] Not valid config value on log_level"
+
+#: ../emma/__init__.py:102
+msgid "[core] preparing interfaces and modules"
+msgstr "[core] preparing interfaces and modules"
+
+#: ../emma/__init__.py:121
+#, python-format
+msgid "[core]     load %(type)s %(name)s"
+msgstr "[core]     load %(type)s %(name)s"
+
+#: ../emma/__init__.py:133
+#, python-format
+msgid "[core] restore %s scheduled events"
+msgstr "[core] restore %s scheduled events"
+
+#: ../emma/events.py:174
+msgid "[core] can't unsubscribe identifier, it was not subscribed"
+msgstr "[core] can't unsubscribe identifier, it was not subscribed"
+
+#: ../emma/module/reminder/__init__.py:36
+msgid "reminder"
+msgstr "reminder"
+
+#: ../emma/module/reminder/__init__.py:38
+msgid "args not well formed"
+msgstr "args not well formed"
+
+#: ../emma/module/find_email/__init__.py:43
+msgid "Not found any email"
+msgstr "Not found any email"
+
+#: ../emma/module/find_email/__init__.py:52
+#, python-format
+msgid "Not valid index: %s"
+msgstr "Not valid index: %s"
+
+#: ../emma/module/find_email/__init__.py:57
+#, python-format
+msgid "Index not in range(0-%(number)d): %(args)s"
+msgstr "Index not in range(0-%(number)d): %(args)s"
+
+#: ../emma/module/find_email/__init__.py:83
+msgid "From"
+msgstr "From"
+
+#: ../emma/module/find_email/__init__.py:83
+msgid "To"
+msgstr "To"
+
+#: ../emma/module/find_email/__init__.py:83
+msgid "Cc"
+msgstr "Cc"
+
+#: ../emma/module/find_email/__init__.py:83
+msgid "Date"
+msgstr "Date"
+
+#: ../emma/module/find_email/__init__.py:83
+msgid "Subject"
+msgstr "Subject"
+
+#: ../emma/module/irc_moderator/__init__.py:37
+msgid "Start moderating"
+msgstr "Start moderating"
+
+#: ../emma/module/irc_moderator/__init__.py:42
+msgid "Stop moderating"
+msgstr "Stop moderating"
+
+#: ../emma/module/irc_moderator/__init__.py:46
+#, python-format
+msgid "Request word from: %s"
+msgstr "Request word from: %s"
+
+#: ../emma/module/irc_moderator/__init__.py:65
+#, python-format
+msgid "Give word to: %s"
+msgstr "Give word to: %s"
+
+#: ../emma/module/irc_moderator/__init__.py:66
+#, python-format
+msgid "%s has the word"
+msgstr "%s has the word"
+
+#: ../emma/module/help/__init__.py:35
+msgid "No help"
+msgstr "No help"
+
+#: ../emma/module/help/__init__.py:39
+msgid "help"
+msgstr "help"

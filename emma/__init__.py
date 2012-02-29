@@ -54,10 +54,10 @@ def main(conf_paths=confPaths):
     It loads all the interfaces and modules described on the config files.
     """
     localedir = os.path.join(os.path.dirname(__file__), 'locale')
-    gettext.install('emma', localedir)
     conf = ConfigParser.RawConfigParser()
     conf.read(conf_paths)
     _init_log(conf)
+    _init_i18n(conf, localedir)
     db = DB()
     db.connect(conf.get("core", "db_host"),
                int(conf.get("core", "db_port")),
@@ -69,6 +69,16 @@ def main(conf_paths=confPaths):
     while 1:
         sleep(1000)    # I didn't find any better wait method
 
+def _init_i18n(conf, localedir):
+    try:
+        language = conf.get("core", "language")
+        lang = gettext.translation('emma', localedir,
+                                   languages=language.split(','))
+        lang.install()
+    except (ConfigParser.NoOptionError, IOError):
+        # If no config option of missing language catalog use system
+        # language
+        gettext.install('emma', localedir)
 
 def _init_log(conf):
     fmt = "%(asctime)s (%(levelname).1s) %(message)s"
