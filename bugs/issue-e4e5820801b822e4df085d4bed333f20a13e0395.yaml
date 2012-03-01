@@ -3,10 +3,10 @@ title: Internationalization
 desc: Maybe gettext? But I need reverse sentence resolution.
 type: :feature
 component: emma
-release: "1.0"
+release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-02-27 17:03:24.951427 Z
 references: []
 
@@ -54,5 +54,17 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - changed status from unstarted to in_progress
   - ""
-git_branch: i18n
+- - 2012-03-01 16:21:20.203464 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - changed status from in_progress to paused
+  - ""
+- - 2012-03-01 16:23:56.507082 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - closed with disposition fixed
+  - fixed between b6e9be4 and 9121b84
+- - 2012-03-01 16:25:09.978204 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - assigned to release 0.2 from 1.0
+  - ""
+git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
