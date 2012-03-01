@@ -10,6 +10,19 @@ To update emma.pot::
 
     $ bash update_pot.sh
 
+To update po file with new translation ids::
+
+    $ bash update_po.sh YOURLOCALE
+
 To compile translations of a language::
 
     $ bash compile_mo YOURLOCALE
+
+
+Typical work flow for updating basque translations::
+
+    $ bash update_pot.sh
+    $ bash update_po.sh eu
+    $ vim eu.po # or poedit, kbabel,...
+    $ bash compile_mo eu
+

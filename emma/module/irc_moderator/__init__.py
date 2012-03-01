@@ -32,16 +32,15 @@ class irc_moderator(Module):
     @use_lock
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        self.log("hau da komandoa: "+cmd)
-        if cmd == "moderate" and not self.on_moderate:
+        if cmd == _("moderate") and not self.on_moderate:
             self.log(_("Start moderating"))
             self.on_moderate = True
             self.words = []
             self.talking = None
-        elif cmd == "stop":
+        elif cmd == _("stop"):
             self.log(_("Stop moderating"))
             self.on_moderate = False
-        elif cmd == "word":
+        elif cmd == _("word"):
             nick = data[1]['From']
             self.log(_("Request word from: %s") % nick)
             if self.talking:

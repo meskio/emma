@@ -34,7 +34,7 @@ class find_email(Module):
         else:
             channel = data[1]['From']
 
-        if cmd == "find":
+        if cmd == _("find"):
             event = Event("db", "email", self.conf['email_id'])
             search = self.parse_args(args)
             self.log("Find: " + str(search))
@@ -44,7 +44,7 @@ class find_email(Module):
             else:
                 self.add_search(res[0], channel)
                 self.show_list(channel)
-        elif cmd == "display" and channel in self.search:
+        elif cmd == _("display") and channel in self.search:
             emails = self.search[channel]
             try:
                 email_index = int(args)

@@ -24,7 +24,9 @@ class help(Module):
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        if cmd != 'help':
+        # Accept also untranslated help, at least this command should work
+        # always :-)
+        if cmd not in ('help', _('help')):
             return
 
         event.event = 'send'

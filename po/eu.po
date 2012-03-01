@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-28 17:07+0100\n"
-"PO-Revision-Date: 2012-02-28 17:35+0100\n"
+"POT-Creation-Date: 2012-03-01 12:21+0100\n"
+"PO-Revision-Date: 2012-03-01 12:24+0100\n"
 "Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -42,7 +42,8 @@ msgstr "db eskaera errorea."
 #: ../emma/interface/irc/__init__.py:34
 #, python-format
 msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
-msgstr "%(server)s:%(port)s-era konektatzen ezizena:%(nick)s kanala:%(channel)s"
+msgstr ""
+"%(server)s:%(port)s-era konektatzen ezizena:%(nick)s kanala:%(channel)s"
 
 #: ../emma/interface/irc/__init__.py:41
 #, python-format
@@ -58,20 +59,20 @@ msgstr "[irc %(identifier)s] komandoa jasoa: %(cmd)s: %(args)s"
 msgid "[core] connect to database"
 msgstr "[core] datu basera konektatu"
 
-#: ../emma/__init__.py:98
+#: ../emma/__init__.py:109
 msgid "[core] Not valid config value on log_level"
 msgstr "[core] log_level konfigurazio balio ezegokia"
 
-#: ../emma/__init__.py:102
+#: ../emma/__init__.py:113
 msgid "[core] preparing interfaces and modules"
 msgstr "[core] interfazeak eta moduluak prestatzen"
 
-#: ../emma/__init__.py:121
+#: ../emma/__init__.py:132
 #, python-format
 msgid "[core]     load %(type)s %(name)s"
 msgstr "[core]     %(type)s %(name)s kargatzen"
 
-#: ../emma/__init__.py:133
+#: ../emma/__init__.py:144
 #, python-format
 msgid "[core] restore %s scheduled events"
 msgstr "[core] agendatutako %s gertakari berreskuratu"
@@ -81,6 +82,10 @@ msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr ""
 "[core] ezin da identifikadorea ez-harpidetu, ez zegoen lehendik harpidetuta"
 
+#: ../emma/module/reminder/__init__.py:28
+msgid "remind"
+msgstr "gogorarazi"
+
 #: ../emma/module/reminder/__init__.py:36
 msgid "reminder"
 msgstr "gogorarazpena"
@@ -89,9 +94,17 @@ msgstr "gogorarazpena"
 msgid "args not well formed"
 msgstr "argumentu formatu ezegokia"
 
+#: ../emma/module/find_email/__init__.py:37
+msgid "find"
+msgstr "bilatu"
+
 #: ../emma/module/find_email/__init__.py:43
 msgid "Not found any email"
 msgstr "Ez da epostarik topatu"
+
+#: ../emma/module/find_email/__init__.py:47
+msgid "display"
+msgstr "erakutsi"
 
 #: ../emma/module/find_email/__init__.py:52
 #, python-format
@@ -123,13 +136,25 @@ msgstr "Data"
 msgid "Subject"
 msgstr "Gaia"
 
+#: ../emma/module/irc_moderator/__init__.py:35
+msgid "moderate"
+msgstr "moderatu"
+
 #: ../emma/module/irc_moderator/__init__.py:36
 msgid "Start moderating"
 msgstr "Moderatzen hasi"
 
+#: ../emma/module/irc_moderator/__init__.py:40
+msgid "stop"
+msgstr "bukatu"
+
 #: ../emma/module/irc_moderator/__init__.py:41
 msgid "Stop moderating"
 msgstr "Moderatzeari utzi"
+
+#: ../emma/module/irc_moderator/__init__.py:43
+msgid "word"
+msgstr "hitza"
 
 #: ../emma/module/irc_moderator/__init__.py:45
 #, python-format
@@ -146,10 +171,10 @@ msgstr "Hitza honek du: %s"
 msgid "%s has the word"
 msgstr "%s-(e)k hitza du"
 
-#: ../emma/module/help/__init__.py:35
-msgid "No help"
-msgstr "Laguntzarik ez"
-
-#: ../emma/module/help/__init__.py:39
+#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:41
 msgid "help"
 msgstr "laguntza"
+
+#: ../emma/module/help/__init__.py:37
+msgid "No help"
+msgstr "Laguntzarik ez"

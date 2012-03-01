@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-28 17:35+0100\n"
-"PO-Revision-Date: 2012-02-29 18:00+0100\n"
+"POT-Creation-Date: 2012-03-01 12:21+0100\n"
+"PO-Revision-Date: 2012-03-01 12:27+0100\n"
 "Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -58,20 +58,20 @@ msgstr "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
 msgid "[core] connect to database"
 msgstr "[core] connect to database"
 
-#: ../emma/__init__.py:98
+#: ../emma/__init__.py:109
 msgid "[core] Not valid config value on log_level"
 msgstr "[core] Not valid config value on log_level"
 
-#: ../emma/__init__.py:102
+#: ../emma/__init__.py:113
 msgid "[core] preparing interfaces and modules"
 msgstr "[core] preparing interfaces and modules"
 
-#: ../emma/__init__.py:121
+#: ../emma/__init__.py:132
 #, python-format
 msgid "[core]     load %(type)s %(name)s"
 msgstr "[core]     load %(type)s %(name)s"
 
-#: ../emma/__init__.py:133
+#: ../emma/__init__.py:144
 #, python-format
 msgid "[core] restore %s scheduled events"
 msgstr "[core] restore %s scheduled events"
@@ -79,6 +79,10 @@ msgstr "[core] restore %s scheduled events"
 #: ../emma/events.py:174
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr "[core] can't unsubscribe identifier, it was not subscribed"
+
+#: ../emma/module/reminder/__init__.py:28
+msgid "remind"
+msgstr "remind"
 
 #: ../emma/module/reminder/__init__.py:36
 msgid "reminder"
@@ -88,9 +92,17 @@ msgstr "reminder"
 msgid "args not well formed"
 msgstr "args not well formed"
 
+#: ../emma/module/find_email/__init__.py:37
+msgid "find"
+msgstr "find"
+
 #: ../emma/module/find_email/__init__.py:43
 msgid "Not found any email"
 msgstr "Not found any email"
+
+#: ../emma/module/find_email/__init__.py:47
+msgid "display"
+msgstr "display"
 
 #: ../emma/module/find_email/__init__.py:52
 #, python-format
@@ -122,33 +134,45 @@ msgstr "Date"
 msgid "Subject"
 msgstr "Subject"
 
-#: ../emma/module/irc_moderator/__init__.py:37
+#: ../emma/module/irc_moderator/__init__.py:35
+msgid "moderate"
+msgstr "moderate"
+
+#: ../emma/module/irc_moderator/__init__.py:36
 msgid "Start moderating"
 msgstr "Start moderating"
 
-#: ../emma/module/irc_moderator/__init__.py:42
+#: ../emma/module/irc_moderator/__init__.py:40
+msgid "stop"
+msgstr "stop"
+
+#: ../emma/module/irc_moderator/__init__.py:41
 msgid "Stop moderating"
 msgstr "Stop moderating"
 
-#: ../emma/module/irc_moderator/__init__.py:46
+#: ../emma/module/irc_moderator/__init__.py:43
+msgid "word"
+msgstr "word"
+
+#: ../emma/module/irc_moderator/__init__.py:45
 #, python-format
 msgid "Request word from: %s"
 msgstr "Request word from: %s"
 
-#: ../emma/module/irc_moderator/__init__.py:65
+#: ../emma/module/irc_moderator/__init__.py:64
 #, python-format
 msgid "Give word to: %s"
 msgstr "Give word to: %s"
 
-#: ../emma/module/irc_moderator/__init__.py:66
+#: ../emma/module/irc_moderator/__init__.py:65
 #, python-format
 msgid "%s has the word"
 msgstr "%s has the word"
 
-#: ../emma/module/help/__init__.py:35
-msgid "No help"
-msgstr "No help"
-
-#: ../emma/module/help/__init__.py:39
+#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:41
 msgid "help"
 msgstr "help"
+
+#: ../emma/module/help/__init__.py:37
+msgid "No help"
+msgstr "No help"

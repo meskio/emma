@@ -25,7 +25,7 @@ class reminder(Module):
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        if cmd != 'remind':
+        if cmd != _('remind'):
             return
 
         s = args.split(';')
