@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Dynamic help: modules should provide help themselves"
+desc: |-
+  For example, irc_moderator itself should have a string (i18n-ed) with general instruction of module usage. Also, each of his commands should have also help.
+  
+  With the help information organized the help command could be more versatile, for example showing only commands on one interface, or providing verbose help for one concrete command.
+type: :feature
+component: emma
+release: "0.2"
+reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-01 13:42:49.422537 Z
+references: []
+
+id: 03523fefb4dc5008491e52f35d508b704d93d0bb
+log_events: 
+- - 2012-03-01 13:43:09.894399 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - created
+  - ""
+git_branch: 
+claimer: 
