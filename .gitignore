@@ -2,6 +2,7 @@
 *.pyo
 *~
 .*.swp
+.ditz-config
 MANIFEST
 build
 html
