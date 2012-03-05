@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Preserve the installed config file
+desc: |-
+  Running 'python setup.py install' overwrites /user/local/etc/emma.cfg destroying the previous configuration.
+  
+  It should copy the file only if there is no file already there.
+type: :bugfix
+component: emma
+release: "0.2"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-05 10:23:58.945146 Z
+references: []
+
+id: a1bcfac6e29ff3b132efe7e794426fb79aaa7a67
+log_events: 
+- - 2012-03-05 10:24:03.344197 Z
+  - meskio <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
