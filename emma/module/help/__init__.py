@@ -12,7 +12,7 @@ Send a help message
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
-from emma.events import Event, subscribe, trigger
+from emma.events import Event, subscribe, trigger, run_event
 from emma.module import Module
 from emma.interface.message import Message
 
@@ -29,15 +29,22 @@ class help(Module):
         if cmd not in ('help', _('help')):
             return
 
-        event.event = 'send'
-        to = data[1]['From']
-        if event.interface in self.conf:
-            body = self.conf[event.interface]
+        # Gather help messages from modules
+        event.event = 'help'
+        help_strs = set(run_event(event, data[0][1]))
+        help_strs -= set("")
+        if help_strs:
+            body = _("emma is a bot for virtual assembly\n" \
+                     "==================================\n" \
+                     "Commands:\n")
+            body += '\n'.join(help_strs)
         else:
             body = _("No help")
+
+        event.event = 'send'
+        to = data[1]['From']
         if event.interface == 'irc' and data[1]['To'][0] == '#':
             to = data[1]['To']
         msg = Message(body, to)
         msg['Subject'] = _("help")
-
         trigger(event, msg)

@@ -20,8 +20,27 @@ from emma.interface.message import Message
 
 class reminder(Module):
     def run(self):
+        help_event = Event(event="help")
+        subscribe(help_event, self.help_handler)
         cmd_event = Event(event="command")
         subscribe(cmd_event, self.cmd_handler)
+
+    def help_handler(self, event, data):
+        if not data:
+            if event.interface == "irc":
+                return _("  * remind 23/11/2011 08:17;" \
+                         "hackmeeting@listas.sindominio.ent;subject;text\n" \
+                         "    Schelude a reminder at certan date\n")
+            elif event.interface == "email":
+                return _("  * [[remind|23/11/2011 08:17;" \
+                         "hackmeeting@listas.sindominio.ent;subject;text]]\n" \
+                         "    Schelude a reminder at certan date\n")
+        elif data[0] == _('remind'):
+            return _("You can program reminders to be send by %s at a " \
+                     "given date.\n It takes three or four parameters " \
+                     "separated by ';': date;email;subject;body\n" \
+                     "The subject is optional") % (self.conf['interface'])
+        return ""
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]

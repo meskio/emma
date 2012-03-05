@@ -22,12 +22,34 @@ class irc_moderator(Module):
     def run(self):
         self.on_moderate = False
 
+        help_event = Event(event="help", interface="irc", \
+                          identifier=self.conf['irc_id'])
+        subscribe(help_event, self.help_handler)
         cmd_event = Event(event="command", interface="irc", \
                           identifier=self.conf['irc_id'])
         subscribe(cmd_event, self.cmd_handler)
         rcv_event = Event(event="receive", interface="irc", \
                           identifier=self.conf['irc_id'])
         subscribe(rcv_event, self.rcv_handler)
+
+    def help_handler(self, event, data):
+        if not data:
+            return _("  * moderate\n" \
+                     "    Start moderating an assembly\n" \
+                     "  * word\n" \
+                     "    While moderating request word\n" \
+                     "  * stop\n" \
+                     "    Stop moderating\n")
+        elif data[0] == _('moderate'):
+            return _("Start the moderation of an assembly.\n" \
+                     "It will assign turns to talk as people request them" \
+                     "with 'word'")
+        elif data[0] == _('word'):
+            return _("While moderating request word")
+        elif data[0] == _('stop'):
+            return _("Stop moderating the assembly started with 'moderate'")
+        else:
+            return ""
 
     @use_lock
     def cmd_handler(self, event, data):

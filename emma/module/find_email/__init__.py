@@ -23,9 +23,32 @@ class find_email(Module):
         self.search = {}
         """ {channel:[email]} """
 
+        help_event = Event(event="help", interface="irc", \
+                          identifier=self.conf['irc_id'])
+        subscribe(help_event, self.help_handler)
         cmd_event = Event(event="command", interface="irc", \
                           identifier=self.conf['irc_id'])
         subscribe(cmd_event, self.cmd_handler)
+
+    def help_handler(self, event, data):
+        if not data:
+            return _("  * find From:/hackmeeting/,Tags:asamblea\n" \
+                     "    Use for search on emails stored by emma\n" \
+                     "  * display 0\n" \
+                     "    Display an email from a search list generated\n")
+        elif data[0] == _('find'):
+            return _("Use for search on emails stored by emma.\n" \
+                     "Search terms are introduced separated by ','" \
+                     "with the form 'Field:string',\n" \
+                     "string can be a regular expression between '/'.\n" \
+                     "Ex: find From:/meskio.*/,Tags:asamblea,Body:/squat/")
+        elif data[0] == _('display'):
+            return _("Once a 'find' command is call use the 'display'" \
+                     "command to output the email\n" \
+                     "with the index number give as parameter of 'display'\n" \
+                     "Ex: display 0")
+        else:
+            return ""
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]

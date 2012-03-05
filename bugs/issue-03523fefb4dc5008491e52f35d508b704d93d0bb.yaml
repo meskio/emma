@@ -8,8 +8,8 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-03-01 13:42:49.422537 Z
 references: []
 
@@ -27,5 +27,9 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - changed status from unstarted to in_progress
   - ""
+- - 2012-03-05 19:21:32.961955 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - closed with disposition fixed
+  - Using event 'help' to gather the help strings from the modules
 git_branch: 
 claimer: Ruben Pollan <meskio@sindominio.net>
