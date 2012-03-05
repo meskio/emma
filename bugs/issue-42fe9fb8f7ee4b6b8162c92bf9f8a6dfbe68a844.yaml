@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: move help string out of config file
+desc: |-
+  With the new internatinalization support the help text don't need to live on the config file.
+  It can go to the code and translate it with gettext.
+type: :feature
+component: emma
+release: "0.2"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-05 16:31:56.265403 Z
+references: []
+
+id: 42fe9fb8f7ee4b6b8162c92bf9f8a6dfbe68a844
+log_events: 
+- - 2012-03-05 16:31:59.058109 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
