@@ -16,5 +16,9 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - created
   - ""
+- - 2012-03-05 16:45:30.333904 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - For that we need to have the init.d script ({issue 88eb15addf612634e4d8bd4b4cc468c670273a95})
 git_branch: 
 claimer: 

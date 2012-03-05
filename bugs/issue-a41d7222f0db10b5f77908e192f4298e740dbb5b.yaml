@@ -16,5 +16,9 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - created
   - ""
+- - 2012-03-05 16:44:33.875146 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - Maybe something using http://readthedocs.org/ and sphinx.
 git_branch: 
 claimer: 

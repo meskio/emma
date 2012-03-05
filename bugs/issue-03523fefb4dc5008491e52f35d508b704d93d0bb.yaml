@@ -8,7 +8,7 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2012-03-01 13:42:49.422537 Z
 references: []
@@ -19,5 +19,13 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - created
   - ""
+- - 2012-03-05 17:22:39.647259 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - issue claimed
+  - ""
+- - 2012-03-05 17:23:53.422245 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - changed status from unstarted to in_progress
+  - ""
 git_branch: 
-claimer: 
+claimer: Ruben Pollan <meskio@sindominio.net>
