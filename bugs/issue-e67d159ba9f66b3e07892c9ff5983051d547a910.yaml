@@ -5,7 +5,7 @@ type: :feature
 component: emma
 release: "1.0"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2012-02-27 17:01:10.035404 Z
 references: []
@@ -27,5 +27,9 @@ log_events:
     Basic interface running: connect to xmpp server, receive commands, send messages.
     Currently only 'help' command.
     The jabber id must be created by hand.
+- - 2012-03-09 16:35:17.775652 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - changed status from unstarted to in_progress
+  - ""
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
