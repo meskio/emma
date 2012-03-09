@@ -20,5 +20,12 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - issue claimed
   - "I'll try with SleekXMPP: https://github.com/fritzy/SleekXMPP"
+- - 2012-03-09 16:28:02.934959 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - commented
+  - |-
+    Basic interface running: connect to xmpp server, receive commands, send messages.
+    Currently only 'help' command.
+    The jabber id must be created by hand.
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
