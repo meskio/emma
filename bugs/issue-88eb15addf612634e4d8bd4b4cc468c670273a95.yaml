@@ -5,7 +5,7 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2012-02-27 17:05:55.145585 Z
 references: []
@@ -16,5 +16,13 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - created
   - ""
+- - 2012-03-12 13:42:35.464647 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - issue claimed
+  - I'll use mongodb init script from debian as base example.
+- - 2012-03-12 13:42:45.867002 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - changed status from unstarted to in_progress
+  - ""
 git_branch: 
-claimer: 
+claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
