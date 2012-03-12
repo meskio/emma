@@ -5,8 +5,8 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-02-27 17:05:55.145585 Z
 references: []
 
@@ -24,5 +24,20 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - changed status from unstarted to in_progress
   - ""
+- - 2012-03-12 18:28:06.995624 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - commented
+  - |-
+    I have used /etc/init.d/skeleton as base for this.
+    
+    I haven't removed almost any comment or unused function, as they may be useful latter.
+- - 2012-03-12 18:28:22.539261 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - changed status from in_progress to paused
+  - ""
+- - 2012-03-12 18:42:27.759986 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - closed with disposition fixed
+  - Note that I have not included init script in setup.py, as its more a sysadmin helper than emma code.
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
