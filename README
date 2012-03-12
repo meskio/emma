@@ -18,3 +18,17 @@ For install it:
 Configure the /usr/local/etc/emma.cfg 
 and run it with:
 $ emm
+
+
+- Starting at boot -
+====================
+
+# cp data/init/emma /etc/init.d
+
+enable emma in default runlevels:
+
+# update-rc.d emma defaults
+
+emma is run by default by the user emma, you could change that setting
+DAEMONUSER=yourprefereduser in /etc/default/emma
+
