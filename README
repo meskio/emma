@@ -10,6 +10,7 @@ You need to have installed some dependencies:
 - poplib (for email interface)
 - smtplib (for email interface)
 - pyzmail (for email interface)
+- sleekxmpp (for xmpp interface)
 
 For install it:
 # python setup.py install
