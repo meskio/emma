@@ -37,9 +37,8 @@ def use_lock(fn):
     ...         self.var += 1
     """
     def wrapper(self, *arg):
-        self.lock.acquire()
-        res = fn(self, *arg)
-        self.lock.release()
+        with self.lock:
+            res = fn(self, *arg)
         return res
     return wrapper
 

@@ -149,12 +149,11 @@ def subscribe(event, handler):
     @type handler: fun(event, data)
     @param handler: function to call if the event is trigger
     """
-    _events_lock.acquire()
-    if event not in _events:
-        _events[event] = [handler]
-    else:
-        _events[event].append(handler)
-    _events_lock.release()
+    with _events_lock:
+        if event not in _events:
+            _events[event] = [handler]
+        else:
+            _events[event].append(handler)
 
 
 def unsubscribe(event, handler):
