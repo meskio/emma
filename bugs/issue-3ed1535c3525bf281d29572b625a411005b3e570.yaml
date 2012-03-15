@@ -5,7 +5,7 @@ type: :feature
 component: emma
 release: "1.0"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2012-02-27 17:01:47.294220 Z
 references: []
@@ -16,5 +16,17 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - created
   - ""
+- - 2012-03-15 15:21:28.637855 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - issue claimed
+  - ""
+- - 2012-03-15 15:22:17.838849 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2012-03-15 15:23:02.200475 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - "I'll try to use simplemediawiki python library: http://packages.python.org/simplemediawiki/"
 git_branch: 
-claimer: 
+claimer: Ruben Pollan <meskio@sindominio.net>
