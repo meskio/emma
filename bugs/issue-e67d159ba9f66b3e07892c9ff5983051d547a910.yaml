@@ -31,5 +31,9 @@ log_events:
   - Ales Zabala Alava <shagi@gisa-elkartea.org>
   - changed status from unstarted to in_progress
   - ""
+- - 2012-03-15 15:15:01.706612 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - It should auto accept any user that tries to add her as buddy
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
