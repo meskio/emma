@@ -8,8 +8,8 @@ type: :bugfix
 component: emma
 release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-03-05 10:23:58.945146 Z
 references: []
 
@@ -19,5 +19,9 @@ log_events:
   - meskio <meskio@sindominio.net>
   - created
   - ""
+- - 2012-03-15 14:56:20.763996 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - closed with disposition fixed
+  - I don't know why I open this bug, but it seems to be working like that.
 git_branch: 
 claimer: 
