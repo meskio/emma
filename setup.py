@@ -34,7 +34,7 @@ setup(
         'emma.interface.irc',
         'emma.interface.xmpp'],
     package_data={'emma': ['locale/*/*/*']},
-    data_files = [('/etc/init.d', ['data/init.d/emma']),
+    data_files = [('etc/init.d', ['data/init.d/emma']),
                   ('etc', ['data/emma.cfg'])],
     scripts = ['emm', 'bin/mbox2emma'],
     license = 'WTFPL',
