@@ -35,5 +35,11 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - commented
   - It should auto accept any user that tries to add her as buddy
+- - 2012-03-15 17:00:50.180396 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - commented
+  - |-
+    I don't know really how, but when I try adding emma to my roster the bot automatically sends me a subscription request.
+    I'm using ejabberd and psi.
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
