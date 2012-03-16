@@ -12,6 +12,7 @@ irc interface
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+import logging
 import irclib
 from time import sleep
 
@@ -23,10 +24,18 @@ from ircclient import IrcClient
 
 class irc(Interface):
     def run(self):
-        event = Event(event='send', interface='irc',
+        event_send = Event(event='send', interface='irc',
                       identifier=self.identifier)
-        subscribe(event, self.handler)
+        subscribe(event_send, self.send_handler)
+        event_history = Event(event='history', interface='irc',
+                              identifier=self.identifier)
+        subscribe(event_history, self.history_handler)
+        event_rcv = Event(event='receive', interface='irc',
+                              identifier=self.identifier)
+        subscribe(event_rcv, self.rcv_handler)
 
+        self.store = ''
+        self.update_db()
         server = self.conf['server']
         port = int(self.conf['port'])
         nick = self.conf['nick']
@@ -40,7 +49,32 @@ class irc(Interface):
         except irclib.ServerConnectionError, x:
             self.log(_("error conecting to server: %s") % x)
 
-    def handler(self, event, data):
+    def send_handler(self, event, data):
         for line in data['Body'].split('\n'):
             self.irc.send(data['To'], line)
             sleep(0.3)    # FIXME: any better way to prevent Flood?
+
+    def history_handler(self, event, data):
+        if data[0] == 'start':
+            self.store = data[1]
+        elif data[0] == 'stop':
+            self.store = ''
+        elif data[0] == 'get':
+            name = data[1]
+            try:
+                res = self.db.find({'session': name})
+            except Exception:
+                self.log(_("db request error."))
+                res = []
+            return [i for i in res]
+        else:
+            self.log(_("Not valid command for history: ") + data[0],
+                     logging.ERROR)
+
+    def rcv_handler(self, event, data):
+        if not self.store:
+            return
+
+        dmsg = dict(data)
+        dmsg['session'] = self.store
+        self.db.insert(dmsg)
