@@ -12,7 +12,10 @@ irc moderator module
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
-from emma.events import Event, subscribe, trigger
+
+import time
+
+from emma.events import Event, subscribe, trigger, run_event
 from emma.module import Module
 from emma.complement import use_lock
 from emma.interface.message import Message
@@ -21,6 +24,7 @@ from emma.interface.message import Message
 class irc_moderator(Module):
     def run(self):
         self.on_moderate = False
+        self.session = ''
 
         help_event = Event(event="help", interface="irc", \
                           identifier=self.conf['irc_id'])
@@ -34,7 +38,7 @@ class irc_moderator(Module):
 
     def help_handler(self, event, data):
         if not data:
-            return _("  * moderate\n" \
+            return _("  * moderate [session_name]\n" \
                      "    Start moderating an assembly\n" \
                      "  * word\n" \
                      "    While moderating request word\n" \
@@ -43,7 +47,9 @@ class irc_moderator(Module):
         elif data[0] == _('moderate'):
             return _("Start the moderation of an assembly.\n" \
                      "It will assign turns to talk as people request them" \
-                     "with 'word'")
+                     " with 'word'.\n" \
+                     "If a session_name is given the session will be saved " \
+                     "on the wiki.")
         elif data[0] == _('word'):
             return _("While moderating request word")
         elif data[0] == _('stop'):
@@ -59,9 +65,14 @@ class irc_moderator(Module):
             self.on_moderate = True
             self.words = []
             self.talking = None
+            if args:
+                self.session = args
+                self.trigger_history('start', args)
         elif cmd == _("stop"):
             self.log(_("Stop moderating"))
             self.on_moderate = False
+            self.wikistore()
+            self.session = ''
         elif cmd == _("word"):
             nick = data[1]['From']
             self.log(_("Request word from: %s") % nick)
@@ -85,6 +96,43 @@ class irc_moderator(Module):
     def give_turn(self, nick):
         self.log(_("Give word to: %s") % nick)
         msg = Message(_("%s has the word") % nick, self.conf['irc_chn'])
-        event = Event(event="send", interface="irc", \
+        event = Event(event="send", interface="irc",
                       identifier=self.conf['irc_id'])
         trigger(event, msg)
+
+    def trigger_history(self, cmd, param=''):
+        event = Event(event="history", interface="irc",
+                      identifier=self.conf['irc_id'])
+        if cmd in ('start', 'stop'):
+            trigger(event, (cmd, param))
+        else:
+            return run_event(event, (cmd, param))[0]
+
+    def wikistore(self):
+        if not self.session:
+            return
+        if not self.conf.has_key('wiki_id'):
+            return
+
+        self.trigger_history('stop')
+        self.log(_("Store irc log on the wiki page ") + self.session)
+
+        history = self.trigger_history('get', self.session)
+        channel = self.conf['irc_chn']
+        today = time.gmtime()
+        text = _("Assembly log from %(day)s/%(month)s/%(year)s\n\n") \
+                 % {'day': today.tm_mday, 'month': today.tm_mon,
+                    'year': today.tm_year}
+        text += _("Present: ")
+        text += ', '.join(set([msg['From'] for msg in history]))
+
+        text += "\n\n<pre>\n"
+        for msg in history:
+            if msg['To'] != channel:
+                continue
+            text += "< %s> %s\n" % (msg['From'], msg['Body'])
+        text += "</pre>"
+
+        event = Event(event="write", interface="mediawiki",
+                      identifier=self.conf['wiki_id'])
+        trigger(event, (self.session, text))
