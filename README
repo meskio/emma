@@ -11,6 +11,7 @@ You need to have installed some dependencies:
 - smtplib (for email interface)
 - pyzmail (for email interface)
 - sleekxmpp (for xmpp interface)
+- mwclient (for mediawiki interface)
 
 For install it:
 # python setup.py install

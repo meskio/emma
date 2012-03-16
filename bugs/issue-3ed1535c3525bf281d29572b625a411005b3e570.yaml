@@ -28,5 +28,9 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - commented
   - "I'll try to use simplemediawiki python library: http://packages.python.org/simplemediawiki/"
+- - 2012-03-16 10:06:03.002399 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - "simplemediawiki is too low level, I try with mwclient: http://sourceforge.net/projects/mwclient/"
 git_branch: 
 claimer: Ruben Pollan <meskio@sindominio.net>
