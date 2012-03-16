@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 22:45+0100\n"
+"POT-Creation-Date: 2012-03-16 16:20+0100\n"
 "PO-Revision-Date: 2012-03-05 01:36+0100\n"
 "Last-Translator: Ruben Pollan <meskio@sindominio.net>\n"
 "Language-Team: Spanish\n"
@@ -17,35 +17,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../emma/interface/__init__.py:60
+#: ../emma/interface/__init__.py:60 ../emma/interface/irc/__init__.py:67
 msgid "db request error."
 msgstr "petición a db erronea."
 
-#: ../emma/interface/irc/__init__.py:34
+#: ../emma/interface/irc/__init__.py:43
+#, python-format
 msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
 msgstr "Conectando a %(server)s:%(port)s nick:%(nick)s canal:%(channel)s"
 
-#: ../emma/interface/irc/__init__.py:41
+#: ../emma/interface/irc/__init__.py:50
+#, python-format
 msgid "error conecting to server: %s"
 msgstr "falló al conectar al servidor: %s"
 
+#: ../emma/interface/irc/__init__.py:71
+msgid "Not valid command for history: "
+msgstr ""
+
 #: ../emma/interface/irc/ircclient.py:76
+#, python-format
 msgid "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
 msgstr "[irc %(identifier)s] comando recivido: %(cmd)s: %(args)s"
 
 #: ../emma/interface/xmpp/__init__.py:31
+#, python-format
 msgid "Connect to jid:%(jid)s "
 msgstr "Conectando a jid:%(jid)s"
 
 #: ../emma/interface/xmpp/__init__.py:39
+#, python-format
 msgid "error conecting to xmpp: %s"
 msgstr "falló al conectar a xmpp: %s"
 
 #: ../emma/interface/xmpp/xmppclient.py:54
+#, python-format
 msgid "[xmpp %(identifier)s] command received: %(cmd)s: %(args)s"
 msgstr "[xmpp %(identifier)s] comando recivido: %(cmd)s: %(args)s"
 
 #: ../emma/interface/email/__init__.py:44
+#, python-format
 msgid "fetching email %(pop_user)s@%(pop_host)s"
 msgstr "descargando email %(pop_user)s@%(pop_host)s"
 
@@ -54,6 +65,7 @@ msgid "    error connecting by POP3"
 msgstr "    falló al conectar por POP3"
 
 #: ../emma/interface/email/__init__.py:72
+#, python-format
 msgid "    %s found"
 msgstr "    %s encontrados"
 
@@ -74,10 +86,12 @@ msgid "[core] preparing interfaces and modules"
 msgstr "[core] preparando interfaces y modulos"
 
 #: ../emma/__init__.py:132
+#, python-format
 msgid "[core]     load %(type)s %(name)s"
 msgstr "[core]     cargando %(type)s %(name)s"
 
 #: ../emma/__init__.py:144
+#, python-format
 msgid "[core] restore %s scheduled events"
 msgstr "[core] restaurando %s eventos programados"
 
@@ -143,7 +157,8 @@ msgid ""
 "with the index number give as parameter of 'display'\n"
 "Ex: display 0"
 msgstr ""
-"Una vez que el comando 'busca' a sido invocado usa el comando 'muestra' para devolver el email\n"
+"Una vez que el comando 'busca' a sido invocado usa el comando 'muestra' para "
+"devolver el email\n"
 "dandole a 'muestra' el indice del email como parametro\n"
 "Ej: muestra 0"
 
@@ -152,10 +167,12 @@ msgid "Not found any email"
 msgstr "Email no encontrado"
 
 #: ../emma/module/find_email/__init__.py:75
+#, python-format
 msgid "Not valid index: %s"
 msgstr "Indice invalido: %s"
 
 #: ../emma/module/find_email/__init__.py:80
+#, python-format
 msgid "Index not in range(0-%(number)d): %(args)s"
 msgstr "Indice fuera de rango(0-%(number)d): %(args)s"
 
@@ -179,79 +196,103 @@ msgstr "Fecha"
 msgid "Subject"
 msgstr "Asunto"
 
-#: ../emma/module/irc_moderator/__init__.py:37
+#: ../emma/module/irc_moderator/__init__.py:41
 msgid ""
-"  * moderate\n"
+"  * moderate [session_name]\n"
 "    Start moderating an assembly\n"
 "  * word\n"
 "    While moderating request word\n"
 "  * stop\n"
 "    Stop moderating\n"
 msgstr ""
-"  * modera\n"
+"  * modera [nombre_sesion]\n"
 "    Inicia la moderación de una asamblea\n"
 "  * palabra\n"
 "    Durante una asamblea moderada pide turno de palabra\n"
 "  * para\n"
 "    Para la moderación\n"
 
-#: ../emma/module/irc_moderator/__init__.py:43
-#: ../emma/module/irc_moderator/__init__.py:57
+#: ../emma/module/irc_moderator/__init__.py:47
+#: ../emma/module/irc_moderator/__init__.py:63
 msgid "moderate"
 msgstr "modera"
 
-#: ../emma/module/irc_moderator/__init__.py:44
+#: ../emma/module/irc_moderator/__init__.py:48
+#, fuzzy
 msgid ""
 "Start the moderation of an assembly.\n"
-"It will assign turns to talk as people request themwith 'word'"
+"It will assign turns to talk as people request them with 'word'.\n"
+"If a session_name is given the session will be saved on the wiki."
 msgstr ""
 "Inicia la moderación de una asamblea.\n"
-"Asignará turnos de palabra a la gente que los pida con el comando 'palabra'"
+"Asignará turnos de palabra a la gente que los pida con el comando 'palabra'.\n"
+"Si se le ha dado un nombre_sesion la sesion sera guardada en el wiki."
 
-#: ../emma/module/irc_moderator/__init__.py:47
-#: ../emma/module/irc_moderator/__init__.py:65
+#: ../emma/module/irc_moderator/__init__.py:53
+#: ../emma/module/irc_moderator/__init__.py:76
 msgid "word"
 msgstr "palabra"
 
-#: ../emma/module/irc_moderator/__init__.py:48
+#: ../emma/module/irc_moderator/__init__.py:54
 msgid "While moderating request word"
 msgstr "Estando en moderación pide turno de palabra"
 
-#: ../emma/module/irc_moderator/__init__.py:49
-#: ../emma/module/irc_moderator/__init__.py:62
+#: ../emma/module/irc_moderator/__init__.py:55
+#: ../emma/module/irc_moderator/__init__.py:71
 msgid "stop"
 msgstr "para"
 
-#: ../emma/module/irc_moderator/__init__.py:50
+#: ../emma/module/irc_moderator/__init__.py:56
 msgid "Stop moderating the assembly started with 'moderate'"
 msgstr "Para la moderación de una asamblea iniciada con 'modera'"
 
-#: ../emma/module/irc_moderator/__init__.py:58
+#: ../emma/module/irc_moderator/__init__.py:64
 msgid "Start moderating"
 msgstr "Empiezo a moderar"
 
-#: ../emma/module/irc_moderator/__init__.py:63
+#: ../emma/module/irc_moderator/__init__.py:72
 msgid "Stop moderating"
 msgstr "Paro de moderar"
 
-#: ../emma/module/irc_moderator/__init__.py:67
+#: ../emma/module/irc_moderator/__init__.py:78
+#, python-format
 msgid "Request word from: %s"
 msgstr "Petición de palabra de: %s"
 
-#: ../emma/module/irc_moderator/__init__.py:86
+#: ../emma/module/irc_moderator/__init__.py:97
+#, python-format
 msgid "Give word to: %s"
 msgstr "Doy palabra a: %s"
 
-#: ../emma/module/irc_moderator/__init__.py:87
+#: ../emma/module/irc_moderator/__init__.py:98
+#, python-format
 msgid "%s has the word"
 msgstr "%s tiene la palabra"
+
+#: ../emma/module/irc_moderator/__init__.py:118
+msgid "Store irc log on the wiki page "
+msgstr ""
+
+#: ../emma/module/irc_moderator/__init__.py:123
+#, python-format
+msgid ""
+"Assembly log from %(day)s/%(month)s/%(year)s\n"
+"\n"
+msgstr ""
+"Log de la asamblea del %(day)s/%(month)s/%(year)s\n"
+"\n"
+
+#: ../emma/module/irc_moderator/__init__.py:126
+msgid "Present: "
+msgstr "Asistentes: "
 
 #: ../emma/module/reminder/__init__.py:31
 msgid ""
 "  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;text\n"
 "    Schelude a reminder at certan date\n"
 msgstr ""
-"  * recuerda 23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;texto\n"
+"  * recuerda 23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;"
+"texto\n"
 "    Programa un recordatorio para una fecha dada\n"
 
 #: ../emma/module/reminder/__init__.py:35
@@ -270,6 +311,7 @@ msgid "remind"
 msgstr "recuerda"
 
 #: ../emma/module/reminder/__init__.py:39
+#, python-format
 msgid ""
 "You can program reminders to be send by %s at a given date.\n"
 " It takes three or four parameters separated by ';': date;email;subject;"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-15 22:45+0100\n"
+"POT-Creation-Date: 2012-03-16 16:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../emma/interface/__init__.py:60
+#: ../emma/interface/__init__.py:60 ../emma/interface/irc/__init__.py:67
 msgid "db request error."
 msgstr ""
 
-#: ../emma/interface/irc/__init__.py:34
+#: ../emma/interface/irc/__init__.py:43
 #, python-format
 msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
 msgstr ""
 
-#: ../emma/interface/irc/__init__.py:41
+#: ../emma/interface/irc/__init__.py:50
 #, python-format
 msgid "error conecting to server: %s"
+msgstr ""
+
+#: ../emma/interface/irc/__init__.py:71
+msgid "Not valid command for history: "
 msgstr ""
 
 #: ../emma/interface/irc/ircclient.py:76
@@ -177,9 +181,9 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:37
+#: ../emma/module/irc_moderator/__init__.py:41
 msgid ""
-"  * moderate\n"
+"  * moderate [session_name]\n"
 "    Start moderating an assembly\n"
 "  * word\n"
 "    While moderating request word\n"
@@ -187,56 +191,72 @@ msgid ""
 "    Stop moderating\n"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:43
-#: ../emma/module/irc_moderator/__init__.py:57
+#: ../emma/module/irc_moderator/__init__.py:47
+#: ../emma/module/irc_moderator/__init__.py:63
 msgid "moderate"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:44
+#: ../emma/module/irc_moderator/__init__.py:48
 msgid ""
 "Start the moderation of an assembly.\n"
-"It will assign turns to talk as people request themwith 'word'"
+"It will assign turns to talk as people request them with 'word'.\n"
+"If a session_name is given the session will be saved on the wiki."
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:47
-#: ../emma/module/irc_moderator/__init__.py:65
+#: ../emma/module/irc_moderator/__init__.py:53
+#: ../emma/module/irc_moderator/__init__.py:76
 msgid "word"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:48
+#: ../emma/module/irc_moderator/__init__.py:54
 msgid "While moderating request word"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:49
-#: ../emma/module/irc_moderator/__init__.py:62
+#: ../emma/module/irc_moderator/__init__.py:55
+#: ../emma/module/irc_moderator/__init__.py:71
 msgid "stop"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:50
+#: ../emma/module/irc_moderator/__init__.py:56
 msgid "Stop moderating the assembly started with 'moderate'"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:58
+#: ../emma/module/irc_moderator/__init__.py:64
 msgid "Start moderating"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:63
+#: ../emma/module/irc_moderator/__init__.py:72
 msgid "Stop moderating"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:67
+#: ../emma/module/irc_moderator/__init__.py:78
 #, python-format
 msgid "Request word from: %s"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:86
+#: ../emma/module/irc_moderator/__init__.py:97
 #, python-format
 msgid "Give word to: %s"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:87
+#: ../emma/module/irc_moderator/__init__.py:98
 #, python-format
 msgid "%s has the word"
+msgstr ""
+
+#: ../emma/module/irc_moderator/__init__.py:118
+msgid "Store irc log on the wiki page "
+msgstr ""
+
+#: ../emma/module/irc_moderator/__init__.py:123
+#, python-format
+msgid ""
+"Assembly log from %(day)s/%(month)s/%(year)s\n"
+"\n"
+msgstr ""
+
+#: ../emma/module/irc_moderator/__init__.py:126
+msgid "Present: "
 msgstr ""
 
 #: ../emma/module/reminder/__init__.py:31
