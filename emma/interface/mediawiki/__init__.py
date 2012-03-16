@@ -45,5 +45,5 @@ class mediawiki(Interface):
 
     def write(self, event, data):
         name, text = data
-        page = self.wiki[name]
+        page = self.wiki.Pages[name]
         page.save(text)
