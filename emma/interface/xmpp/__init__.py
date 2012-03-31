@@ -1,5 +1,5 @@
 """
-xmpp interface 
+xmpp interface
 
 @copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
 @author: Ales Zabala Alava (Shagi)
@@ -31,10 +31,10 @@ class xmpp(Interface):
         self.log(_("Connect to jid:%(jid)s ") % self.conf)
 
         self.xmpp = XMPPClient(self.identifier, jid, password)
-        self.xmpp.register_plugin('xep_0030') # Service Discovery                                                
+        self.xmpp.register_plugin('xep_0030') # Service Discovery
         self.xmpp.register_plugin('xep_0199') # XMPP Ping
         if self.xmpp.connect((server, port)):
-            self.xmpp.process(block=True)
+            self.xmpp.process()
         else:
             self.log(_("error conecting to xmpp: %s") % jid)
 

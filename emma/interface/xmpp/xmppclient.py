@@ -57,8 +57,6 @@ class XMPPClient(sleekxmpp.ClientXMPP):
         cmd_event = Event(event='command', interface='xmpp', \
                           identifier=self.identifier)
         trigger(cmd_event, ((cmd, args), msg))
-        
-
 
     def send_msg(self, to, msg):
         self.send_message(mto=to,
