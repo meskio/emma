@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "IRC: add support for multiple channels in one instance"
+desc: |-
+  The instances of the irc interface should be for server, so one instance
+  should be able to connect to multiple channels
+type: :feature
+component: emma
+release: 
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-31 17:52:49.942015 Z
+references: []
+
+id: 725be75cfef0610cedf10e02ed2d121a01abeba1
+log_events: 
+- - 2012-03-31 17:52:50.924494 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
