@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "email: Parse Date to a mongodb date type"
+desc: |-
+  Right now the date of the emails is stored as a string on the database.
+  That should be parsed so we can do searches base on date ranges
+type: :feature
+component: emma
+release: 
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-31 18:18:44.920897 Z
+references: []
+
+id: 5a757266d21692bd2c3b03ddc3be1c92653fe864
+log_events: 
+- - 2012-03-31 18:18:46.089643 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 

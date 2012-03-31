@@ -3,7 +3,7 @@ title: "Interface: MediaWiki"
 desc: "Emma must talk with MediaWiki instalations. For example: handle hackmeeting's nodes"
 type: :feature
 component: emma
-release: "1.0"
+release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
 status: :closed
 disposition: :fixed
@@ -38,5 +38,9 @@ log_events:
   - |-
     Pretty simple support, can only read and write pages.
     irc_moderator is already using it to store assembly logs.
+- - 2012-03-31 18:00:29.138170 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from 1.0
+  - ""
 git_branch: 
 claimer: Ruben Pollan <meskio@sindominio.net>

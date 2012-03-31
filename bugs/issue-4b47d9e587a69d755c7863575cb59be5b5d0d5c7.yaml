@@ -3,7 +3,7 @@ title: "XMPP: port irc_moderator to xmpp"
 desc: Maybe the module should be renamed to moderator alone
 type: :feature
 component: emma
-release: 
+release: "0.3"
 reporter: Ruben Pollan <meskio@sindominio.net>
 status: :unstarted
 disposition: 
@@ -16,5 +16,13 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - created
   - ""
+- - 2012-03-31 18:46:49.008765 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from unassigned
+  - ""
+- - 2012-03-31 18:48:02.700626 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.3 from 0.2
+  - It will need to support channels
 git_branch: 
 claimer: 

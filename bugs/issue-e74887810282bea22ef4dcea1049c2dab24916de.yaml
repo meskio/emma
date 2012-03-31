@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "XMPP: add support for channels"
+desc: needed for {issue 4b47d9e587a69d755c7863575cb59be5b5d0d5c7}
+type: :feature
+component: emma
+release: "0.3"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-31 18:48:38.829809 Z
+references: []
+
+id: e74887810282bea22ef4dcea1049c2dab24916de
+log_events: 
+- - 2012-03-31 18:48:39.818013 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
