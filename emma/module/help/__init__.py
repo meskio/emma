@@ -31,12 +31,15 @@ class help(Module):
 
         # Gather help messages from modules
         event.event = 'help'
-        help_strs = set(run_event(event, data[0][1]))
-        help_strs -= set("")
+        help_strs = set(run_event(event, args))
+        help_strs -= set([""])
         if help_strs:
-            body = _("emma is a bot for virtual assembly\n" \
-                     "==================================\n" \
-                     "Commands:\n")
+            if not args:
+                body = _("emma is a bot for virtual assembly\n" \
+                         "==================================\n" \
+                         "Commands:\n")
+            else:
+                body = ""
             body += '\n'.join(help_strs)
         else:
             body = _("No help")

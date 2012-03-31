@@ -36,13 +36,13 @@ class find_email(Module):
                      "    Use for search on emails stored by emma\n" \
                      "  * display 0\n" \
                      "    Display an email from a search list generated\n")
-        elif data[0] == _('find'):
+        elif data == _('find'):
             return _("Use for search on emails stored by emma.\n" \
                      "Search terms are introduced separated by ','" \
                      "with the form 'Field:string',\n" \
                      "string can be a regular expression between '/'.\n" \
                      "Ex: find From:/meskio.*/,Tags:asamblea,Body:/squat/")
-        elif data[0] == _('display'):
+        elif data == _('display'):
             return _("Once a 'find' command is call use the 'display'" \
                      "command to output the email\n" \
                      "with the index number give as parameter of 'display'\n" \

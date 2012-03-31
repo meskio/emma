@@ -35,7 +35,7 @@ class reminder(Module):
                 return _("  * [[remind|23/11/2011 08:17;" \
                          "hackmeeting@listas.sindominio.ent;subject;text]]\n" \
                          "    Schelude a reminder at certan date\n")
-        elif data[0] == _('remind'):
+        elif data == _('remind'):
             return _("You can program reminders to be send by %s at a " \
                      "given date.\n It takes three or four parameters " \
                      "separated by ';': date;email;subject;body\n" \

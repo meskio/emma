@@ -44,15 +44,15 @@ class irc_moderator(Module):
                      "    While moderating request word\n" \
                      "  * stop\n" \
                      "    Stop moderating\n")
-        elif data[0] == _('moderate'):
+        elif data == _('moderate'):
             return _("Start the moderation of an assembly.\n" \
                      "It will assign turns to talk as people request them" \
                      " with 'word'.\n" \
                      "If a session_name is given the session will be saved " \
                      "on the wiki.")
-        elif data[0] == _('word'):
+        elif data == _('word'):
             return _("While moderating request word")
-        elif data[0] == _('stop'):
+        elif data == _('stop'):
             return _("Stop moderating the assembly started with 'moderate'")
         else:
             return ""
