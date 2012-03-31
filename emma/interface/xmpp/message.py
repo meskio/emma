@@ -21,7 +21,7 @@ class Message(message.Message):
     """
     def __init__(self, event):
         body = event['body']
-        to = event['to']
-        frm = event['from']
+        to = str(event['to'])
+        frm = str(event['from'])
         tpe = event['type']
         message.Message.__init__(self, body, to, frm, tpe)

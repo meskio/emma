@@ -17,6 +17,7 @@ Simple xmpp implementation, is missing a lot of features
 import re
 import logging
 import sleekxmpp
+from sleekxmpp.xmlstream.jid import JID
 
 from emma.events import Event, subscribe, trigger
 from message import Message
@@ -59,6 +60,7 @@ class XMPPClient(sleekxmpp.ClientXMPP):
         trigger(cmd_event, ((cmd, args), msg))
 
     def send_msg(self, to, msg):
-        self.send_message(mto=to,
+        jid = JID(to)
+        self.send_message(mto=jid,
                           mbody=msg,
                           mtype='chat')
