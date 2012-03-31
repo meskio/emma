@@ -3,7 +3,7 @@ title: "Interface: XMPP"
 desc: Jabber, mostly for same uses as IRC
 type: :feature
 component: emma
-release: "1.0"
+release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
 status: :in_progress
 disposition: 
@@ -41,5 +41,16 @@ log_events:
   - |-
     I don't know really how, but when I try adding emma to my roster the bot automatically sends me a subscription request.
     I'm using ejabberd and psi.
+- - 2012-03-31 21:10:47.187774 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from 1.0
+  - ""
+- - 2012-03-31 21:17:22.083855 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - |-
+    I think this bug is ready to be close.
+    I fix a comple of simple things and the xmpp support I think is in a good shape,
+    It will need more work in the future, but I start opening bugs for specific features.
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
