@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "IRC: add support for /me messages"
+desc: ""
+type: :feature
+component: emma
+release: "0.3"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-31 17:03:42.773239 Z
+references: []
+
+id: e3ef137c675ddd2fd6ee6d8da6ea25b1f9137d9a
+log_events: 
+- - 2012-03-31 17:03:43.967770 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 

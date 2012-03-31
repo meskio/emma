@@ -7,13 +7,17 @@ components:
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.1"
-  status: :unreleased
-  release_time: 
+  status: :released
+  release_time: 2012-03-31 17:09:53.332877 Z
   log_events: 
   - - 2012-02-27 16:57:25.344590 Z
     - Ales Zabala Alava <shagi@gisa-elkartea.org>
     - created
     - First published version, it works, but mainly incomplete
+  - - 2012-03-31 17:09:53.332921 Z
+    - Ruben Pollan <meskio@sindominio.net>
+    - released
+    - It was released some months ago as a first public release
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "0.2"
   status: :unreleased
@@ -23,6 +27,15 @@ releases:
     - Ales Zabala Alava <shagi@gisa-elkartea.org>
     - created
     - Some extra features, still in heavy development
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: "0.3"
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2012-03-31 17:04:28.451506 Z
+    - Ruben Pollan <meskio@sindominio.net>
+    - created
+    - ""
 - !ditz.rubyforge.org,2008-03-06/release 
   name: "1.0"
   status: :unreleased

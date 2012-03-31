@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: unit test
+desc: |-
+  At least the core part should have unit tests
+  Maybe we can use: http://pytest.org
+type: :task
+component: emma
+release: 
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-29 15:38:36.296063 Z
+references: []
+
+id: 7881359bd21d95de7804b4fbca0f64b82a92630d
+log_events: 
+- - 2012-03-29 15:38:39.238895 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 

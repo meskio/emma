@@ -1,0 +1,26 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "IRC: get the message date for each post"
+desc: |-
+  Right now it is not getting the date of each post. That will be usefull at least for the
+  logs stored on mediawiki by the moderator
+type: :feature
+component: emma
+release: "0.3"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-31 17:28:47.867930 Z
+references: []
+
+id: cc9ca17b9075aae2a10bae469cb3552d889dba67
+log_events: 
+- - 2012-03-31 17:28:49.022252 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+- - 2012-03-31 17:36:20.412007 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.3 from unassigned
+  - ""
+git_branch: 
+claimer: 
