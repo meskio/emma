@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: email -> MediaWiki module
+desc: |-
+  A simple module to store on the mediawiki some content of an email triggered by a command.
+  Something like:
+  [[wiki|name_of_the_page
+  text for the wiki with wiki markup]]
+type: :feature
+component: emma
+release: "0.2"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-03-31 21:22:35.120564 Z
+references: []
+
+id: 0cfe9d7109a3cb9083b5fbe302b3931c3bf2318a
+log_events: 
+- - 2012-03-31 21:22:36.490827 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
