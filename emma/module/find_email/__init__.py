@@ -23,14 +23,15 @@ class find_email(Module):
         self.search = {}
         """ {channel:[email]} """
 
-        help_event = Event(event="help", interface="irc", \
-                          identifier=self.conf['irc_id'])
+        help_event = Event(event="help", identifier=self.conf['im_id'])
         subscribe(help_event, self.help_handler)
-        cmd_event = Event(event="command", interface="irc", \
-                          identifier=self.conf['irc_id'])
+        cmd_event = Event(event="command", identifier=self.conf['im_id'])
         subscribe(cmd_event, self.cmd_handler)
 
     def help_handler(self, event, data):
+        if not event.interface in ["irc", "xmpp"]:
+            return ""
+
         if not data:
             return _("  * find From:/hackmeeting/,Tags:asamblea\n" \
                      "    Use for search on emails stored by emma\n" \
@@ -51,11 +52,14 @@ class find_email(Module):
             return ""
 
     def cmd_handler(self, event, data):
+        interface = event.interface
+        if not interface in ["irc", "xmpp"]:
+            return
+
         cmd, args = data[0]
-        if data[1]['To'][0] == '#':
-            channel = data[1]['To']
-        else:
-            channel = data[1]['From']
+        to = data[1]['From']
+        if interface == 'irc' and data[1]['To'][0] == '#':
+            to = data[1]['To']
 
         if cmd == _("find"):
             event = Event("db", "email", self.conf['email_id'])
@@ -63,29 +67,29 @@ class find_email(Module):
             self.log("Find: " + str(search))
             res = run_event(event, search)
             if not res or not res[0]:
-                self.say(_("Not found any email"), channel)
+                self.say(_("Not found any email"), to, interface)
             else:
-                self.add_search(res[0], channel)
-                self.show_list(channel)
-        elif cmd == _("display") and channel in self.search:
-            emails = self.search[channel]
+                self.add_search(res[0], to)
+                self.show_list(to, interface)
+        elif cmd == _("display") and to in self.search:
+            emails = self.search[to]
             try:
                 email_index = int(args)
             except ValueError:
-                self.say(_("Not valid index: %s") % args, channel)
+                self.say(_("Not valid index: %s") % args, to, interface)
                 return
             if len(emails) > email_index:
-                self.show_email(emails[email_index], channel)
+                self.show_email(emails[email_index], to, interface)
             else:
                 err_str = (_("Index not in range(0-%(number)d): %(args)s") %
                            {'number':len(emails) - 1, 'args':args})
-                self.say(err_str, channel)
+                self.say(err_str, to, interface)
 
     @use_lock
     def add_search(self, emails, channel):
         self.search[channel] = emails
 
-    def show_list(self, channel):
+    def show_list(self, channel, interface):
         emails = self.search[channel]
         string = ""
         for i, email in zip(range(len(emails)), emails):
@@ -93,9 +97,9 @@ class find_email(Module):
             frm = email.get('From', '')
             sbj = email.get('Subject', '')
             string += "%d - %s   %s   %s\n" % (i, date, frm, sbj)
-        self.say(string, channel)
+        self.say(string, channel, interface)
 
-    def show_email(self, email, channel):
+    def show_email(self, email, channel, interface):
         string = ""
         keys = ['From', 'To', 'Cc', 'Date', 'Subject']
         for key in keys:
@@ -103,11 +107,12 @@ class find_email(Module):
                 string += "%s: %s\n" % (_(key), email[key])
         body = ["   " + line for line in email['Body'].split('\n')]
         string += '\n'.join(body)
-        self.say(string, channel)
+        self.say(string, channel, interface)
 
-    def say(self, msg, channel):
-        event = Event(event="send", interface="irc", \
-                      identifier=self.conf['irc_id'])
+    def say(self, msg, channel, interface):
+        event = Event(event="send", interface=interface, \
+                      identifier=self.conf['im_id'])
+        print interface
         message = Message(msg, channel)
         run_event(event, message)
 
