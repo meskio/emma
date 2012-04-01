@@ -113,7 +113,7 @@ class Complement:
         if dbmeta.count():
             for meta in dbmeta:
                 v = float(meta['version'])
-                if old_version and v < old_version:
+                if not old_version or v < old_version:
                     old_version = v
                 if v != emma.__version__:
                     self.db.remove(meta['_id'])
