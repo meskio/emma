@@ -15,6 +15,9 @@ email interface for mailing lists or private mail
 import poplib
 import smtplib
 from email.mime.text import MIMEText
+from email.utils import parsedate
+from time import mktime
+from datetime import datetime
 
 from emma.interface import Interface
 from emma.sched import periodic
@@ -104,3 +107,32 @@ class email(Interface):
         """
         dmsg = dict(message)
         self.db.insert(dmsg)
+
+    def update_db(self):
+        old_version, version = Interface.update_db(self)
+        if not old_version or old_version == 0.1:
+            try:
+                res = self.db.find({}, ['_id','Date'])
+            except Exception:
+                self.log(_("db request error."))
+                res = []
+            for doc in res:
+                if not 'Date' in doc:
+                    continue
+                date = doc['Date']
+                if type(date) != unicode:
+                    continue
+                _id = doc['_id']
+
+                try:
+                    timestamp = mktime(parsedate(date))
+                except TypeError:
+                    self.log(_("time conversion error: %s - %s") % (_id, date))
+                    continue
+                utcdate = datetime.fromtimestamp(timestamp)
+                try:
+                    self.db.update({'_id': _id}, {"$set": {'Date': utcdate}})
+                except Exception:
+                    self.log(_("db update error: %s - %s") % (_id, date))
+
+        return (old_version, version)

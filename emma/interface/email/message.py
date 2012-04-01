@@ -14,6 +14,9 @@ email message support
 
 import pyzmail
 import re
+from email.utils import parsedate
+from time import mktime
+from datetime import datetime
 
 from emma.interface import message
 
@@ -33,6 +36,8 @@ class Message(message.Message):
 
         d = msg_to_dict(msg)
         self._.update(d)
+        timestamp = mktime(parsedate(self._['Date']))
+        self._['Date'] = datetime.fromtimestamp(timestamp)
         self._['Commands'] = self.commands()
         self._['Tags'] = self.tags()
 
