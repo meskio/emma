@@ -5,7 +5,7 @@ desc: |-
   logs stored on mediawiki by the moderator
 type: :feature
 component: emma
-release: "0.3"
+release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
 status: :closed
 disposition: :fixed
@@ -20,7 +20,7 @@ log_events:
   - ""
 - - 2012-03-31 17:36:20.412007 Z
   - Ruben Pollan <meskio@sindominio.net>
-  - assigned to release 0.3 from unassigned
+  - assigned to release 0.2 from unassigned
   - ""
 - - 2012-04-01 05:53:14.141143 Z
   - Ruben Pollan <meskio@sindominio.net>
