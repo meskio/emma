@@ -54,11 +54,18 @@ class IrcClient(SingleServerIRCBot):
             args = m.groups()[0]
             self._trigger_cmd(args, msg)
 
-    def send(self, to, msg):
+    def on_ctcp(self, c, e):
+        msg = Message(e)
+        self._trigger_rcv(msg)
+
+    def send(self, to, msg, tpe="privmsg"):
         c = self.connection
         #FIXME: find a proper way to do the encoding
         msg = msg.encode('iso-8859-1')
-        c.privmsg(to, msg)
+        if tpe == "ctcp":
+            c.ctcp("ACTION", to, msg)
+        else:
+            c.privmsg(to, msg)
 
     def _trigger_rcv(self, msg):
         recv_event = Event(event='receive', interface='irc', \

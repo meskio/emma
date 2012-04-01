@@ -24,7 +24,7 @@ class Message(message.Message):
     the types can be 'pubmsg', 'privmsg'
     """
     def __init__(self, ircEvent):
-        body = ircEvent.arguments()[0]
+        body = ircEvent.arguments()[-1]
         to = ircEvent.target()
         frm = nm_to_n(ircEvent.source())
         tpe = ircEvent.eventtype()
