@@ -85,20 +85,33 @@ class irc_moderator(Module):
 
     @use_lock
     def rcv_handler(self, event, data):
-        channel = data['To']
-        if channel[0] != '#' or not channel in self._:
-            return
+        if data['Type'] == 'nick':
+            old_nick = data['From']
+            new_nick = data['To']
+            for c in self._.keys():
+                if self._[c]['talking'] == old_nick:
+                    self._[c]['talking'] = new_nick
+                if old_nick in self._[c]['words']:
+                    f = lambda nick: (nick == old_nick) and new_nick or nick
+                    self._[c]['words'] = map(f, self._[c]['words'])
 
-        if data['Body'] == "." and data['From'] == self._[channel]['talking']:
-            if self._[channel]['words']:
-                self._[channel]['talking'] = self._[channel]['words'][0]
-                self._[channel]['words']= self._[channel]['words'][1:]
-                self.give_turn(channel)
-            else:
-                self._[channel]['talking'] = None
-        if data['Type'] == "ctcp" and _("word") in data['Body']:
-            nick = data['From']
-            self.add_word(nick, channel)
+        else:
+            channel = data['To']
+            if channel[0] != '#' or not channel in self._:
+                return
+
+            if (data['Body'] == "." and
+                data['From'] == self._[channel]['talking']):
+                if self._[channel]['words']:
+                    self._[channel]['talking'] = self._[channel]['words'][0]
+                    self._[channel]['words']= self._[channel]['words'][1:]
+                    self.give_turn(channel)
+                else:
+                    self._[channel]['talking'] = None
+
+            if data['Type'] == "ctcp" and _("word") in data['Body']:
+                nick = data['From']
+                self.add_word(nick, channel)
 
     def add_word(self, nick, channel):
         self.log(_("Request word from: %s") % nick)
