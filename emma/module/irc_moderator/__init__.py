@@ -145,7 +145,12 @@ class irc_moderator(Module):
         for msg in history:
             if msg['To'] != channel:
                 continue
-            text += "< %s> %s\n" % (msg['From'], msg['Body'])
+            if msg['Type'] == "ctcp":
+                text += "[%s]  * %s %s\n" % (msg['Date'].strftime("%H:%M"),
+                                             msg['From'], msg['Body'])
+            else:
+                text += "[%s] < %s> %s\n" % (msg['Date'].strftime("%H:%M"),
+                                             msg['From'], msg['Body'])
         text += "</pre>"
 
         event = Event(event="write", interface="mediawiki",
