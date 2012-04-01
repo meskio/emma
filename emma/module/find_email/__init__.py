@@ -107,7 +107,7 @@ class find_email(Module):
         # See gettext documentation on deferred translations:
         # http://docs.python.org/library/gettext.html?highlight=gettext#deferred-translations
         def N_(msg): return msg
-        keys = [N_('From'), N_('To'), N_('Cc'), N_('Date'),N _('Subject')]
+        keys = [N_('From'), N_('To'), N_('Cc'), N_('Date'), N_('Subject')]
         for key in keys:
             if key in email:
                 string += "%s: %s\n" % (_(key), email[key])
