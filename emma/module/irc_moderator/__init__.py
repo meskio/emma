@@ -51,7 +51,9 @@ class irc_moderator(Module):
                      "If a session_name is given the session will be saved " \
                      "on the wiki.")
         elif data == _('word'):
-            return _("While moderating request word")
+            return _("While moderating request word.\n" \
+                     "It can also be requestested with a /me containing the word " \
+                     "'word' in it.")
         elif data == _('stop'):
             return _("Stop moderating the assembly started with 'moderate'")
         else:
@@ -84,6 +86,7 @@ class irc_moderator(Module):
 
     @use_lock
     def rcv_handler(self, event, data):
+        print data['Body']
         if self.on_moderate:
             if data['Body'] == "." and data['From'] == self.talking:
                 if self.words:
@@ -92,10 +95,19 @@ class irc_moderator(Module):
                     self.give_turn(self.talking)
                 else:
                     self.talking = None
+            if data['Type'] == "ctcp" and _("word") in data['Body']:
+                nick = data['From']
+                self.log(_("Request word from: %s") % nick)
+                if self.talking:
+                    self.words.append(nick)
+                else:
+                    self.talking = nick
+                    self.give_turn(nick)
 
     def give_turn(self, nick):
         self.log(_("Give word to: %s") % nick)
-        msg = Message(_("%s has the word") % nick, self.conf['irc_chn'])
+        msg = Message(_("give the word to %s") % nick, self.conf['irc_chn'],
+                      tpe="ctcp")
         event = Event(event="send", interface="irc",
                       identifier=self.conf['irc_id'])
         trigger(event, msg)
