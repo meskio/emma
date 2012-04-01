@@ -78,7 +78,7 @@ class Event:
         event_tuples = itertools.product((self.event, None), \
                                          (self.interface, None), \
                                          (self.identifier, None))
-        events = [Event(x, y, z) for x, y, z in event_tuples]
+        events = set([Event(x, y, z) for x, y, z in event_tuples])
         return events
 
 
@@ -91,7 +91,7 @@ def _get_handlers(event):
     for e in event.all_events():
         if e in _events:
             handlers += _events[e]
-    return set(handlers)
+    return handlers
 
 
 def trigger(event, data):
