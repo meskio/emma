@@ -63,18 +63,20 @@ class irc_moderator(Module):
     def cmd_handler(self, event, data):
         cmd, args = data[0]
         if cmd == _("moderate") and not self.on_moderate:
-            self.log(_("Start moderating"))
+            self.log(_("starts moderating"))
             self.on_moderate = True
             self.words = []
             self.talking = None
             if args:
                 self.session = args
                 self.trigger_history('start', args)
+            self.send_ctcp(_("starts moderating"))
         elif cmd == _("stop"):
-            self.log(_("Stop moderating"))
+            self.log(_("stops moderating"))
             self.on_moderate = False
             self.wikistore()
             self.session = ''
+            self.send_ctcp(_("stops moderating"))
         elif cmd == _("word"):
             nick = data[1]['From']
             self.log(_("Request word from: %s") % nick)
@@ -86,7 +88,6 @@ class irc_moderator(Module):
 
     @use_lock
     def rcv_handler(self, event, data):
-        print data['Body']
         if self.on_moderate:
             if data['Body'] == "." and data['From'] == self.talking:
                 if self.words:
@@ -105,9 +106,11 @@ class irc_moderator(Module):
                     self.give_turn(nick)
 
     def give_turn(self, nick):
-        self.log(_("Give word to: %s") % nick)
-        msg = Message(_("give the word to %s") % nick, self.conf['irc_chn'],
-                      tpe="ctcp")
+        self.log(_("gives the word to %s") % nick)
+        self.send_ctcp(_("gives the word to %s") % nick)
+
+    def send_ctcp(self, txt):
+        msg = Message(txt, self.conf['irc_chn'], tpe="ctcp")
         event = Event(event="send", interface="irc",
                       identifier=self.conf['irc_id'])
         trigger(event, msg)
