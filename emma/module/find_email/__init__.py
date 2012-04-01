@@ -82,7 +82,7 @@ class find_email(Module):
                 self.show_email(emails[email_index], to, interface)
             else:
                 err_str = (_("Index not in range(0-%(number)d): %(args)s") %
-                           {'number':len(emails) - 1, 'args':args})
+                           {'number': len(emails) - 1, 'args': args})
                 self.say(err_str, to, interface)
 
     @use_lock

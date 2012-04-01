@@ -112,7 +112,7 @@ class email(Interface):
         old_version, version = Interface.update_db(self)
         if not old_version or old_version == 0.1:
             try:
-                res = self.db.find({}, ['_id','Date'])
+                res = self.db.find({}, ['_id', 'Date'])
             except Exception:
                 self.log(_("db request error."))
                 res = []

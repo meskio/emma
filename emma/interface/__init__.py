@@ -1,7 +1,7 @@
 """
 interfaces are where the comunication to the internet happends
 
-Interfaces communicate with L{modules<module>} through L{events}. modules 
+Interfaces communicate with L{modules<module>} through L{events}. modules
 will do the functionallity of the bot, using interfaces for communicate with
 mailing lists, irc, ...
 

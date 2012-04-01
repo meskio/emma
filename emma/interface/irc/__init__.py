@@ -1,5 +1,5 @@
 """
-irc interface 
+irc interface
 
 @copyright: (c) 2011 hackmeeting U{http://sindominio.net/hackmeeting}
 @author: Ruben Pollan

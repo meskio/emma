@@ -69,6 +69,7 @@ def main(conf_paths=confPaths):
     while 1:
         sleep(1000)    # I didn't find any better wait method
 
+
 def _init_i18n(conf, localedir):
     try:
         language = conf.get("core", "language")
@@ -79,6 +80,7 @@ def _init_i18n(conf, localedir):
         # If no config option of missing language catalog use system
         # language
         gettext.install('emma', localedir)
+
 
 def _init_log(conf):
     fmt = "%(asctime)s (%(levelname).1s) %(message)s"
@@ -129,8 +131,8 @@ def _load_complements(conf):
 
 def _init_complement(tpe, name, identifier, options):
     db = DB()
-    logging.debug(_("[core]     load %(type)s %(name)s") % {'type':tpe,
-                                                            'name':name})
+    logging.debug(_("[core]     load %(type)s %(name)s") % {'type': tpe,
+                                                            'name': name})
     db_coll = db.collection("%s_%s_%s" % (tpe, name, identifier))
     imp = __import__("emma.%s.%s" % (tpe, name))
     complements = getattr(imp, tpe)

@@ -52,8 +52,8 @@ class irc_moderator(Module):
                      "on the wiki.")
         elif data == _('word'):
             return _("While moderating request word.\n" \
-                     "It can also be requestested with a /me containing the word " \
-                     "'word' in it.")
+                     "It can also be requestested with a /me containing " \
+                     "the word 'word' in it.")
         elif data == _('stop'):
             return _("Stop moderating the assembly started with 'moderate'")
         else:
@@ -126,7 +126,7 @@ class irc_moderator(Module):
     def wikistore(self):
         if not self.session:
             return
-        if not self.conf.has_key('wiki_id'):
+        if not 'wiki_id' in self.conf:
             return
 
         self.trigger_history('stop')

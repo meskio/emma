@@ -2,7 +2,7 @@
 modules are where the actual functionality of the bot happens
 
 If you want to add functionality to emma you should hack here, creating a
-module. Modules communicate through L{events} with 
+module. Modules communicate through L{events} with
 L{interfaces<emma.interface>} for access to mailing lists, irc, ...
 
 Module inheritate from L{complement} from where you can

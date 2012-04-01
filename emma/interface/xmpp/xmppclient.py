@@ -22,6 +22,7 @@ from sleekxmpp.xmlstream.jid import JID
 from emma.events import Event, subscribe, trigger
 from message import Message
 
+
 class XMPPClient(sleekxmpp.ClientXMPP):
     def __init__(self, identifier, jid, password):
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
