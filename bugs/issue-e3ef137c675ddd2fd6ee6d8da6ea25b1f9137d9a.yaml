@@ -3,7 +3,7 @@ title: "IRC: add support for /me messages"
 desc: ""
 type: :feature
 component: emma
-release: "0.3"
+release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
 status: :closed
 disposition: :fixed
@@ -23,6 +23,10 @@ log_events:
 - - 2012-04-01 04:33:02.675269 Z
   - Ruben Pollan <meskio@sindominio.net>
   - closed with disposition fixed
+  - ""
+- - 2012-04-01 11:12:02.689954 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from 0.3
   - ""
 git_branch: 
 claimer: Ruben Pollan <meskio@sindominio.net>
