@@ -21,6 +21,10 @@ and run it with:
 $ emm
 
 
+To run the test:
+$ python setup.py test
+
+
 - Starting at boot -
 ====================
 
