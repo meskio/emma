@@ -23,8 +23,9 @@ from emma.interface.message import Message
 
 class irc_moderator(Module):
     def run(self):
-        self.on_moderate = False
-        self.session = ''
+        # self._ = {channel: {'talking': nick, 'words': [nicks],
+        #                     'session': str}}
+        self._ = {}
 
         help_event = Event(event="help", interface="irc", \
                           identifier=self.conf['irc_id'])
@@ -61,56 +62,59 @@ class irc_moderator(Module):
 
     @use_lock
     def cmd_handler(self, event, data):
+        channel = data[1]['To']
+        if channel[0] != '#':
+            return  # not in channel
+
         cmd, args = data[0]
-        if cmd == _("moderate") and not self.on_moderate:
+        if cmd == _("moderate") and not channel in self._:
             self.log(_("starts moderating"))
-            self.on_moderate = True
-            self.words = []
-            self.talking = None
+            self._[channel] = {'talking': None, 'words': []}
             if args:
-                self.session = args
+                self._[channel]['session'] = args
                 self.trigger_history('start', args)
-            self.send_ctcp(_("starts moderating"))
-        elif cmd == _("stop"):
+            self.send_ctcp(_("starts moderating"), channel)
+        elif cmd == _("stop") and channel in self._:
             self.log(_("stops moderating"))
-            self.on_moderate = False
-            self.wikistore()
-            self.session = ''
-            self.send_ctcp(_("stops moderating"))
+            self.wikistore(channel)
+            del self._[channel]
+            self.send_ctcp(_("stops moderating"), channel)
         elif cmd == _("word"):
             nick = data[1]['From']
-            self.log(_("Request word from: %s") % nick)
-            if self.talking:
-                self.words.append(nick)
-            else:
-                self.talking = nick
-                self.give_turn(nick)
+            self.add_word(nick, channel)
 
     @use_lock
     def rcv_handler(self, event, data):
-        if self.on_moderate:
-            if data['Body'] == "." and data['From'] == self.talking:
-                if self.words:
-                    self.talking = self.words[0]
-                    self.words = self.words[1:]
-                    self.give_turn(self.talking)
-                else:
-                    self.talking = None
-            if data['Type'] == "ctcp" and _("word") in data['Body']:
-                nick = data['From']
-                self.log(_("Request word from: %s") % nick)
-                if self.talking:
-                    self.words.append(nick)
-                else:
-                    self.talking = nick
-                    self.give_turn(nick)
+        channel = data['To']
+        if channel[0] != '#' or not channel in self._:
+            return
 
-    def give_turn(self, nick):
+        if data['Body'] == "." and data['From'] == self._[channel]['talking']:
+            if self._[channel]['words']:
+                self._[channel]['talking'] = self._[channel]['words'][0]
+                self._[channel]['words']= self._[channel]['words'][1:]
+                self.give_turn(channel)
+            else:
+                self._[channel]['talking'] = None
+        if data['Type'] == "ctcp" and _("word") in data['Body']:
+            nick = data['From']
+            self.add_word(nick, channel)
+
+    def add_word(self, nick, channel):
+        self.log(_("Request word from: %s") % nick)
+        if self._[channel]['talking']:
+            self._[channel]['words'].append(nick)
+        else:
+            self._[channel]['talking'] = nick
+            self.give_turn(channel)
+
+    def give_turn(self, channel):
+        nick = self._[channel]['talking']
         self.log(_("gives the word to %s") % nick)
-        self.send_ctcp(_("gives the word to %s") % nick)
+        self.send_ctcp(_("gives the word to %s") % nick, channel)
 
-    def send_ctcp(self, txt):
-        msg = Message(txt, self.conf['irc_chn'], tpe="ctcp")
+    def send_ctcp(self, txt, channel):
+        msg = Message(txt, channel, tpe="ctcp")
         event = Event(event="send", interface="irc",
                       identifier=self.conf['irc_id'])
         trigger(event, msg)
@@ -123,17 +127,17 @@ class irc_moderator(Module):
         else:
             return run_event(event, (cmd, param))[0]
 
-    def wikistore(self):
-        if not self.session:
+    def wikistore(self, channel):
+        if not 'session' in self._[channel]:
             return
         if not 'wiki_id' in self.conf:
             return
 
+        session = self._[channel]['session']
         self.trigger_history('stop')
-        self.log(_("Store irc log on the wiki page ") + self.session)
+        self.log(_("Store irc log on the wiki page ") + session)
 
-        history = self.trigger_history('get', self.session)
-        channel = self.conf['irc_chn']
+        history = self.trigger_history('get', session)
         today = time.gmtime()
         text = _("Assembly log from %(day)s/%(month)s/%(year)s\n\n") \
                  % {'day': today.tm_mday, 'month': today.tm_mon,
@@ -155,4 +159,4 @@ class irc_moderator(Module):
 
         event = Event(event="write", interface="mediawiki",
                       identifier=self.conf['wiki_id'])
-        trigger(event, (self.session, text))
+        trigger(event, (session, text))
