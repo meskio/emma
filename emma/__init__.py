@@ -33,7 +33,7 @@ from sched import at
 from events import Event
 
 
-__version__ = 0.1
+__version__ = 0.2
 """ Version of emma """
 
 confPaths = (

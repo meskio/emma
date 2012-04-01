@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name = 'emma',
-    version = '0.1',
+    version = '0.2',
     description = 'Bot for digital assembly',
     author = 'Ruben Pollan',
     author_email = 'meskio@sindominio.net',
