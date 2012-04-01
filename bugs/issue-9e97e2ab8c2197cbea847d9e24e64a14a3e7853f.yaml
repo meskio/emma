@@ -5,10 +5,10 @@ desc: |-
   it don't dipslay any error.
 type: :bugfix
 component: emma
-release: "0.3"
+release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-03-31 17:25:29.432321 Z
 references: []
 
@@ -18,5 +18,21 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - created
   - ""
+- - 2012-04-01 14:22:04.936314 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from 0.3
+  - ""
+- - 2012-04-01 14:22:10.638578 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - issue claimed
+  - ""
+- - 2012-04-01 14:23:15.713160 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - closed with disposition fixed
+  - ""
+- - 2012-04-01 14:42:30.565205 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - commented
+  - I use incremental sleep time for prevent flooding
 git_branch: 
-claimer: 
+claimer: Ruben Pollan <meskio@sindominio.net>

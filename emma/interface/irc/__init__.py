@@ -50,9 +50,12 @@ class irc(Interface):
             self.log(_("error conecting to server: %s") % x)
 
     def send_handler(self, event, data):
+        time = 0.2
         for line in data['Body'].split('\n'):
             self.irc.send(data['To'], line, data['Type'])
-            sleep(0.3)    # FIXME: any better way to prevent Flood?
+            sleep(time)
+            if time < 1:  # to prevent flooding the sleep time increases
+                time += 0.05
 
     def history_handler(self, event, data):
         if data[0] == 'start':
