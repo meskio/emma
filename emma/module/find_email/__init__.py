@@ -101,7 +101,13 @@ class find_email(Module):
 
     def show_email(self, email, channel, interface):
         string = ""
-        keys = ['From', 'To', 'Cc', 'Date', 'Subject']
+        # We don't need keys translated when searching for them in the
+        # email, but they must be translated when presented to the user, so
+        # we define a temporal _ function to overwrite builting one.
+        # See gettext documentation on deferred translations:
+        # http://docs.python.org/library/gettext.html?highlight=gettext#deferred-translations
+        def N_(msg): return msg
+        keys = [N_('From'), N_('To'), N_('Cc'), N_('Date'),N _('Subject')]
         for key in keys:
             if key in email:
                 string += "%s: %s\n" % (_(key), email[key])

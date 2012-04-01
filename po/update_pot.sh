@@ -1,1 +1,1 @@
-find ../emma/ -iname "*py" |xargs xgettext -o emma.pot 
+find ../emma/ -iname "*py" |xargs xgettext -kN_ -o emma.pot 
