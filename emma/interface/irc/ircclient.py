@@ -19,6 +19,7 @@ This is a modification of the testbot.py example of the irclib
 import re
 import logging
 from ircbot import SingleServerIRCBot
+from irclib import nm_to_n
 
 from emma.events import Event, subscribe, trigger
 from message import Message
@@ -56,6 +57,10 @@ class IrcClient(SingleServerIRCBot):
             self._trigger_cmd(args, msg)
 
     def on_ctcp(self, c, e):
+        msg = Message(e)
+        self._trigger_rcv(msg)
+
+    def on_nick(self, c, e):
         msg = Message(e)
         self._trigger_rcv(msg)
 
