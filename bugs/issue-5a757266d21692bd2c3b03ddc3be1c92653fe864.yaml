@@ -5,7 +5,7 @@ desc: |-
   That should be parsed so we can do searches base on date ranges
 type: :feature
 component: emma
-release: 
+release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
 status: :closed
 disposition: :fixed
@@ -25,6 +25,10 @@ log_events:
 - - 2012-04-01 05:52:48.943434 Z
   - Ruben Pollan <meskio@sindominio.net>
   - closed with disposition fixed
+  - ""
+- - 2012-04-01 05:57:43.510261 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from unassigned
   - ""
 git_branch: 
 claimer: Ruben Pollan <meskio@sindominio.net>
