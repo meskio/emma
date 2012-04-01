@@ -7,8 +7,8 @@ type: :feature
 component: emma
 release: "0.3"
 reporter: Ruben Pollan <meskio@sindominio.net>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-03-31 17:28:47.867930 Z
 references: []
 
@@ -22,5 +22,13 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - assigned to release 0.3 from unassigned
   - ""
+- - 2012-04-01 05:53:14.141143 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - issue claimed
+  - ""
+- - 2012-04-01 05:53:43.608543 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - closed with disposition fixed
+  - Implemented in a generic way, now all messages have their own date
 git_branch: 
-claimer: 
+claimer: Ruben Pollan <meskio@sindominio.net>

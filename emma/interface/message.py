@@ -12,12 +12,15 @@ generic message for interfaces
   U{http://sam.zoy.org/projects/COPYING.WTFPL} for more details.
 """
 
+from datetime import datetime
+
 
 class Message:
     """
     Message is basically a dictionary
     """
-    def __init__(self, body=None, to=None, frm=None, tpe=None):
+    def __init__(self, body=None, to=None, frm=None, tpe=None,
+                 date=datetime.utcnow()):
         """
         @type body: string
         @param body: content
@@ -27,8 +30,11 @@ class Message:
         @param frm: source
         @type tpe: string
         @param tpe: message type
+        @type date: datetime
+        @param date: message date
         """
-        self._ = {'From': frm, 'To': to, 'Body': body, 'Type': tpe}
+        self._ = {'From': frm, 'To': to, 'Body': body, 'Type': tpe,
+                  'Date': date}
 
     def items(self):
         return self._.items()
