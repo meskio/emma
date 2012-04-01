@@ -1,5 +1,7 @@
 import thread
 import logging
+import emma.events
+import emma.database
 
 
 # mock the gettext _(...) function
@@ -34,3 +36,35 @@ class MyLogging:
         self.log = True
         self.text = msg
         self.level = level
+
+
+class MyEvents:
+    def __init__(self, monkeypatch, module=emma.events):
+        self.event = None
+        self.data = None
+        monkeypatch.setattr(module, 'trigger', self.trigger)
+
+    def trigger(self, event, data):
+        self.event = event
+        self.data = data
+
+
+class MyDB:
+    def __init__(self, monkeypatch, module=emma.database):
+        self.data = []
+        self.deleted = []
+        class DB:
+            def core(self):
+                return Collection()
+
+        class Collection:
+            def insert(s, element):
+                index = len(self.data)
+                self.data.append(element)
+                return index
+
+            def remove(s, index):
+                self.deleted.append(self.data[index])
+                del self.data[index]
+
+        monkeypatch.setattr(module, 'DB', DB)
