@@ -5,10 +5,10 @@ desc: |-
   should be able to connect to multiple channels
 type: :feature
 component: emma
-release: 
+release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-03-31 17:52:49.942015 Z
 references: []
 
@@ -18,5 +18,17 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - created
   - ""
+- - 2012-04-01 14:04:10.688566 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - issue claimed
+  - ""
+- - 2012-04-01 14:04:23.586126 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - assigned to release 0.2 from unassigned
+  - ""
+- - 2012-04-01 14:04:31.937381 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - closed with disposition fixed
+  - ""
 git_branch: 
-claimer: 
+claimer: Ruben Pollan <meskio@sindominio.net>

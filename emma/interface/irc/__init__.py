@@ -39,12 +39,12 @@ class irc(Interface):
         server = self.conf['server']
         port = int(self.conf['port'])
         nick = self.conf['nick']
-        channel = self.conf['channel']
+        channels = [i.strip() for i in self.conf['channels'].split(',')]
         self.log(_("Connect to %(server)s:%(port)s nick:%(nick)s " \
-                   "channel:%(channel)s") % self.conf)
+                   "channels:%(channels)s") % self.conf)
 
         try:
-            self.irc = IrcClient(self.identifier, channel, nick, server, port)
+            self.irc = IrcClient(self.identifier, channels, nick, server, port)
             self.irc.start()
         except irclib.ServerConnectionError, x:
             self.log(_("error conecting to server: %s") % x)

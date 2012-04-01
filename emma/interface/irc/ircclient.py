@@ -25,17 +25,18 @@ from message import Message
 
 
 class IrcClient(SingleServerIRCBot):
-    def __init__(self, identifier, channel, nickname, server, port=6667):
+    def __init__(self, identifier, channels, nickname, server, port=6667):
         SingleServerIRCBot.__init__(self, [(server, port)], nickname, nickname)
         self.nick = nickname
-        self.channel = channel
+        self.chann = channels
         self.identifier = identifier
 
     def on_nicknameinuse(self, c, e):
         c.nick(c.get_nickname() + "_")
 
     def on_welcome(self, c, e):
-        c.join(self.channel)
+        for channel in self.chann:
+            c.join(channel)
 
     def on_privmsg(self, c, e):
         args = e.arguments()[0]
