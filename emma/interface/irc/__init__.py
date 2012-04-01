@@ -51,7 +51,7 @@ class irc(Interface):
 
     def send_handler(self, event, data):
         for line in data['Body'].split('\n'):
-            self.irc.send(data['To'], line)
+            self.irc.send(data['To'], line, data['Type'])
             sleep(0.3)    # FIXME: any better way to prevent Flood?
 
     def history_handler(self, event, data):
