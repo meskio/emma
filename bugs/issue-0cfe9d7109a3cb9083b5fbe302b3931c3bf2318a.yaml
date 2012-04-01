@@ -9,7 +9,7 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ruben Pollan <meskio@sindominio.net>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2012-03-31 21:22:35.120564 Z
 references: []
@@ -20,5 +20,13 @@ log_events:
   - Ruben Pollan <meskio@sindominio.net>
   - created
   - ""
+- - 2012-04-01 02:10:27.019493 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - issue claimed
+  - ""
+- - 2012-04-01 02:14:10.604035 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - changed status from unstarted to in_progress
+  - ""
 git_branch: 
-claimer: 
+claimer: Ruben Pollan <meskio@sindominio.net>

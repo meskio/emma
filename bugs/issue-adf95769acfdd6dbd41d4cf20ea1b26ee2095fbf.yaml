@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "XMPP: store messages on the database"
+desc: |-
+  Implement 'history' event similar to the one at IRC
+  That will be necessary for {issue 4b47d9e587a69d755c7863575cb59be5b5d0d5c7}
+type: :feature
+component: emma
+release: "0.3"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-04-01 02:12:41.147597 Z
+references: []
+
+id: adf95769acfdd6dbd41d4cf20ea1b26ee2095fbf
+log_events: 
+- - 2012-04-01 02:12:42.690617 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
