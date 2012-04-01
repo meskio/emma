@@ -61,6 +61,7 @@ class IrcClient(SingleServerIRCBot):
 
     def send(self, to, msg, tpe="privmsg"):
         c = self.connection
+        msg = msg.encode('UTF-8')
         if tpe == "ctcp":
             c.ctcp("ACTION", to, msg)
         else:
