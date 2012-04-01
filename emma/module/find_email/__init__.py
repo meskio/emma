@@ -118,7 +118,6 @@ class find_email(Module):
     def say(self, msg, channel, interface):
         event = Event(event="send", interface=interface, \
                       identifier=self.conf['im_id'])
-        print interface
         message = Message(msg, channel)
         run_event(event, message)
 
