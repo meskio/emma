@@ -127,12 +127,14 @@ class email(Interface):
                 try:
                     timestamp = mktime(parsedate(date))
                 except TypeError:
-                    self.log(_("time conversion error: %s - %s") % (_id, date))
+                    self.log(_("time conversion error: %(id)s - %(date)s") %
+                             {'id': _id, 'date': date})
                     continue
                 utcdate = datetime.fromtimestamp(timestamp)
                 try:
                     self.db.update({'_id': _id}, {"$set": {'Date': utcdate}})
                 except Exception:
-                    self.log(_("db update error: %s - %s") % (_id, date))
+                    self.log(_("db update error: %(id)s - %(date)s") %
+                             {'id': _id, 'date': date})
 
         return (old_version, version)
