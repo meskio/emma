@@ -61,8 +61,6 @@ class IrcClient(SingleServerIRCBot):
 
     def send(self, to, msg, tpe="privmsg"):
         c = self.connection
-        #FIXME: find a proper way to do the encoding
-        msg = msg.encode('iso-8859-1')
         if tpe == "ctcp":
             c.ctcp("ACTION", to, msg)
         else:
