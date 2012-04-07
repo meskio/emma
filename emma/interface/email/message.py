@@ -49,9 +49,35 @@ class Message(message.Message):
 
         @returns: [(cmd, params)]
         """
-        comexp = re.compile(r"\[\[([^\|]*)\|([^\]]*)\]\]")
+        if 'Commands' in self._:
+            return self._['Commands']
+
         text = self._['Body']
-        return comexp.findall(text)
+        commands = []
+        cmd = ["", ""]
+        isCmd = False
+        isArg = False
+        for i in range(len(text)):
+            if isCmd:
+                if text[i] == '|':
+                    isArg = True
+                    isCmd = False
+                else:
+                    cmd[0] += text[i]
+            elif isArg:
+                if text[i:i+2] == ']]':
+                    isArg = False
+                    commands.append(cmd)
+                    cmd = ["", ""]
+                elif text[i:i+2] == '\]':
+                    pass
+                else:
+                    cmd[1] += text[i]
+            else:
+                if text[i-1:i+1] == '[[':
+                    isCmd = True
+
+        return commands
 
     def tags(self):
         """
