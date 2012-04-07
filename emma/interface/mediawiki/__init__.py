@@ -32,6 +32,7 @@ class mediawiki(Interface):
         user = self.conf['user']
         password = self.conf['password']
         self.wiki.login(user, password)
+        self.log(_("Login to %s wiki") % (host))
 
         event_read = Event(event='read', interface='mediawiki',
                            identifier=self.identifier)
@@ -41,9 +42,11 @@ class mediawiki(Interface):
         subscribe(event_write, self.write)
 
     def read(self, event, data):
+        self.log(_("Fetch %s wiki page") % (data))
         return self.wiki.Pages[data].edit()
 
     def write(self, event, data):
         name, text = data
+        self.log(_("Write %s wiki page") % (name))
         page = self.wiki.Pages[name]
         page.save(text)
