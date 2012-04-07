@@ -14,6 +14,7 @@ email interface for mailing lists or private mail
 
 import poplib
 import smtplib
+import logging
 from email.mime.text import MIMEText
 from email.utils import parsedate
 from time import mktime, sleep
@@ -45,17 +46,27 @@ class email(Interface):
 
         Will be run periodically fetching the email from a POP3 server.
         """
-        self.log(_("fetching email %(pop_user)s@%(pop_host)s") % self.conf)
+        if 'pop_user' in self.conf:
+            user = self.conf['pop_user']
+            passwd = self.conf['pop_pass']
+        elif 'user' in self.conf:
+            user = self.conf['user']
+            passwd = self.conf['pass']
+        else:
+            self.log(_("No user defined for pop"), logging.ERROR)
+            return
 
+        self.log(_("fetching email %(user)s@%(host)s")
+                    % {'user': user, 'host': self.conf['pop_host']})
         try:
-            if self.conf['pop_ssl'] == "yes":
+            if 'pop_ssl' in self.conf and self.conf['pop_ssl'] == "yes":
                 pop = poplib.POP3_SSL(self.conf['pop_host'])
             else:
                 pop = poplib.POP3(self.conf['pop_host'])
-            pop.user(self.conf['pop_user'])
-            pop.pass_(self.conf['pop_pass'])
+            pop.user(user)
+            pop.pass_(passwd)
         except:
-            self.log(_("    error connecting by POP3"))
+            self.log(_("    error connecting by POP3"), logging.ERROR)
             return
 
         recv_event = Event(event='receive', interface='email', \
@@ -83,16 +94,26 @@ class email(Interface):
         self.send(msg['To'], mime.as_string())
 
     def send(self, to, msg):
+        if 'smtp_user' in self.conf:
+            user = self.conf['smtp_user']
+            passwd = self.conf['smtp_pass']
+        elif 'user' in self.conf:
+            user = self.conf['user']
+            passwd = self.conf['pass']
+        else:
+            self.log(_("No user defined for smtp"), logging.ERROR)
+            return
+
         try:
-            if self.conf['smtp_ssl'] == "yes":
+            if 'smtp_ssl' in self.conf and self.conf['smtp_ssl'] == "yes":
                 server = smtplib.SMTP_SSL(self.conf['smtp_host'])
             else:
                 server = smtplib.SMTP(self.conf['smtp_host'])
-            if self.conf['smtp_tls'] == "yes":
+            if 'smtp_tls' in self.conf and  self.conf['smtp_tls'] == "yes":
                 server.starttls()
-            server.login(self.conf['smtp_user'], self.conf['smtp_pass'])
+            server.login(user, passwd)
         except:
-            self.log(_("    error sending email"))
+            self.log(_("Error sending email"), logging.ERROR)
             return
 
         fromaddr = self.conf['smtp_address']
