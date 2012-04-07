@@ -16,7 +16,7 @@ import poplib
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import parsedate
-from time import mktime
+from time import mktime, sleep
 from datetime import datetime
 
 from emma.interface import Interface
@@ -31,12 +31,13 @@ class email(Interface):
         """
         Initialize email interface
         """
-        period = self.conf['pop_period']
-        periodic(self.fetch, period)
+        self.update_db()
         event = Event(event='send', interface='email', \
                       identifier=self.identifier)
         subscribe(event, self.send_handle)
-        self.update_db()
+        sleep(1)  # allow the rest of the interfaces to boot before parse email
+        period = self.conf['pop_period']
+        periodic(self.fetch, period)
 
     def fetch(self):
         """
