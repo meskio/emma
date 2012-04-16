@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-01 13:55+0200\n"
+"POT-Creation-Date: 2012-04-16 06:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,65 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../emma/interface/__init__.py:60 ../emma/interface/irc/__init__.py:67
-#: ../emma/interface/email/__init__.py:117
+#: ../emma/interface/email/__init__.py:56
+msgid "No user defined for pop"
+msgstr ""
+
+#: ../emma/interface/email/__init__.py:59
+#, python-format
+msgid "fetching email %(user)s@%(host)s"
+msgstr ""
+
+#: ../emma/interface/email/__init__.py:69
+msgid "    error connecting by POP3"
+msgstr ""
+
+#: ../emma/interface/email/__init__.py:87
+#, python-format
+msgid "    %s found"
+msgstr ""
+
+#: ../emma/interface/email/__init__.py:104
+msgid "No user defined for smtp"
+msgstr ""
+
+#: ../emma/interface/email/__init__.py:116
+msgid "Error sending email"
+msgstr ""
+
+#: ../emma/interface/email/__init__.py:139 ../emma/interface/__init__.py:60
+#: ../emma/interface/irc/__init__.py:70
 msgid "db request error."
 msgstr ""
 
-#: ../emma/interface/irc/__init__.py:43
+#: ../emma/interface/email/__init__.py:152
 #, python-format
-msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
+msgid "time conversion error: %(id)s - %(date)s"
 msgstr ""
 
-#: ../emma/interface/irc/__init__.py:50
+#: ../emma/interface/email/__init__.py:159
 #, python-format
-msgid "error conecting to server: %s"
+msgid "db update error: %(id)s - %(date)s"
 msgstr ""
 
-#: ../emma/interface/irc/__init__.py:71
-msgid "Not valid command for history: "
+#: ../emma/interface/mediawiki/__init__.py:35
+#, python-format
+msgid "Login to %s wiki"
 msgstr ""
 
-#: ../emma/interface/irc/ircclient.py:83
+#: ../emma/interface/mediawiki/__init__.py:45
 #, python-format
-msgid "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
+msgid "Fetch %s wiki page"
+msgstr ""
+
+#: ../emma/interface/mediawiki/__init__.py:50
+#, python-format
+msgid "Write %s wiki page"
 msgstr ""
 
 #: ../emma/interface/xmpp/__init__.py:31
 #, python-format
-msgid "Connect to jid:%(jid)s "
+msgid "Connect to jid: %(jid)s"
 msgstr ""
 
 #: ../emma/interface/xmpp/__init__.py:39
@@ -56,32 +88,23 @@ msgstr ""
 msgid "[xmpp %(identifier)s] command received: %(cmd)s: %(args)s"
 msgstr ""
 
-#: ../emma/interface/email/__init__.py:47
+#: ../emma/interface/irc/__init__.py:43
 #, python-format
-msgid "fetching email %(pop_user)s@%(pop_host)s"
+msgid "Connect to %(server)s:%(port)s nick:%(nick)s channels:%(channels)s"
 msgstr ""
 
-#: ../emma/interface/email/__init__.py:57
-msgid "    error connecting by POP3"
-msgstr ""
-
-#: ../emma/interface/email/__init__.py:75
+#: ../emma/interface/irc/__init__.py:50
 #, python-format
-msgid "    %s found"
+msgid "error conecting to server: %s"
 msgstr ""
 
-#: ../emma/interface/email/__init__.py:94
-msgid "    error sending email"
+#: ../emma/interface/irc/__init__.py:74
+msgid "Not valid command for history: "
 msgstr ""
 
-#: ../emma/interface/email/__init__.py:130
+#: ../emma/interface/irc/ircclient.py:88
 #, python-format
-msgid "time conversion error: %(id)s - %(date)s"
-msgstr ""
-
-#: ../emma/interface/email/__init__.py:137
-#, python-format
-msgid "db update error: %(id)s - %(date)s"
+msgid "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
 msgstr ""
 
 #: ../emma/database.py:42
@@ -110,19 +133,62 @@ msgstr ""
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr ""
 
-#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:52
-msgid "help"
-msgstr ""
-
-#: ../emma/module/help/__init__.py:38
+#: ../emma/module/email2wiki/__init__.py:34
 msgid ""
-"emma is a bot for virtual assembly\n"
-"==================================\n"
-"Commands:\n"
+"  * [[wiki|wiki page name\n"
+"      text on wiki markup]]\n"
+"    Store the text on the wiki page\n"
 msgstr ""
 
-#: ../emma/module/help/__init__.py:45
-msgid "No help"
+#: ../emma/module/email2wiki/__init__.py:37
+msgid "wiki"
+msgstr ""
+
+#: ../emma/module/email2wiki/__init__.py:38
+msgid ""
+"The arguments up to the first change of line will be considered the name of "
+"the page on the wiki\n"
+"to create or change with the text given after thefirst change of line"
+msgstr ""
+
+#: ../emma/module/email2wiki/__init__.py:50
+#, python-format
+msgid "Store '%(page)s' page on the '%(wiki)s' wiki"
+msgstr ""
+
+#: ../emma/module/reminder/__init__.py:31
+msgid ""
+"  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;text\n"
+"    Schelude a reminder at certan date\n"
+msgstr ""
+
+#: ../emma/module/reminder/__init__.py:35
+msgid ""
+"  * [[remind|23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;"
+"text]]\n"
+"    Schelude a reminder at certan date\n"
+msgstr ""
+
+#: ../emma/module/reminder/__init__.py:38
+#: ../emma/module/reminder/__init__.py:47
+msgid "remind"
+msgstr ""
+
+#: ../emma/module/reminder/__init__.py:39
+#, python-format
+msgid ""
+"You can program reminders to be send by %s at a given date.\n"
+" It takes three or four parameters separated by ';': date;email;subject;"
+"body\n"
+"The subject is optional"
+msgstr ""
+
+#: ../emma/module/reminder/__init__.py:55
+msgid "reminder"
+msgstr ""
+
+#: ../emma/module/reminder/__init__.py:57
+msgid "args not well formed"
 msgstr ""
 
 #: ../emma/module/find_email/__init__.py:36
@@ -192,7 +258,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:41
+#: ../emma/module/irc_moderator/__init__.py:42
 msgid ""
 "  * moderate [session_name]\n"
 "    Start moderating an assembly\n"
@@ -202,107 +268,86 @@ msgid ""
 "    Stop moderating\n"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:47
-#: ../emma/module/irc_moderator/__init__.py:65
+#: ../emma/module/irc_moderator/__init__.py:48
+#: ../emma/module/irc_moderator/__init__.py:70
 msgid "moderate"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:48
+#: ../emma/module/irc_moderator/__init__.py:49
 msgid ""
 "Start the moderation of an assembly.\n"
 "It will assign turns to talk as people request them with 'word'.\n"
 "If a session_name is given the session will be saved on the wiki."
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:53
-#: ../emma/module/irc_moderator/__init__.py:80
-#: ../emma/module/irc_moderator/__init__.py:99
+#: ../emma/module/irc_moderator/__init__.py:54
+#: ../emma/module/irc_moderator/__init__.py:82
+#: ../emma/module/irc_moderator/__init__.py:112
 msgid "word"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:54
+#: ../emma/module/irc_moderator/__init__.py:55
 msgid ""
 "While moderating request word.\n"
 "It can also be requestested with a /me containing the word 'word' in it."
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:57
-#: ../emma/module/irc_moderator/__init__.py:74
+#: ../emma/module/irc_moderator/__init__.py:58
+#: ../emma/module/irc_moderator/__init__.py:77
 msgid "stop"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:58
+#: ../emma/module/irc_moderator/__init__.py:59
 msgid "Stop moderating the assembly started with 'moderate'"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:66
-#: ../emma/module/irc_moderator/__init__.py:73
+#: ../emma/module/irc_moderator/__init__.py:71
+#: ../emma/module/irc_moderator/__init__.py:76
 msgid "starts moderating"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:75
-#: ../emma/module/irc_moderator/__init__.py:79
+#: ../emma/module/irc_moderator/__init__.py:78
+#: ../emma/module/irc_moderator/__init__.py:81
 msgid "stops moderating"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:82
-#: ../emma/module/irc_moderator/__init__.py:101
+#: ../emma/module/irc_moderator/__init__.py:117
 #, python-format
 msgid "Request word from: %s"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:109
-#: ../emma/module/irc_moderator/__init__.py:110
+#: ../emma/module/irc_moderator/__init__.py:126
+#: ../emma/module/irc_moderator/__init__.py:127
 #, python-format
 msgid "gives the word to %s"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:133
-msgid "Store irc log on the wiki page "
+#: ../emma/module/irc_moderator/__init__.py:151
+msgid "Store irc log on the wiki page %s"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:138
+#: ../emma/module/irc_moderator/__init__.py:155
 #, python-format
 msgid ""
 "Assembly log from %(day)s/%(month)s/%(year)s\n"
 "\n"
 msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:141
+#: ../emma/module/irc_moderator/__init__.py:158
 msgid "Present: "
 msgstr ""
 
-#: ../emma/module/reminder/__init__.py:31
+#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:52
+msgid "help"
+msgstr ""
+
+#: ../emma/module/help/__init__.py:38
 msgid ""
-"  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;text\n"
-"    Schelude a reminder at certan date\n"
+"emma is a bot for virtual assembly\n"
+"==================================\n"
+"Commands:\n"
 msgstr ""
 
-#: ../emma/module/reminder/__init__.py:35
-msgid ""
-"  * [[remind|23/11/2011 08:17;hackmeeting@listas.sindominio.ent;subject;"
-"text]]\n"
-"    Schelude a reminder at certan date\n"
-msgstr ""
-
-#: ../emma/module/reminder/__init__.py:38
-#: ../emma/module/reminder/__init__.py:47
-msgid "remind"
-msgstr ""
-
-#: ../emma/module/reminder/__init__.py:39
-#, python-format
-msgid ""
-"You can program reminders to be send by %s at a given date.\n"
-" It takes three or four parameters separated by ';': date;email;subject;"
-"body\n"
-"The subject is optional"
-msgstr ""
-
-#: ../emma/module/reminder/__init__.py:55
-msgid "reminder"
-msgstr ""
-
-#: ../emma/module/reminder/__init__.py:57
-msgid "args not well formed"
+#: ../emma/module/help/__init__.py:45
+msgid "No help"
 msgstr ""

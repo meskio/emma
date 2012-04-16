@@ -28,7 +28,7 @@ class xmpp(Interface):
         password = self.conf['password']
         server = self.conf['server']
         port = int(self.conf['port'])
-        self.log(_("Connect to jid:%(jid)s ") % self.conf)
+        self.log(_("Connect to jid: %(jid)s") % self.conf)
 
         self.xmpp = XMPPClient(self.identifier, jid, password)
         self.xmpp.register_plugin('xep_0030')  # Service Discovery

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-01 12:21+0100\n"
-"PO-Revision-Date: 2012-03-01 12:27+0100\n"
+"POT-Creation-Date: 2012-04-16 06:02+0200\n"
+"PO-Revision-Date: 2012-04-16 07:01+0200\n"
 "Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -17,39 +17,92 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../emma/interface/email/__init__.py:44
-#, python-format
-msgid "fetching email %(pop_user)s@%(pop_host)s"
-msgstr "fetching email %(pop_user)s@%(pop_host)s"
+#: ../emma/interface/email/__init__.py:56
+msgid "No user defined for pop"
+msgstr "No user defined for pop"
 
-#: ../emma/interface/email/__init__.py:54
+#: ../emma/interface/email/__init__.py:59
+#, python-format
+msgid "fetching email %(user)s@%(host)s"
+msgstr "fetching email %(user)s@%(host)s"
+
+#: ../emma/interface/email/__init__.py:69
 msgid "    error connecting by POP3"
 msgstr "    error connecting by POP3"
 
-#: ../emma/interface/email/__init__.py:72
+#: ../emma/interface/email/__init__.py:87
 #, python-format
 msgid "    %s found"
 msgstr "    %s found"
 
-#: ../emma/interface/email/__init__.py:91
-msgid "    error sending email"
-msgstr "    error sending email"
+#: ../emma/interface/email/__init__.py:104
+msgid "No user defined for smtp"
+msgstr "No user defined for smtp"
 
-#: ../emma/interface/__init__.py:60
+#: ../emma/interface/email/__init__.py:116
+msgid "Error sending email"
+msgstr "Error sending email"
+
+#: ../emma/interface/email/__init__.py:139 ../emma/interface/__init__.py:60
+#: ../emma/interface/irc/__init__.py:70
 msgid "db request error."
 msgstr "db request error."
 
-#: ../emma/interface/irc/__init__.py:34
+#: ../emma/interface/email/__init__.py:152
 #, python-format
-msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
-msgstr "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
+msgid "time conversion error: %(id)s - %(date)s"
+msgstr "time conversion error: %(id)s - %(date)s"
 
-#: ../emma/interface/irc/__init__.py:41
+#: ../emma/interface/email/__init__.py:159
+#, python-format
+msgid "db update error: %(id)s - %(date)s"
+msgstr "db update error: %(id)s - %(date)s"
+
+#: ../emma/interface/mediawiki/__init__.py:35
+#, python-format
+msgid "Login to %s wiki"
+msgstr "Login to %s wiki"
+
+#: ../emma/interface/mediawiki/__init__.py:45
+#, python-format
+msgid "Fetch %s wiki page"
+msgstr "Fetch %s wiki page"
+
+#: ../emma/interface/mediawiki/__init__.py:50
+#, python-format
+msgid "Write %s wiki page"
+msgstr "Write %s wiki page"
+
+#: ../emma/interface/xmpp/__init__.py:31
+#, python-format
+msgid "Connect to jid: %(jid)s"
+msgstr "Connect to jid: %(jid)s"
+
+#: ../emma/interface/xmpp/__init__.py:39
+#, python-format
+msgid "error conecting to xmpp: %s"
+msgstr "error conecting to xmpp: %s"
+
+#: ../emma/interface/xmpp/xmppclient.py:56
+#, python-format
+msgid "[xmpp %(identifier)s] command received: %(cmd)s: %(args)s"
+msgstr "[xmpp %(identifier)s] command received: %(cmd)s: %(args)s"
+
+#: ../emma/interface/irc/__init__.py:43
+#, python-format
+msgid "Connect to %(server)s:%(port)s nick:%(nick)s channels:%(channels)s"
+msgstr "Connect to %(server)s:%(port)s nick:%(nick)s channels:%(channels)s"
+
+#: ../emma/interface/irc/__init__.py:50
 #, python-format
 msgid "error conecting to server: %s"
 msgstr "error conecting to server: %s"
 
-#: ../emma/interface/irc/ircclient.py:76
+#: ../emma/interface/irc/__init__.py:74
+msgid "Not valid command for history: "
+msgstr "Not valid command for history: "
+
+#: ../emma/interface/irc/ircclient.py:88
 #, python-format
 msgid "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
 msgstr "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
@@ -58,121 +111,282 @@ msgstr "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
 msgid "[core] connect to database"
 msgstr "[core] connect to database"
 
-#: ../emma/__init__.py:109
+#: ../emma/__init__.py:111
 msgid "[core] Not valid config value on log_level"
 msgstr "[core] Not valid config value on log_level"
 
-#: ../emma/__init__.py:113
+#: ../emma/__init__.py:115
 msgid "[core] preparing interfaces and modules"
 msgstr "[core] preparing interfaces and modules"
 
-#: ../emma/__init__.py:132
+#: ../emma/__init__.py:134
 #, python-format
 msgid "[core]     load %(type)s %(name)s"
 msgstr "[core]     load %(type)s %(name)s"
 
-#: ../emma/__init__.py:144
+#: ../emma/__init__.py:146
 #, python-format
 msgid "[core] restore %s scheduled events"
 msgstr "[core] restore %s scheduled events"
 
-#: ../emma/events.py:174
+#: ../emma/events.py:173
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr "[core] can't unsubscribe identifier, it was not subscribed"
 
-#: ../emma/module/reminder/__init__.py:28
+#: ../emma/module/email2wiki/__init__.py:34
+msgid ""
+"  * [[wiki|wiki page name\n"
+"      text on wiki markup]]\n"
+"    Store the text on the wiki page\n"
+msgstr ""
+"  * [[wiki|wiki page name\n"
+"      text on wiki markup]]\n"
+"    Store the text on the wiki page\n"
+
+#: ../emma/module/email2wiki/__init__.py:37
+msgid "wiki"
+msgstr "wiki"
+
+#: ../emma/module/email2wiki/__init__.py:38
+msgid ""
+"The arguments up to the first change of line will be considered the name of "
+"the page on the wiki\n"
+"to create or change with the text given after thefirst change of line"
+msgstr ""
+"The arguments up to the first change of line will be considered the name of "
+"the page on the wiki\n"
+"to create or change with the text given after thefirst change of line"
+
+#: ../emma/module/email2wiki/__init__.py:50
+#, python-format
+msgid "Store '%(page)s' page on the '%(wiki)s' wiki"
+msgstr "Store '%(page)s' page on the '%(wiki)s' wiki"
+
+#: ../emma/module/reminder/__init__.py:31
+msgid ""
+"  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;text\n"
+"    Schelude a reminder at certan date\n"
+msgstr ""
+"  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;text\n"
+"    Schelude a reminder at certan date\n"
+
+#: ../emma/module/reminder/__init__.py:35
+msgid ""
+"  * [[remind|23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;"
+"text]]\n"
+"    Schelude a reminder at certan date\n"
+msgstr ""
+"  * [[remind|23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;"
+"text]]\n"
+"    Schelude a reminder at certan date\n"
+
+#: ../emma/module/reminder/__init__.py:38
+#: ../emma/module/reminder/__init__.py:47
 msgid "remind"
 msgstr "remind"
 
-#: ../emma/module/reminder/__init__.py:36
+#: ../emma/module/reminder/__init__.py:39
+#, python-format
+msgid ""
+"You can program reminders to be send by %s at a given date.\n"
+" It takes three or four parameters separated by ';': date;email;subject;"
+"body\n"
+"The subject is optional"
+msgstr ""
+"You can program reminders to be send by %s at a given date.\n"
+" It takes three or four parameters separated by ';': date;email;subject;"
+"body\n"
+"The subject is optional"
+
+#: ../emma/module/reminder/__init__.py:55
 msgid "reminder"
 msgstr "reminder"
 
-#: ../emma/module/reminder/__init__.py:38
+#: ../emma/module/reminder/__init__.py:57
 msgid "args not well formed"
 msgstr "args not well formed"
 
-#: ../emma/module/find_email/__init__.py:37
+#: ../emma/module/find_email/__init__.py:36
+msgid ""
+"  * find From:/hackmeeting/,Tags:asamblea\n"
+"    Use for search on emails stored by emma\n"
+"  * display 0\n"
+"    Display an email from a search list generated\n"
+msgstr ""
+"  * find From:/hackmeeting/,Tags:asamblea\n"
+"    Use for search on emails stored by emma\n"
+"  * display 0\n"
+"    Display an email from a search list generated\n"
+
+#: ../emma/module/find_email/__init__.py:40
+#: ../emma/module/find_email/__init__.py:64
 msgid "find"
 msgstr "find"
 
-#: ../emma/module/find_email/__init__.py:43
-msgid "Not found any email"
-msgstr "Not found any email"
+#: ../emma/module/find_email/__init__.py:41
+msgid ""
+"Use for search on emails stored by emma.\n"
+"Search terms are introduced separated by ','with the form 'Field:string',\n"
+"string can be a regular expression between '/'.\n"
+"Ex: find From:/meskio.*/,Tags:asamblea,Body:/squat/"
+msgstr ""
+"Use for search on emails stored by emma.\n"
+"Search terms are introduced separated by ','with the form 'Field:string',\n"
+"string can be a regular expression between '/'.\n"
+"Ex: find From:/meskio.*/,Tags:asamblea,Body:/squat/"
 
-#: ../emma/module/find_email/__init__.py:47
+#: ../emma/module/find_email/__init__.py:46
+#: ../emma/module/find_email/__init__.py:74
 msgid "display"
 msgstr "display"
 
-#: ../emma/module/find_email/__init__.py:52
+#: ../emma/module/find_email/__init__.py:47
+msgid ""
+"Once a 'find' command is call use the 'display'command to output the email\n"
+"with the index number give as parameter of 'display'\n"
+"Ex: display 0"
+msgstr ""
+"Once a 'find' command is call use the 'display'command to output the email\n"
+"with the index number give as parameter of 'display'\n"
+"Ex: display 0"
+
+#: ../emma/module/find_email/__init__.py:70
+msgid "Not found any email"
+msgstr "Not found any email"
+
+#: ../emma/module/find_email/__init__.py:79
 #, python-format
 msgid "Not valid index: %s"
 msgstr "Not valid index: %s"
 
-#: ../emma/module/find_email/__init__.py:57
+#: ../emma/module/find_email/__init__.py:84
 #, python-format
 msgid "Index not in range(0-%(number)d): %(args)s"
 msgstr "Index not in range(0-%(number)d): %(args)s"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "From"
 msgstr "From"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "To"
 msgstr "To"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "Cc"
 msgstr "Cc"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "Date"
 msgstr "Date"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "Subject"
 msgstr "Subject"
 
-#: ../emma/module/irc_moderator/__init__.py:35
+#: ../emma/module/irc_moderator/__init__.py:42
+msgid ""
+"  * moderate [session_name]\n"
+"    Start moderating an assembly\n"
+"  * word\n"
+"    While moderating request word\n"
+"  * stop\n"
+"    Stop moderating\n"
+msgstr ""
+
+#: ../emma/module/irc_moderator/__init__.py:48
+#: ../emma/module/irc_moderator/__init__.py:70
 msgid "moderate"
 msgstr "moderate"
 
-#: ../emma/module/irc_moderator/__init__.py:36
-msgid "Start moderating"
-msgstr "Start moderating"
+#: ../emma/module/irc_moderator/__init__.py:49
+msgid ""
+"Start the moderation of an assembly.\n"
+"It will assign turns to talk as people request them with 'word'.\n"
+"If a session_name is given the session will be saved on the wiki."
+msgstr ""
+"Start the moderation of an assembly.\n"
+"It will assign turns to talk as people request them with 'word'.\n"
+"If a session_name is given the session will be saved on the wiki."
 
-#: ../emma/module/irc_moderator/__init__.py:40
-msgid "stop"
-msgstr "stop"
-
-#: ../emma/module/irc_moderator/__init__.py:41
-msgid "Stop moderating"
-msgstr "Stop moderating"
-
-#: ../emma/module/irc_moderator/__init__.py:43
+#: ../emma/module/irc_moderator/__init__.py:54
+#: ../emma/module/irc_moderator/__init__.py:82
+#: ../emma/module/irc_moderator/__init__.py:112
 msgid "word"
 msgstr "word"
 
-#: ../emma/module/irc_moderator/__init__.py:45
+#: ../emma/module/irc_moderator/__init__.py:55
+msgid ""
+"While moderating request word.\n"
+"It can also be requestested with a /me containing the word 'word' in it."
+msgstr ""
+"While moderating request word.\n"
+"It can also be requestested with a /me containing the word 'word' in it."
+
+#: ../emma/module/irc_moderator/__init__.py:58
+#: ../emma/module/irc_moderator/__init__.py:77
+msgid "stop"
+msgstr "stop"
+
+#: ../emma/module/irc_moderator/__init__.py:59
+msgid "Stop moderating the assembly started with 'moderate'"
+msgstr "Stop moderating the assembly started with 'moderate'"
+
+#: ../emma/module/irc_moderator/__init__.py:71
+#: ../emma/module/irc_moderator/__init__.py:76
+msgid "starts moderating"
+msgstr "starts moderating"
+
+#: ../emma/module/irc_moderator/__init__.py:78
+#: ../emma/module/irc_moderator/__init__.py:81
+msgid "stops moderating"
+msgstr "stops moderating"
+
+#: ../emma/module/irc_moderator/__init__.py:117
 #, python-format
 msgid "Request word from: %s"
 msgstr "Request word from: %s"
 
-#: ../emma/module/irc_moderator/__init__.py:64
+#: ../emma/module/irc_moderator/__init__.py:126
+#: ../emma/module/irc_moderator/__init__.py:127
 #, python-format
-msgid "Give word to: %s"
-msgstr "Give word to: %s"
+msgid "gives the word to %s"
+msgstr "gives the word to %s"
 
-#: ../emma/module/irc_moderator/__init__.py:65
+#: ../emma/module/irc_moderator/__init__.py:151
+msgid "Store irc log on the wiki page %s"
+msgstr "Store irc log on the wiki page %s"
+
+#: ../emma/module/irc_moderator/__init__.py:155
 #, python-format
-msgid "%s has the word"
-msgstr "%s has the word"
+msgid ""
+"Assembly log from %(day)s/%(month)s/%(year)s\n"
+"\n"
+msgstr ""
+"Assembly log from %(day)s/%(month)s/%(year)s\n"
+"\n"
 
-#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:41
+#: ../emma/module/irc_moderator/__init__.py:158
+msgid "Present: "
+msgstr "Present: "
+
+#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:52
 msgid "help"
 msgstr "help"
 
-#: ../emma/module/help/__init__.py:37
+#: ../emma/module/help/__init__.py:38
+msgid ""
+"emma is a bot for virtual assembly\n"
+"==================================\n"
+"Commands:\n"
+msgstr ""
+"emma is a bot for virtual assembly\n"
+"==================================\n"
+"Commands:\n"
+
+#: ../emma/module/help/__init__.py:45
 msgid "No help"
 msgstr "No help"
+
+#~ msgid "%s has the word"
+#~ msgstr "%s has the word"

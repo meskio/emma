@@ -148,7 +148,7 @@ class irc_moderator(Module):
 
         session = self._[channel]['session']
         self.trigger_history('stop')
-        self.log(_("Store irc log on the wiki page ") + session)
+        self.log(_("Store irc log on the wiki page %s") % session)
 
         history = self.trigger_history('get', session)
         today = time.gmtime()

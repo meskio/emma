@@ -30,7 +30,7 @@ def str2date(date):
     @param date: string date of the date
     @returns: epoch date
     """
-    date_fmt = ["%d/%m/%Y %H:%M", "%d/%m/%Y"]
+    date_fmt = [_("%d/%m/%Y %H:%M"), _("%d/%m/%Y")]
 
     for fmt in date_fmt:
         try:

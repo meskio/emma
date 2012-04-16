@@ -35,7 +35,7 @@ class email2wiki(Module):
                      "      text on wiki markup]]\n" \
                      "    Store the text on the wiki page\n")
         elif data == _('wiki'):
-            return _("The arguments up to the first change of line will" \
+            return _("The arguments up to the first change of line will " \
                      "be considered the name of the page on the wiki\n" \
                      "to create or change with the text given after the" \
                      "first change of line")
@@ -47,6 +47,6 @@ class email2wiki(Module):
         page = page.strip()
         event_write = Event(event='write', interface='mediawiki',
                             identifier=self.conf['wiki_id'])
-        self.log(_("Store '%s' page on the '%s' wiki")
-                    % (page, self.conf['wiki_id']))
+        self.log(_("Store '%(page)s' page on the '%(wiki)s' wiki") %
+                 {'page':page, 'wiki':self.conf['wiki_id']})
         trigger(event_write, (page, text))

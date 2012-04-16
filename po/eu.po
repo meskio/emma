@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-01 12:21+0100\n"
-"PO-Revision-Date: 2012-03-01 12:24+0100\n"
+"POT-Creation-Date: 2012-04-16 06:02+0200\n"
+"PO-Revision-Date: 2012-04-16 06:52+0200\n"
 "Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -17,40 +17,93 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../emma/interface/email/__init__.py:44
-#, python-format
-msgid "fetching email %(pop_user)s@%(pop_host)s"
-msgstr "eposta jasotzeko kontua:  %(pop_user)s@%(pop_host)s"
+#: ../emma/interface/email/__init__.py:56
+msgid "No user defined for pop"
+msgstr "Ez da POPerako erabiltzailerik zehaztu"
 
-#: ../emma/interface/email/__init__.py:54
+#: ../emma/interface/email/__init__.py:59
+#, python-format
+msgid "fetching email %(user)s@%(host)s"
+msgstr "eposta %(user)s@%(host)s kontutik jasotzen"
+
+#: ../emma/interface/email/__init__.py:69
 msgid "    error connecting by POP3"
 msgstr "    errorea POP3 bidez konektatzean"
 
-#: ../emma/interface/email/__init__.py:72
+#: ../emma/interface/email/__init__.py:87
 #, python-format
 msgid "    %s found"
 msgstr "    %s topatuta"
 
-#: ../emma/interface/email/__init__.py:91
-msgid "    error sending email"
-msgstr "    errorea eposta bidaltzean"
+#: ../emma/interface/email/__init__.py:104
+msgid "No user defined for smtp"
+msgstr "Ez da SMTPrako erabiltzailerik zehaztu"
 
-#: ../emma/interface/__init__.py:60
+#: ../emma/interface/email/__init__.py:116
+msgid "Error sending email"
+msgstr "Errorea eposta bidaltzean"
+
+#: ../emma/interface/email/__init__.py:139 ../emma/interface/__init__.py:60
+#: ../emma/interface/irc/__init__.py:70
 msgid "db request error."
 msgstr "db eskaera errorea."
 
-#: ../emma/interface/irc/__init__.py:34
+#: ../emma/interface/email/__init__.py:152
 #, python-format
-msgid "Connect to %(server)s:%(port)s nick:%(nick)s channel:%(channel)s"
+msgid "time conversion error: %(id)s - %(date)s"
 msgstr ""
-"%(server)s:%(port)s-era konektatzen ezizena:%(nick)s kanala:%(channel)s"
 
-#: ../emma/interface/irc/__init__.py:41
+#: ../emma/interface/email/__init__.py:159
+#, python-format
+msgid "db update error: %(id)s - %(date)s"
+msgstr "db eguneraketa errorea: %(id)s - %(date)s"
+
+#: ../emma/interface/mediawiki/__init__.py:35
+#, python-format
+msgid "Login to %s wiki"
+msgstr "%s wikian saioa hasten"
+
+#: ../emma/interface/mediawiki/__init__.py:45
+#, python-format
+msgid "Fetch %s wiki page"
+msgstr "Eskuratu %s wiki orria"
+
+#: ../emma/interface/mediawiki/__init__.py:50
+#, python-format
+msgid "Write %s wiki page"
+msgstr "Idatzi %s wiki orria"
+
+#: ../emma/interface/xmpp/__init__.py:31
+#, python-format
+msgid "Connect to jid:%(jid)s "
+msgstr "%(jid)s jid-era konektatu"
+
+#: ../emma/interface/xmpp/__init__.py:39
+#, python-format
+msgid "error conecting to xmpp: %s"
+msgstr "errorea xmpp-ra konektatzean: %s"
+
+#: ../emma/interface/xmpp/xmppclient.py:56
+#, python-format
+msgid "[xmpp %(identifier)s] command received: %(cmd)s: %(args)s"
+msgstr "[xmpp %(identifier)s] komandoa jasoa: %(cmd)s: %(args)s"
+
+#: ../emma/interface/irc/__init__.py:43
+#, python-format
+msgid "Connect to %(server)s:%(port)s nick:%(nick)s channels:%(channels)s"
+msgstr ""
+"%(server)s:%(port)s-era konektatzen ezizena:%(nick)s kanalak:%(channels)s"
+
+#: ../emma/interface/irc/__init__.py:50
 #, python-format
 msgid "error conecting to server: %s"
 msgstr "errorea zerbitzarira konektatzean: %s"
 
-#: ../emma/interface/irc/ircclient.py:76
+#: ../emma/interface/irc/__init__.py:74
+msgid "Not valid command for history: "
+msgstr ""
+
+#: ../emma/interface/irc/ircclient.py:88
 #, python-format
 msgid "[irc %(identifier)s] command received: %(cmd)s: %(args)s"
 msgstr "[irc %(identifier)s] komandoa jasoa: %(cmd)s: %(args)s"
@@ -59,122 +112,326 @@ msgstr "[irc %(identifier)s] komandoa jasoa: %(cmd)s: %(args)s"
 msgid "[core] connect to database"
 msgstr "[core] datu basera konektatu"
 
-#: ../emma/__init__.py:109
+#: ../emma/__init__.py:111
 msgid "[core] Not valid config value on log_level"
 msgstr "[core] log_level konfigurazio balio ezegokia"
 
-#: ../emma/__init__.py:113
+#: ../emma/__init__.py:115
 msgid "[core] preparing interfaces and modules"
 msgstr "[core] interfazeak eta moduluak prestatzen"
 
-#: ../emma/__init__.py:132
+#: ../emma/__init__.py:134
 #, python-format
 msgid "[core]     load %(type)s %(name)s"
 msgstr "[core]     %(type)s %(name)s kargatzen"
 
-#: ../emma/__init__.py:144
+#: ../emma/__init__.py:146
 #, python-format
 msgid "[core] restore %s scheduled events"
 msgstr "[core] agendatutako %s gertakari berreskuratu"
 
-#: ../emma/events.py:174
+#: ../emma/events.py:173
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr ""
 "[core] ezin da identifikadorea ez-harpidetu, ez zegoen lehendik harpidetuta"
 
-#: ../emma/module/reminder/__init__.py:28
+#: ../emma/module/email2wiki/__init__.py:34
+msgid ""
+"  * [[wiki|wiki page name\n"
+"      text on wiki markup]]\n"
+"    Store the text on the wiki page\n"
+msgstr ""
+
+#: ../emma/module/email2wiki/__init__.py:37
+msgid "wiki"
+msgstr "wiki"
+
+#: ../emma/module/email2wiki/__init__.py:38
+msgid ""
+"The arguments up to the first change of line will be considered the name of "
+"the page on the wiki\n"
+"to create or change with the text given after thefirst change of line"
+msgstr "Lehenbiziko lerroko parametro guztiak sortu edo aldatuko den
+wikiaren izena izango dira. Hurrengo lerroek edukia osatuko dute."
+
+#: ../emma/module/email2wiki/__init__.py:50
+#, python-format
+msgid "Store '%(page)s' page on the '%(wiki)s' wiki"
+msgstr "'%(page)s orria %(wiki)s wikian gorde"
+
+#: ../emma/module/reminder/__init__.py:31
+msgid ""
+"  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;text\n"
+"    Schelude a reminder at certan date\n"
+msgstr ""
+"  * gogorarazi 2011/11/23 08:17;hackmeeting@listas.sindominio.ent;gaia;testua\n"
+"    Data jakin baterako oroigarria planifikatu\n"
+
+#: ../emma/module/reminder/__init__.py:35
+msgid ""
+"  * [[remind|23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;"
+"text]]\n"
+"    Schelude a reminder at certan date\n"
+msgstr ""
+"  * [[gogorarazi|2011/11/23 08:17;hackmeeting@listas.sindominio.net;gaia;"
+"edukia]]\n"
+"    Data jakin baterako oroigarria planifikatu\n"
+
+#: ../emma/module/reminder/__init__.py:38
+#: ../emma/module/reminder/__init__.py:47
 msgid "remind"
 msgstr "gogorarazi"
 
-#: ../emma/module/reminder/__init__.py:36
+#: ../emma/module/reminder/__init__.py:39
+#, python-format
+msgid ""
+"You can program reminders to be send by %s at a given date.\n"
+" It takes three or four parameters separated by ';': date;email;subject;"
+"body\n"
+"The subject is optional"
+msgstr ""
+"Oroigarriak data jakin batean %s bidez obidaltzeko planifikatu ditzakezu.\n"
+"Hiru edo lau parametro behar ditu, ';' bidez bereiztuta: "
+"data;eposta;gaia;edukia\n"
+"Gaia ez da beharrezkoa."
+
+#: ../emma/module/reminder/__init__.py:55
 msgid "reminder"
 msgstr "gogorarazpena"
 
-#: ../emma/module/reminder/__init__.py:38
+#: ../emma/module/reminder/__init__.py:57
 msgid "args not well formed"
 msgstr "argumentu formatu ezegokia"
 
-#: ../emma/module/find_email/__init__.py:37
+#: ../emma/module/find_email/__init__.py:36
+msgid ""
+"  * find From:/hackmeeting/,Tags:asamblea\n"
+"    Use for search on emails stored by emma\n"
+"  * display 0\n"
+"    Display an email from a search list generated\n"
+msgstr ""
+"  * bilatu From:/hackmeeting/,Tags:asamblea\n"
+"    Emmak gordetako epostetan bilatzeko\n"
+"  * erakutsi 0\n"
+"    Sortutako eposta zerrendatik bat erakutsi\n"
+
+#: ../emma/module/find_email/__init__.py:40
+#: ../emma/module/find_email/__init__.py:64
 msgid "find"
 msgstr "bilatu"
 
-#: ../emma/module/find_email/__init__.py:43
-msgid "Not found any email"
-msgstr "Ez da epostarik topatu"
+#: ../emma/module/find_email/__init__.py:41
+msgid ""
+"Use for search on emails stored by emma.\n"
+"Search terms are introduced separated by ','with the form 'Field:string',\n"
+"string can be a regular expression between '/'.\n"
+"Ex: find From:/meskio.*/,Tags:asamblea,Body:/squat/"
+msgstr ""
+"Emmak gordetako epostetan bilatzeko.\n"
+"Bilaketa terminoak ','z bereiztu behar dira 'Field:string' formatuarekin.\n"
+"stringa expresio erregularra izan daiteke, '/' artean baldin badoa.\n"
+"Adib: bilatu From:/meskio.*/,Tags:asamblada,Body:/squat/"
 
-#: ../emma/module/find_email/__init__.py:47
+#: ../emma/module/find_email/__init__.py:46
+#: ../emma/module/find_email/__init__.py:74
 msgid "display"
 msgstr "erakutsi"
 
-#: ../emma/module/find_email/__init__.py:52
+#: ../emma/module/find_email/__init__.py:47
+msgid ""
+"Once a 'find' command is call use the 'display'command to output the email\n"
+"with the index number give as parameter of 'display'\n"
+"Ex: display 0"
+msgstr ""
+"'bilatu' komandoa habiatu ondoren 'erakutsi' erabili eposta ikusteko.\n"
+"Parametro bezala epostaren indize zenbakia sartu\n"
+"Adib: display 0"
+
+#: ../emma/module/find_email/__init__.py:70
+msgid "Not found any email"
+msgstr "Ez da epostarik topatu"
+
+#: ../emma/module/find_email/__init__.py:79
 #, python-format
 msgid "Not valid index: %s"
 msgstr "Indize ezegokia: %s"
 
-#: ../emma/module/find_email/__init__.py:57
+#: ../emma/module/find_email/__init__.py:84
 #, python-format
 msgid "Index not in range(0-%(number)d): %(args)s"
 msgstr "Indizea ez dago (0-%(number)d) tartean: %(args)s"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "From"
-msgstr "Nokr"
+msgstr "Nork"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "To"
 msgstr "Nori"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "Cc"
 msgstr "Kopia"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "Date"
 msgstr "Data"
 
-#: ../emma/module/find_email/__init__.py:83
+#: ../emma/module/find_email/__init__.py:110
 msgid "Subject"
 msgstr "Gaia"
 
-#: ../emma/module/irc_moderator/__init__.py:35
-msgid "moderate"
-msgstr "moderatu"
+#: ../emma/module/issues/__init__.py:37
+msgid ""
+"  Keep track of issues.\n"
+"  * issues [group]\n"
+"    Show issues. If group given, filter by it.\n"
+"  * issue group bla\n"
+"    Add new issue, required by the group\n"
+"  * done n\n"
+"    close issue numbered with n in issue list.\n"
+msgstr ""
 
-#: ../emma/module/irc_moderator/__init__.py:36
-msgid "Start moderating"
-msgstr "Moderatzen hasi"
+#: ../emma/module/issues/__init__.py:44 ../emma/module/issues/__init__.py:56
+msgid "issues"
+msgstr "zereginak"
 
-#: ../emma/module/irc_moderator/__init__.py:40
-msgid "stop"
-msgstr "bukatu"
+#: ../emma/module/issues/__init__.py:45
+msgid "Show the list of issues."
+msgstr "Zereginen zerrenda erakutsi."
 
-#: ../emma/module/irc_moderator/__init__.py:41
-msgid "Stop moderating"
-msgstr "Moderatzeari utzi"
+#: ../emma/module/issues/__init__.py:46 ../emma/module/issues/__init__.py:58
+msgid "issue"
+msgstr "zeregina"
 
-#: ../emma/module/irc_moderator/__init__.py:43
-msgid "word"
-msgstr "hitza"
+#: ../emma/module/issues/__init__.py:47
+msgid "Add new issue"
+msgstr "Zeregin berria gehitu"
 
-#: ../emma/module/irc_moderator/__init__.py:45
-#, python-format
-msgid "Request word from: %s"
-msgstr "Hitz eskaria: %s"
+#: ../emma/module/issues/__init__.py:48 ../emma/module/issues/__init__.py:60
+msgid "done"
+msgstr "eginda"
 
-#: ../emma/module/irc_moderator/__init__.py:64
+#: ../emma/module/issues/__init__.py:49
+msgid "Close the issue'"
+msgstr "Zeregina itxi"
+
+#: ../emma/module/issues/__init__.py:75
 #, python-format
 msgid "Give word to: %s"
 msgstr "Hitza honek du: %s"
 
-#: ../emma/module/irc_moderator/__init__.py:65
+#: ../emma/module/issues/__init__.py:76
 #, python-format
 msgid "%s has the word"
 msgstr "%s-(e)k hitza du"
 
-#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:41
+#: ../emma/module/irc_moderator/__init__.py:42
+msgid ""
+"  * moderate [session_name]\n"
+"    Start moderating an assembly\n"
+"  * word\n"
+"    While moderating request word\n"
+"  * stop\n"
+"    Stop moderating\n"
+msgstr ""
+"  * moderatu [saio_izena]\n"
+"    Asanblada moderatzen hasi\n"
+"  * hitza\n"
+"    Moderatutako asanbladan hitza eskatu\n"
+"  * stop\n"
+"    Moderatzeari utzi\n"
+
+#: ../emma/module/irc_moderator/__init__.py:48
+#: ../emma/module/irc_moderator/__init__.py:70
+msgid "moderate"
+msgstr "moderatu"
+
+#: ../emma/module/irc_moderator/__init__.py:49
+msgid ""
+"Start the moderation of an assembly.\n"
+"It will assign turns to talk as people request them with 'word'.\n"
+"If a session_name is given the session will be saved on the wiki."
+msgstr ""
+"Asanblada baten moderazioa hasi.\n"
+"Jendeak 'hitza'-ren bidez eskatu ahala hitzegiteko txandak esleituko ditu.\n"
+"saio_izena zehazten bada wikian gordeko da."
+
+#: ../emma/module/irc_moderator/__init__.py:54
+#: ../emma/module/irc_moderator/__init__.py:82
+#: ../emma/module/irc_moderator/__init__.py:112
+msgid "word"
+msgstr "hitza"
+
+#: ../emma/module/irc_moderator/__init__.py:55
+msgid ""
+"While moderating request word.\n"
+"It can also be requestested with a /me containing the word 'word' in it."
+msgstr ""
+"Hitza eskatu moderazioa dagoenean.\n"
+"'hitza' hitza duen /me baten bidez ere eskatu daiteke."
+
+#: ../emma/module/irc_moderator/__init__.py:58
+#: ../emma/module/irc_moderator/__init__.py:77
+msgid "stop"
+msgstr "bukatu"
+
+#: ../emma/module/irc_moderator/__init__.py:59
+msgid "Stop moderating the assembly started with 'moderate'"
+msgstr "Asanblada moderatzeari utzi."
+
+#: ../emma/module/irc_moderator/__init__.py:71
+#: ../emma/module/irc_moderator/__init__.py:76
+msgid "starts moderating"
+msgstr "Moderatzen hasi"
+
+#: ../emma/module/irc_moderator/__init__.py:78
+#: ../emma/module/irc_moderator/__init__.py:81
+msgid "stops moderating"
+msgstr "Moderatzeari utzi"
+
+#: ../emma/module/irc_moderator/__init__.py:117
+#, python-format
+msgid "Request word from: %s"
+msgstr "Hitz eskaria: %s"
+
+#: ../emma/module/irc_moderator/__init__.py:126
+#: ../emma/module/irc_moderator/__init__.py:127
+#, python-format
+msgid "gives the word to %s"
+msgstr "Hitza honek du: %s"
+
+#: ../emma/module/irc_moderator/__init__.py:151
+msgid "Store irc log on the wiki page %s"
+msgstr "irc loga %s wikian gorde"
+
+#: ../emma/module/irc_moderator/__init__.py:155
+#, python-format
+msgid ""
+"Assembly log from %(day)s/%(month)s/%(year)s\n"
+"\n"
+msgstr ""
+"%(year)s/$(month)s/%(day)s eguneko asanbladaren log-a\n"
+"\n"
+
+#: ../emma/module/irc_moderator/__init__.py:158
+msgid "Present: "
+msgstr "Parte hartzaileak: "
+
+#: ../emma/module/help/__init__.py:29 ../emma/module/help/__init__.py:52
 msgid "help"
 msgstr "laguntza"
 
-#: ../emma/module/help/__init__.py:37
+#: ../emma/module/help/__init__.py:38
+msgid ""
+"emma is a bot for virtual assembly\n"
+"==================================\n"
+"Commands:\n"
+msgstr ""
+"emma asanblada birtualentzako robota da\n"
+"=======================================\n"
+"Komandoak:\n"
+
+#: ../emma/module/help/__init__.py:45
 msgid "No help"
 msgstr "Laguntzarik ez"
