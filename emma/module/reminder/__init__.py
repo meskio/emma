@@ -27,7 +27,7 @@ class reminder(Module):
 
     def help_handler(self, event, data):
         if not data:
-            if event.interface == "irc":
+            if event.interface in ("irc", "xmpp"):
                 return _("  * remind 23/11/2011 08:17;" \
                          "hackmeeting@listas.sindominio.net;subject;text\n" \
                          "    Schelude a reminder at certan date\n")
