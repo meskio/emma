@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-16 06:02+0200\n"
-"PO-Revision-Date: 2012-04-16 07:01+0200\n"
+"POT-Creation-Date: 2012-09-21 20:05+0200\n"
+"PO-Revision-Date: 2012-09-21 20:07+0200\n"
 "Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -132,6 +132,14 @@ msgstr "[core] restore %s scheduled events"
 #: ../emma/events.py:173
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr "[core] can't unsubscribe identifier, it was not subscribed"
+
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y %H:%M"
+msgstr "%m/%d/%Y %H:%M"
+
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y"
+msgstr "%m/%d/%Y"
 
 #: ../emma/module/email2wiki/__init__.py:34
 msgid ""
@@ -293,6 +301,12 @@ msgid ""
 "  * stop\n"
 "    Stop moderating\n"
 msgstr ""
+"  * moderate [session_name]\n"
+"    Start moderating an assembly\n"
+"  * word\n"
+"    While moderating request word\n"
+"  * stop\n"
+"    Stop moderating\n"
 
 #: ../emma/module/irc_moderator/__init__.py:48
 #: ../emma/module/irc_moderator/__init__.py:70
@@ -354,6 +368,7 @@ msgid "gives the word to %s"
 msgstr "gives the word to %s"
 
 #: ../emma/module/irc_moderator/__init__.py:151
+#, python-format
 msgid "Store irc log on the wiki page %s"
 msgstr "Store irc log on the wiki page %s"
 

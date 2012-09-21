@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-16 06:02+0200\n"
-"PO-Revision-Date: 2012-04-16 06:52+0200\n"
+"POT-Creation-Date: 2012-09-21 20:05+0200\n"
+"PO-Revision-Date: 2012-09-21 20:23+0200\n"
 "Last-Translator: Ales Zabala Alava <shagi@gisa-elkartea.org>\n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -51,7 +51,7 @@ msgstr "db eskaera errorea."
 #: ../emma/interface/email/__init__.py:152
 #, python-format
 msgid "time conversion error: %(id)s - %(date)s"
-msgstr ""
+msgstr "data bihurketa errorea: $(id)s - %(date)s"
 
 #: ../emma/interface/email/__init__.py:159
 #, python-format
@@ -75,7 +75,7 @@ msgstr "Idatzi %s wiki orria"
 
 #: ../emma/interface/xmpp/__init__.py:31
 #, python-format
-msgid "Connect to jid:%(jid)s "
+msgid "Connect to jid: %(jid)s"
 msgstr "%(jid)s jid-era konektatu"
 
 #: ../emma/interface/xmpp/__init__.py:39
@@ -101,7 +101,7 @@ msgstr "errorea zerbitzarira konektatzean: %s"
 
 #: ../emma/interface/irc/__init__.py:74
 msgid "Not valid command for history: "
-msgstr ""
+msgstr "Komando ezegokia historikoarentzako: "
 
 #: ../emma/interface/irc/ircclient.py:88
 #, python-format
@@ -135,12 +135,23 @@ msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr ""
 "[core] ezin da identifikadorea ez-harpidetu, ez zegoen lehendik harpidetuta"
 
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y %H:%M"
+msgstr "%Y/%m/%d %H:%M"
+
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y"
+msgstr "%Y/%m/%d"
+
 #: ../emma/module/email2wiki/__init__.py:34
 msgid ""
 "  * [[wiki|wiki page name\n"
 "      text on wiki markup]]\n"
 "    Store the text on the wiki page\n"
 msgstr ""
+"  * [[wiki|wiki orriaren izena\n"
+"      wiki markadun testua]]\n"
+"    Testua wiki orrian gorde\n"
 
 #: ../emma/module/email2wiki/__init__.py:37
 msgid "wiki"
@@ -151,8 +162,9 @@ msgid ""
 "The arguments up to the first change of line will be considered the name of "
 "the page on the wiki\n"
 "to create or change with the text given after thefirst change of line"
-msgstr "Lehenbiziko lerroko parametro guztiak sortu edo aldatuko den
-wikiaren izena izango dira. Hurrengo lerroek edukia osatuko dute."
+msgstr ""
+"Lehenbiziko lerroko parametro guztiak sortu edo aldatuko den wikiaren izena "
+"izango dira. Hurrengo lerroek edukia osatuko dute."
 
 #: ../emma/module/email2wiki/__init__.py:50
 #, python-format
@@ -164,7 +176,8 @@ msgid ""
 "  * remind 23/11/2011 08:17;hackmeeting@listas.sindominio.net;subject;text\n"
 "    Schelude a reminder at certan date\n"
 msgstr ""
-"  * gogorarazi 2011/11/23 08:17;hackmeeting@listas.sindominio.ent;gaia;testua\n"
+"  * gogorarazi 2011/11/23 08:17;hackmeeting@listas.sindominio.ent;gaia;"
+"testua\n"
 "    Data jakin baterako oroigarria planifikatu\n"
 
 #: ../emma/module/reminder/__init__.py:35
@@ -191,8 +204,8 @@ msgid ""
 "The subject is optional"
 msgstr ""
 "Oroigarriak data jakin batean %s bidez obidaltzeko planifikatu ditzakezu.\n"
-"Hiru edo lau parametro behar ditu, ';' bidez bereiztuta: "
-"data;eposta;gaia;edukia\n"
+"Hiru edo lau parametro behar ditu, ';' bidez bereiztuta: data;eposta;gaia;"
+"edukia\n"
 "Gaia ez da beharrezkoa."
 
 #: ../emma/module/reminder/__init__.py:55
@@ -281,51 +294,6 @@ msgstr "Data"
 msgid "Subject"
 msgstr "Gaia"
 
-#: ../emma/module/issues/__init__.py:37
-msgid ""
-"  Keep track of issues.\n"
-"  * issues [group]\n"
-"    Show issues. If group given, filter by it.\n"
-"  * issue group bla\n"
-"    Add new issue, required by the group\n"
-"  * done n\n"
-"    close issue numbered with n in issue list.\n"
-msgstr ""
-
-#: ../emma/module/issues/__init__.py:44 ../emma/module/issues/__init__.py:56
-msgid "issues"
-msgstr "zereginak"
-
-#: ../emma/module/issues/__init__.py:45
-msgid "Show the list of issues."
-msgstr "Zereginen zerrenda erakutsi."
-
-#: ../emma/module/issues/__init__.py:46 ../emma/module/issues/__init__.py:58
-msgid "issue"
-msgstr "zeregina"
-
-#: ../emma/module/issues/__init__.py:47
-msgid "Add new issue"
-msgstr "Zeregin berria gehitu"
-
-#: ../emma/module/issues/__init__.py:48 ../emma/module/issues/__init__.py:60
-msgid "done"
-msgstr "eginda"
-
-#: ../emma/module/issues/__init__.py:49
-msgid "Close the issue'"
-msgstr "Zeregina itxi"
-
-#: ../emma/module/issues/__init__.py:75
-#, python-format
-msgid "Give word to: %s"
-msgstr "Hitza honek du: %s"
-
-#: ../emma/module/issues/__init__.py:76
-#, python-format
-msgid "%s has the word"
-msgstr "%s-(e)k hitza du"
-
 #: ../emma/module/irc_moderator/__init__.py:42
 msgid ""
 "  * moderate [session_name]\n"
@@ -402,6 +370,7 @@ msgid "gives the word to %s"
 msgstr "Hitza honek du: %s"
 
 #: ../emma/module/irc_moderator/__init__.py:151
+#, python-format
 msgid "Store irc log on the wiki page %s"
 msgstr "irc loga %s wikian gorde"
 

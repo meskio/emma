@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-16 06:02+0200\n"
+"POT-Creation-Date: 2012-09-21 20:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,6 +131,14 @@ msgstr ""
 
 #: ../emma/events.py:173
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
+msgstr ""
+
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y %H:%M"
+msgstr ""
+
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y"
 msgstr ""
 
 #: ../emma/module/email2wiki/__init__.py:34
@@ -323,6 +331,7 @@ msgid "gives the word to %s"
 msgstr ""
 
 #: ../emma/module/irc_moderator/__init__.py:151
+#, python-format
 msgid "Store irc log on the wiki page %s"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emma 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-16 06:02+0200\n"
-"PO-Revision-Date: 2012-04-16 06:54+0200\n"
+"POT-Creation-Date: 2012-09-21 20:05+0200\n"
+"PO-Revision-Date: 2012-09-21 20:19+0200\n"
 "Last-Translator: Ruben Pollan <meskio@sindominio.net>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../emma/interface/email/__init__.py:56
 msgid "No user defined for pop"
-msgstr ""
+msgstr "No hay usuario pop definido"
 
 #: ../emma/interface/email/__init__.py:59
 #, python-format
@@ -37,7 +37,7 @@ msgstr "    %s encontrados"
 
 #: ../emma/interface/email/__init__.py:104
 msgid "No user defined for smtp"
-msgstr ""
+msgstr "No hay usuario smtp definido"
 
 #: ../emma/interface/email/__init__.py:116
 msgid "Error sending email"
@@ -61,21 +61,21 @@ msgstr "fallo en la actualización de la bd: %(id)s - %(date)s"
 #: ../emma/interface/mediawiki/__init__.py:35
 #, python-format
 msgid "Login to %s wiki"
-msgstr ""
+msgstr "Login a la wiki %s"
 
 #: ../emma/interface/mediawiki/__init__.py:45
 #, python-format
 msgid "Fetch %s wiki page"
-msgstr ""
+msgstr "Obtener página wiki %s"
 
 #: ../emma/interface/mediawiki/__init__.py:50
 #, python-format
 msgid "Write %s wiki page"
-msgstr ""
+msgstr "Escribir página wiki %s"
 
 #: ../emma/interface/xmpp/__init__.py:31
 #, python-format
-msgid "Connect to jid:%(jid)s"
+msgid "Connect to jid: %(jid)s"
 msgstr "Conectando a jid: %(jid)s"
 
 #: ../emma/interface/xmpp/__init__.py:39
@@ -133,16 +133,27 @@ msgstr "[core] restaurando %s eventos programados"
 msgid "[core] can't unsubscribe identifier, it was not subscribed"
 msgstr "[core] no se puede desubscribir el identificador, no estaba subscrito"
 
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y %H:%M"
+msgstr "%d/%m/%Y %H:%M"
+
+#: ../emma/sched.py:33
+msgid "%d/%m/%Y"
+msgstr "%d/%m/%Y"
+
 #: ../emma/module/email2wiki/__init__.py:34
 msgid ""
 "  * [[wiki|wiki page name\n"
 "      text on wiki markup]]\n"
 "    Store the text on the wiki page\n"
 msgstr ""
+"  * [[wiki|nombre de página wiki\n"
+"      texto con markado wiki]]\n"
+"    Guardar el texto en la página wiki\n"
 
 #: ../emma/module/email2wiki/__init__.py:37
 msgid "wiki"
-msgstr ""
+msgstr "wiki"
 
 #: ../emma/module/email2wiki/__init__.py:38
 msgid ""
@@ -150,11 +161,14 @@ msgid ""
 "the page on the wiki\n"
 "to create or change with the text given after thefirst change of line"
 msgstr ""
+"Los argumentso hasta el primer salto de línea se considerarán como el nombre "
+" de la página en la wiki\n"
+"para ser creada o cambiada con el texto posterior al primer retorno de carro"
 
 #: ../emma/module/email2wiki/__init__.py:50
 #, python-format
 msgid "Store '%(page)s' page on the '%(wiki)s' wiki"
-msgstr ""
+msgstr "Guardando página '%(page)s' en la wiki '%(wiki)s'"
 
 #: ../emma/module/reminder/__init__.py:31
 msgid ""
@@ -358,6 +372,7 @@ msgid "gives the word to %s"
 msgstr "da turno de palabra a %s"
 
 #: ../emma/module/irc_moderator/__init__.py:151
+#, python-format
 msgid "Store irc log on the wiki page %s"
 msgstr "Almacena el log de irc en la pagina wiki %s"
 
