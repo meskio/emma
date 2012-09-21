@@ -39,5 +39,8 @@ class xmpp(Interface):
             self.log(_("error conecting to xmpp: %s") % jid)
 
     def handler(self, event, data):
-        for line in data['Body'].split('\n'):
-            self.xmpp.send_msg(data['To'], line)
+        if 'Subject' in data:
+            text = "%(Subject)s: %(Body)s" % data
+        else:
+            text = data['Body']
+        self.xmpp.send_msg(data['To'], text)
