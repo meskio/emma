@@ -15,7 +15,7 @@ generic message for interfaces
 from datetime import datetime
 
 
-class Message:
+class Message(dict):
     """
     Message is basically a dictionary
     """
@@ -33,31 +33,11 @@ class Message:
         @type date: datetime
         @param date: message date
         """
-        self._ = {'From': frm, 'To': to, 'Body': body, 'Type': tpe,
-                  'Date': date}
-
-    def items(self):
-        return self._.items()
+        super(Message, self).__init__(From=frm, To=to, Body=body, Type=tpe,
+                                     Date=date)
 
     def __getitem__(self, item):
-        if item in self._:
-            return self._[item]
-        else:
+        if item not in self:
             return ""
-
-    def __setitem__(self, item, value):
-        self._[item] = value
-
-    def __iter__(self):
-        class __meta__:
-            def __init__(self, elements):
-                self.elements = elements
-
-            def next(self):
-                if len(self.elements):
-                    element = self.elements[0]
-                    self.elements = self.elements[1:]
-                    return element
-                else:
-                    raise StopIteration
-        return __meta__(self.items())
+        else:
+            return super(Message, self).__getitem__(item)
