@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from distutils.core import setup, Command
+
+class PyTest(Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+    def finalize_options(self):
+        pass
+    def run(self):
+        import sys,subprocess
+        errno = subprocess.call([sys.executable, 'runtest.py'])
+        raise SystemExit(errno)
 
 setup(
     name = 'emma',
@@ -39,4 +50,5 @@ setup(
     scripts = ['emm', 'bin/mbox2emma'],
     license = 'WTFPL',
     long_description = open('README').read(),
+    cmdclass = {'test': PyTest},
 )
