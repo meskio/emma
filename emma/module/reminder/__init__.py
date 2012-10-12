@@ -35,7 +35,7 @@ class reminder(Module):
                 return _("  * [[remind|23/11/2011 08:17;" \
                          "hackmeeting@listas.sindominio.net;subject;text]]\n" \
                          "    Schelude a reminder at certan date\n")
-        elif data == _('remind'):
+        elif data in ('remind', _('remind')):
             return _("You can program reminders to be send by %s at a " \
                      "given date.\n It takes three or four parameters " \
                      "separated by ';': date;email;subject;body\n" \
@@ -44,7 +44,7 @@ class reminder(Module):
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        if cmd != _('remind'):
+        if cmd not in ('remind', _('remind')):
             return
 
         s = args.split(';')
