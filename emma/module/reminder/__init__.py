@@ -27,13 +27,13 @@ class reminder(Module):
 
     def help_handler(self, event, data):
         if not data:
-            if event.interface == "irc":
+            if event.interface in ("irc", "xmpp"):
                 return _("  * remind 23/11/2011 08:17;" \
-                         "hackmeeting@listas.sindominio.ent;subject;text\n" \
+                         "hackmeeting@listas.sindominio.net;subject;text\n" \
                          "    Schelude a reminder at certan date\n")
             elif event.interface == "email":
                 return _("  * [[remind|23/11/2011 08:17;" \
-                         "hackmeeting@listas.sindominio.ent;subject;text]]\n" \
+                         "hackmeeting@listas.sindominio.net;subject;text]]\n" \
                          "    Schelude a reminder at certan date\n")
         elif data == _('remind'):
             return _("You can program reminders to be send by %s at a " \
