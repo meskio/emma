@@ -36,22 +36,22 @@ class issues(Module):
                      "    Add new issue, required by the group\n" \
                      "  * done n\n" \
                      "    close issue numbered with n in issue list.\n")
-        elif data[0] == _('issues'):
+        elif data[0] in ('issues', _('issues')):
             return _("Show the list of issues.")
-        elif data[0] == _('issue'):
+        elif data[0] in ('issue', _('issue')):
             return _("Add new issue")
-        elif data[0] == _('done'):
+        elif data[0] in ('done', _('done')):
             return _("Close the issue'")
         else:
             return ""
 
     def cmd_handler(self, event, data):
         cmd, args = data[0]
-        if cmd == _("issues"):
+        if cmd in ("issues", _("issues")):
             self.issues(event, data)
-        elif cmd == _("issue"):
+        elif cmd in ("issue", _("issue")):
             self.issue(event, data)
-        elif cmd == _("done"):
+        elif cmd in ("done", _("done")):
             self.done(event, data)
 
     def issue(self, event, data):

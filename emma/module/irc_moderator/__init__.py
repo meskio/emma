@@ -45,17 +45,17 @@ class irc_moderator(Module):
                      "    While moderating request word\n" \
                      "  * stop\n" \
                      "    Stop moderating\n")
-        elif data == _('moderate'):
+        elif data in ('moderate', _('moderate')):
             return _("Start the moderation of an assembly.\n" \
                      "It will assign turns to talk as people request them" \
                      " with 'word'.\n" \
                      "If a session_name is given the session will be saved " \
                      "on the wiki.")
-        elif data == _('word'):
+        elif data in ('word', _('word')):
             return _("While moderating request word.\n" \
                      "It can also be requestested with a /me containing " \
                      "the word 'word' in it.")
-        elif data == _('stop'):
+        elif data in ('stop', _('stop')):
             return _("Stop moderating the assembly started with 'moderate'")
         else:
             return ""
@@ -67,19 +67,19 @@ class irc_moderator(Module):
             return  # not in channel
 
         cmd, args = data[0]
-        if cmd == _("moderate") and not channel in self._:
+        if cmd in ("moderate", _("moderate")) and not channel in self._:
             self.log(_("starts moderating"))
             self._[channel] = {'talking': None, 'words': []}
             if args:
                 self._[channel]['session'] = args
                 self.trigger_history('start', args)
             self.send_ctcp(_("starts moderating"), channel)
-        elif cmd == _("stop") and channel in self._:
+        elif cmd in ("stop", _("stop")) and channel in self._:
             self.log(_("stops moderating"))
             self.wikistore(channel)
             del self._[channel]
             self.send_ctcp(_("stops moderating"), channel)
-        elif cmd == _("word"):
+        elif cmd in ("word", _("word")):
             nick = data[1]['From']
             self.add_word(nick, channel)
 

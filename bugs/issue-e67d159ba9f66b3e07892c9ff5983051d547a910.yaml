@@ -5,8 +5,8 @@ type: :feature
 component: emma
 release: "0.2"
 reporter: Ales Zabala Alava <shagi@gisa-elkartea.org>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2012-02-27 17:01:10.035404 Z
 references: []
 
@@ -52,5 +52,9 @@ log_events:
     I think this bug is ready to be close.
     I fix a comple of simple things and the xmpp support I think is in a good shape,
     It will need more work in the future, but I start opening bugs for specific features.
+- - 2012-10-12 16:19:19.341018 Z
+  - Ales Zabala Alava <shagi@gisa-elkartea.org>
+  - closed with disposition fixed
+  - ""
 git_branch: 
 claimer: Ales Zabala Alava <shagi@gisa-elkartea.org>
