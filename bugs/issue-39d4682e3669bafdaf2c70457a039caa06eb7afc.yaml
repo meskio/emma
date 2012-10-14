@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "issues: new module"
+desc: Create a new issue module
+type: :feature
+component: emma
+release: "0.2"
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-10-14 09:26:50.180511 Z
+references: []
+
+id: 39d4682e3669bafdaf2c70457a039caa06eb7afc
+log_events: 
+- - 2012-10-14 09:26:58.674480 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - Work in progress
+git_branch: 
+claimer: 
