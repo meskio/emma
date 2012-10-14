@@ -44,6 +44,7 @@ setup(
         'emma.interface',
         'emma.interface.email',
         'emma.interface.irc',
+        'emma.interface.mediawiki',
         'emma.interface.xmpp'],
     package_data={'emma': ['locale/*/*/*']},
     data_files = [('etc/init.d', ['data/init.d/emma']),
