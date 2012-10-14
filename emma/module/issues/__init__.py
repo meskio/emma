@@ -22,15 +22,10 @@ class issues(Module):
     def run(self):
         self.todo_list = []
 
-        help_event = Event(event="help", interface="irc", \
-                          identifier=self.conf['irc_id'])
+        help_event = Event(event="help", identifier=self.conf['id'])
         subscribe(help_event, self.help_handler)
-        cmd_event = Event(event="command", interface="irc", \
-                          identifier=self.conf['irc_id'])
+        cmd_event = Event(event="command", identifier=self.conf['id'])
         subscribe(cmd_event, self.cmd_handler)
-        rcv_event = Event(event="receive", interface="irc", \
-                          identifier=self.conf['irc_id'])
-        subscribe(rcv_event, self.rcv_handler)
 
     def help_handler(self, event, data):
         if not data:
@@ -50,30 +45,35 @@ class issues(Module):
         else:
             return ""
 
-    @use_lock
     def cmd_handler(self, event, data):
         cmd, args = data[0]
         if cmd == _("issues"):
-            pass
+            self.issues(event, data)
         elif cmd == _("issue"):
-            pass
+            self.issue(event, data)
         elif cmd == _("done"):
-            pass
+            self.done(event, data)
 
-    @use_lock
-    def rcv_handler(self, event, data):
-        if self.on_moderate:
-            if data['Body'] == "." and data['From'] == self.talking:
-                if self.words:
-                    self.talking = self.words[0]
-                    self.words = self.words[1:]
-                    self.give_turn(self.talking)
-                else:
-                    self.talking = None
+    def issue(self, event, data):
+        cmd, args = data[0]
+        if event.interface == "email":
+            group, text = args.split("\n", 1)
+        else:
+            group, text = args.split(" ", 1)
+        self.db.insert({"group": group, "text": text})
 
-    def give_turn(self, nick):
-        self.log(_("Give word to: %s") % nick)
-        msg = Message(_("%s has the word") % nick, self.conf['irc_chn'])
-        event = Event(event="send", interface="irc", \
-                      identifier=self.conf['irc_id'])
+        # Reply ack
+        to = data[1]['From']
+        if event.interface == 'irc' and data[1]['To'][0] == '#':
+            to = data[1]['To']
+        msg = Message(_("issue accepted"), to)
+        event = Event(event="send", interface=event.interface,
+                      identifier=event.identifier)
         trigger(event, msg)
+        self.log(_("Issue accepted (%s, %s)") % (group, text))
+
+    def issues(self, event, data):
+        pass
+
+    def done(self, event, data):
+        pass
