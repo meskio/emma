@@ -39,6 +39,7 @@ setup(
         'emma.module.irc_moderator',
         'emma.module.find_email',
         'emma.module.reminder',
+        'emma.module.email2wiki',
         'emma.module.help',
         'emma.interface',
         'emma.interface.email',
