@@ -30,7 +30,7 @@ class reminder(Module):
             if event.interface in ("irc", "xmpp"):
                 return _("  * remind 23/11/2011 08:17;" \
                          "hackmeeting@listas.sindominio.net;subject;text\n" \
-                         "    Schelude a reminder at certan date\n")
+                         "    Schelude a reminder at certain date\n")
             elif event.interface == "email":
                 return _("  * [[remind|23/11/2011 08:17;" \
                          "hackmeeting@listas.sindominio.net;subject;text]]\n" \
