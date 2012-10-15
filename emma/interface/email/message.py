@@ -35,11 +35,11 @@ class Message(message.Message):
         msg = pyzmail.PyzMessage.factory(msgStr)
 
         d = msg_to_dict(msg)
-        self._.update(d)
-        timestamp = mktime(parsedate(self._['Date']))
-        self._['Date'] = datetime.fromtimestamp(timestamp)
-        self._['Commands'] = self.commands()
-        self._['Tags'] = self.tags()
+        self.update(d)
+        timestamp = mktime(parsedate(self['Date']))
+        self['Date'] = datetime.fromtimestamp(timestamp)
+        self['Commands'] = self.commands()
+        self['Tags'] = self.tags()
 
     def commands(self):
         """
@@ -49,10 +49,10 @@ class Message(message.Message):
 
         @returns: [(cmd, params)]
         """
-        if 'Commands' in self._:
-            return self._['Commands']
+        if 'Commands' in self:
+            return self['Commands']
 
-        text = self._['Body']
+        text = self['Body']
         commands = []
         cmd = ["", ""]
         isCmd = False
@@ -88,7 +88,7 @@ class Message(message.Message):
         @returns: [tag]
         """
         tagexp = re.compile(r"\[([^\]]*)\]")
-        subject = self._['Subject']
+        subject = self['Subject']
         return tagexp.findall(subject)
 
 
