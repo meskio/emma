@@ -45,7 +45,7 @@ class Message(message.Message):
         """
         get a list of the commands inside the email
 
-        Everithing with the form [[cmd|params]] will be reconice as command
+        Everithing with the form __cmd params__ will be reconice as command
 
         @returns: [(cmd, params)]
         """
@@ -57,24 +57,39 @@ class Message(message.Message):
         cmd = ["", ""]
         isCmd = False
         isArg = False
+        isComment = False
         for i in range(len(text)):
-            if isCmd:
-                if text[i] == '|':
+            # don't parse the commented lines
+            # ignore everyline starting with '>'
+            if text[i] == '>':
+                j = i-1
+                while text[j] in (' ', '\t'):
+                    j -= 1
+                if text[j] == '\n':
+                    isComment = True
+            elif text[i] == '\n':
+                isComment = False
+            if isComment:
+                if isArg:
+                    cmd[1] += text[i]
+                continue
+
+            if text[i:i+2] == '__' and (isCmd or isArg):
+                isArg = False
+                commands.append(cmd)
+                cmd = ["", ""]
+            elif isCmd:
+                if text[i] == ' ':
                     isArg = True
                     isCmd = False
                 else:
                     cmd[0] += text[i]
             elif isArg:
-                if text[i:i+2] == ']]':
-                    isArg = False
-                    commands.append(cmd)
-                    cmd = ["", ""]
-                elif text[i:i+2] == '\]':
+                if text[i:i+2] == '\_':
                     pass
                 else:
                     cmd[1] += text[i]
-            else:
-                if text[i-1:i+1] == '[[':
+            elif text[i-1:i+1] == '__':
                     isCmd = True
 
         return commands

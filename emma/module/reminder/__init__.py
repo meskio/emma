@@ -32,8 +32,8 @@ class reminder(Module):
                          "hackmeeting@listas.sindominio.net;subject;text\n" \
                          "    Schelude a reminder at certain date\n")
             elif event.interface == "email":
-                return _("  * [[remind|23/11/2011 08:17;" \
-                         "hackmeeting@listas.sindominio.net;subject;text]]\n" \
+                return _("  * __remind 23/11/2011 08:17;" \
+                         "hackmeeting@listas.sindominio.net;subject;text__\n" \
                          "    Schelude a reminder at certan date\n")
         elif data in ('remind', _('remind')):
             return _("You can program reminders to be send by %s at a " \
