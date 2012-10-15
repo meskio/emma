@@ -74,7 +74,7 @@ class Message(message.Message):
                     cmd[1] += text[i]
                 continue
 
-            if text[i:i+2] == '__' and (isCmd or isArg):
+            if text[i-1] != '\\' and text[i:i+2] == '._' and (isCmd or isArg):
                 isArg = False
                 commands.append(cmd)
                 cmd = ["", ""]
@@ -85,11 +85,11 @@ class Message(message.Message):
                 else:
                     cmd[0] += text[i]
             elif isArg:
-                if text[i:i+2] == '\_':
+                if text[i:i+3] in ('\\._', '\\_.'):
                     pass
                 else:
                     cmd[1] += text[i]
-            elif text[i-1:i+1] == '__':
+            elif text[i-1] != '\\' and text[i-1:i+1] == '_.':
                     isCmd = True
 
         return commands

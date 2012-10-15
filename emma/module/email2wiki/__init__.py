@@ -31,8 +31,8 @@ class email2wiki(Module):
 
     def help_handler(self, event, data):
         if not data:
-            return _("  * __wiki wiki page name\n" \
-                     "      text on wiki markup__\n" \
+            return _("  * _.wiki wiki page name\n" \
+                     "      text on wiki markup._\n" \
                      "    Store the text on the wiki page\n")
         elif data == _('wiki'):
             return _("The arguments up to the first change of line will " \
