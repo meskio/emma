@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "email: ignore commands that were already executed"
+desc: |-
+  If you reply an email with an emma command from a crappy email reader that don't append '>'
+  emma should not execute the command agai.
+  
+  Maybe use the database for that.
+type: :feature
+component: emma
+release: 
+reporter: Ruben Pollan <meskio@sindominio.net>
+status: :unstarted
+disposition: 
+creation_time: 2012-10-15 13:32:39.670679 Z
+references: []
+
+id: faba0cdc487b8db4c99a200d3e0b2a7f93308ce5
+log_events: 
+- - 2012-10-15 13:32:41.251574 Z
+  - Ruben Pollan <meskio@sindominio.net>
+  - created
+  - ""
+git_branch: 
+claimer: 
